@@ -21,8 +21,9 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte e
 | Élément | Statut |
 |---|---|
 | **Phase en cours** | Phase 1 — Architecture |
-| **Sous-étape en cours** | 1.0 Recherche — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Best Practices Summary](phase-1/1.0-best-practices-summary.md) |
+| **Sous-étape en cours** | 1.1 Vision produit — livrable rédigé, **en attente de validation HITL** |
+| **Dernier livrable** | [Vision Produit](phase-1/1.1-vision-produit.md) |
+| **Validé à ce jour** | 1.0 [Best Practices Summary](phase-1/1.0-best-practices-summary.md) (D1) |
 
 ## Méthode de travail
 
