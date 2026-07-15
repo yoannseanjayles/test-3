@@ -31,8 +31,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | ⏳ **En attente de validation HITL** |
-| 3.1 Inventaire | Media Inventory | À venir |
+| 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | ✅ Validé HITL (D21) |
+| 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | ⏳ **En attente de validation HITL** |
 | 3.2 Bibliothèque de prompts IA | Media Prompt Library | À venir |
 
 ## Phases à venir
@@ -48,7 +48,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 3.0 Best Practices — Médias** ← nous sommes ici
-2. Étape 3.1 — Media Inventory
-3. Étape 3.2 — Media Prompt Library
-4. Phases 4 à 9
+1. **Validation HITL de la 3.1 Media Inventory** ← nous sommes ici
+2. Étape 3.2 — Media Prompt Library
+3. Phases 4 à 9

@@ -27,7 +27,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 - [2.2 — Video Experience Specification](docs/phase-2/2.2-video-experience-specification.md) ✅ *(validé HITL — Phase 2 terminée)*
 
 ### Phase 3 — Génération des médias
-- [3.0 — Best Practices Summary : Médias](docs/phase-3/3.0-best-practices-medias.md) ⏳ *(en attente de validation HITL)*
+- [3.0 — Best Practices Summary : Médias](docs/phase-3/3.0-best-practices-medias.md) ✅ *(validé HITL)*
+- [3.1 — Media Inventory](docs/phase-3/3.1-media-inventory.md) ⏳ *(en attente de validation HITL)*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ## Méthode

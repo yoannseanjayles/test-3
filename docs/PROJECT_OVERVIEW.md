@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Définition des pages (D13-D20) |
 | **Phase en cours** | Phase 3 — Génération des médias |
-| **Sous-étape en cours** | 3.0 Recherche — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) |
+| **Sous-étape en cours** | 3.1 Inventaire — livrable rédigé, **en attente de validation HITL** |
+| **Dernier livrable** | [Media Inventory](phase-3/3.1-media-inventory.md) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail
