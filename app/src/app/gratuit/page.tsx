@@ -55,7 +55,7 @@ export default function GratuitPage() {
                   {video.title} <span className="font-normal text-secondary">({video.year})</span>
                 </h2>
                 <p className="mt-1 line-clamp-2 text-sm text-secondary">{video.overview}</p>
-                <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-primary/50">
+                <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-secondary">
                   <Badge tone="license">{video.licence}</Badge>
                   {video.durationMinutes} min · {video.genre}
                 </p>
@@ -65,7 +65,7 @@ export default function GratuitPage() {
         ))}
       </ul>
 
-      <p className="mt-10 max-w-2xl text-xs leading-relaxed text-primary/40">
+      <p className="mt-10 max-w-2xl text-xs leading-relaxed text-secondary">
         Les œuvres de cette page sont dans le domaine public ou diffusées sous licence ouverte
         (l&apos;attribution est affichée sur chaque page de lecture). Les vidéos de la communauté
         rejoindront cette page avec le Studio de création.

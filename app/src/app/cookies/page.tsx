@@ -59,7 +59,7 @@ export default function CookiesPage() {
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] border-collapse text-left">
                 <thead>
-                  <tr className="border-b border-white/10 text-xs uppercase tracking-wide text-primary/50">
+                  <tr className="border-b border-white/10 text-xs uppercase tracking-wide text-secondary">
                     <th className="py-2 pr-4">Nom</th>
                     <th className="py-2 pr-4">Type</th>
                     <th className="py-2 pr-4">Catégorie</th>

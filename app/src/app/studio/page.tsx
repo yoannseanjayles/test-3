@@ -83,7 +83,7 @@ export default async function StudioPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-xs text-primary/50">
+        <p className="mt-4 text-xs text-secondary">
           Le détail figure dans les <Link href="/cgu" className="underline hover:text-brand">CGU</Link> (section
           « Contenus publiés par les utilisateurs »).
         </p>

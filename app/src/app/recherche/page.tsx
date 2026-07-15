@@ -45,7 +45,7 @@ export default async function RecherchePage({
           defaultValue={query}
           placeholder="Un titre de film ou de série…"
           autoFocus={!query}
-          className="h-12 w-full rounded-full border border-white/10 bg-surface-raised px-5 text-primary placeholder:text-primary/40 focus:border-brand focus:outline-none"
+          className="h-12 w-full rounded-full border border-white/10 bg-surface-raised px-5 text-primary placeholder:text-secondary focus:border-brand focus:outline-none"
         />
         <button
           type="submit"

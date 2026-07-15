@@ -27,7 +27,7 @@ export default function ContactPage() {
     <div className="mx-auto max-w-xl px-4 py-10 md:px-6">
       <h1 className="text-3xl font-bold md:text-4xl">Contact</h1>
       <p className="mt-2 text-sm text-secondary">
-        Réponse sous 72 h. Pour les questions courantes, la <Link href="/faq" className="text-link hover:text-brand">FAQ</Link> répond immédiatement.
+        Réponse sous 72 h. Pour les questions courantes, la <Link href="/faq" className="text-link underline hover:text-brand">FAQ</Link> répond immédiatement.
       </p>
 
       <div className="mt-6 rounded-(--radius-m) border-l-2 border-brand bg-surface-raised px-4 py-3 text-sm leading-relaxed text-secondary">
@@ -49,7 +49,7 @@ export default function ContactPage() {
               <option key={m}>{m}</option>
             ))}
           </select>
-          <p className="mt-1.5 text-xs text-primary/50">
+          <p className="mt-1.5 text-xs text-secondary">
             « Ayants droit / demande de retrait » : merci de préciser l&apos;URL du contenu, votre
             qualité (titulaire, mandataire…) et votre déclaration — procédure de retrait prioritaire.
           </p>
@@ -65,7 +65,7 @@ export default function ContactPage() {
             type="email"
             autoComplete="email"
             placeholder="vous@exemple.fr"
-            className="h-12 w-full rounded-(--radius-m) border border-white/10 bg-surface-raised px-4 text-primary placeholder:text-primary/40 focus:border-brand focus:outline-none"
+            className="h-12 w-full rounded-(--radius-m) border border-white/10 bg-surface-raised px-4 text-primary placeholder:text-secondary focus:border-brand focus:outline-none"
           />
         </div>
 
@@ -78,7 +78,7 @@ export default function ContactPage() {
             name="message"
             rows={6}
             placeholder="Décrivez votre demande — pour un bug : la page, l'appareil et ce qui s'est passé."
-            className="w-full rounded-(--radius-m) border border-white/10 bg-surface-raised px-4 py-3 text-primary placeholder:text-primary/40 focus:border-brand focus:outline-none"
+            className="w-full rounded-(--radius-m) border border-white/10 bg-surface-raised px-4 py-3 text-primary placeholder:text-secondary focus:border-brand focus:outline-none"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function ContactPage() {
         >
           Envoyer — bientôt actif
         </button>
-        <p id="form-status" className="text-xs text-primary/50">
+        <p id="form-status" className="text-xs text-secondary">
           Annonceurs : un kit média détaillé (audiences, formats plafonnés, brand safety) sera
           disponible avec l&apos;offre publicitaire.
         </p>

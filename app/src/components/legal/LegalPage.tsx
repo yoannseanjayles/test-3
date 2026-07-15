@@ -59,7 +59,7 @@ export function LegalPage({
         </section>
       ))}
 
-      <p className="mt-12 border-t border-white/10 pt-6 text-xs leading-relaxed text-primary/40">
+      <p className="mt-12 border-t border-white/10 pt-6 text-xs leading-relaxed text-secondary">
         Document de travail : la structure et le contenu sont livrés au titre de la Phase 5 ;
         les clauses définitives seront validées juridiquement avant l&apos;ouverture publique du service.
         Une question ? <Link href="/contact" className="underline hover:text-brand">Contactez-nous</Link>.

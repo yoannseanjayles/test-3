@@ -81,7 +81,7 @@ export function TitleDetailPage({ details }: { details: TitleDetails }) {
               )}
               {voteCount > 0 && (
                 <li aria-label={`Note moyenne ${voteAverage.toFixed(1)} sur 10, ${voteCount} votes`}>
-                  ★ {voteAverage.toFixed(1)} <span className="text-primary/40">({voteCount.toLocaleString("fr-FR")})</span>
+                  ★ {voteAverage.toFixed(1)} <span className="text-secondary">({voteCount.toLocaleString("fr-FR")})</span>
                 </li>
               )}
             </ul>

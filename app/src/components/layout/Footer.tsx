@@ -26,13 +26,13 @@ export function Footer() {
           </ul>
         </nav>
         {/* Attributions obligatoires — D5 §3.3 */}
-        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-disabled">
+        <p className="mt-6 max-w-2xl text-xs leading-relaxed text-secondary">
           Ce produit utilise l&apos;API TMDB sans être approuvé ni certifié par TMDB. Les
           données de disponibilité en streaming sont fournies par JustWatch. Les contenus du
           catalogue gratuit proviennent du domaine public, de licences ouvertes ou de leurs
           créateurs — la source et la licence sont indiquées sur chaque fiche.
         </p>
-        <p className="mt-4 text-xs text-disabled">© 2026 Ciné+</p>
+        <p className="mt-4 text-xs text-secondary">© 2026 Ciné+</p>
       </div>
     </footer>
   );

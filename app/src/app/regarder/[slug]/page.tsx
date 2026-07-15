@@ -82,7 +82,7 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
           {video.year} · {video.durationMinutes} min · {video.genre}
         </p>
         <p className="mt-4 max-w-3xl leading-relaxed text-secondary">{video.overview}</p>
-        <p className="mt-3 text-xs text-primary/50">
+        <p className="mt-3 text-xs text-secondary">
           {video.attribution}
           {video.licenceUrl && (
             <>
