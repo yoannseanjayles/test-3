@@ -30,9 +30,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D20 | 2026-07-15 | 2.2 | Adoption de la [Video Experience Specification](phase-2/2.2-video-experience-specification.md) : matrice d'états du lecteur, gestes mobiles, mode 10-feet, contrat sous-titres/audio (EAA), contrat publicitaire in-player, budgets qualité gelés — **clôture de la Phase 2** | Voir le livrable 2.2 | ✅ Validé HITL |
 | D21 | 2026-07-15 | 3.0 | Adoption du [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) : médias contenu = TMDB (jamais générés), périmètre IA = interface/marque/marketing/house ads, placeholders blurhash + couleur dominante, OG dynamique, règles CRAFT, interdits légaux | Voir le livrable 3.0 | ✅ Validé HITL |
+| D22 | 2026-07-15 | 3.1 | Adoption du [Media Inventory](phase-3/3.1-media-inventory.md) : ~70 assets en 4 familles avec formats, sources et priorités P0/P1/P2 | Voir le livrable 3.1 | ✅ Validé HITL |
 
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P22 | 2026-07-15 | 3.1 | Adopter le [Media Inventory](phase-3/3.1-media-inventory.md) : inventaire exhaustif (~70 assets en 4 familles — interface, contenus, marketing, publicité) avec formats, sources et priorités P0/P1/P2 | Voir le livrable 3.1 |
+| P23 | 2026-07-15 | 3.2 | Adopter la [Media Prompt Library](phase-3/3.2-media-prompt-library.md) : STYLE_BLOCK paramétré commun, prompts par famille (états vides, erreurs, 18 genres, chips, onboarding, heros, OG avec texte Ideogram, house ads, storyboards pré-roll, exploration logo), adaptations par modèle | Voir le livrable 3.2 |

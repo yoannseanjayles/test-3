@@ -32,8 +32,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | ✅ Validé HITL (D21) |
-| 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | ⏳ **En attente de validation HITL** |
-| 3.2 Bibliothèque de prompts IA | Media Prompt Library | À venir |
+| 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | ✅ Validé HITL (D22) |
+| 3.2 Bibliothèque de prompts IA | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) | ⏳ **En attente de validation HITL** |
 
 ## Phases à venir
 
@@ -48,6 +48,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 3.1 Media Inventory** ← nous sommes ici
-2. Étape 3.2 — Media Prompt Library
-3. Phases 4 à 9
+1. **Validation HITL de la 3.2 Media Prompt Library** ← nous sommes ici (dernière sous-étape de la Phase 3)
+2. Phase 4 — Design System (4.0 recherche, 4.1 design system + advertising design system)
+3. Phases 5 à 9

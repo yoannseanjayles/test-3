@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Définition des pages (D13-D20) |
 | **Phase en cours** | Phase 3 — Génération des médias |
-| **Sous-étape en cours** | 3.1 Inventaire — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Media Inventory](phase-3/3.1-media-inventory.md) |
+| **Sous-étape en cours** | 3.2 Bibliothèque de prompts IA — livrable rédigé, **en attente de validation HITL** (dernière sous-étape de la Phase 3) |
+| **Dernier livrable** | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail
