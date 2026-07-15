@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 4 : Lecteur & Gratuit ▶
 
 > **Livrable** : lecteur vidéo (hls.js + MP4 progressif), page Watch `/regarder/{slug}`, catalogue Gratuit ▶ réel, reprise/heartbeat/historique branchés sur Ma liste (`app/`)
-> **Statut** : ⏳ En attente de validation HITL (P30)
+> **Statut** : ✅ Validé HITL (D30) — déployé en production
 
 ## Contenu du lot
 

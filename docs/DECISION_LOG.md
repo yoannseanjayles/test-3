@@ -46,8 +46,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D29 | 2026-07-15 | 5.1 | Validation du **Lot 3 du front (compte & interactions)** : Ma liste locale (favoris/en-cours/historique, UI optimiste, persistance navigateur H70), bouton Ma liste sur les fiches, pages Connexion/Inscription (comptes actifs en 6.1), page d'attente Gratuit ▶ — déployé en production. | Directive « ok on attaque » du 2026-07-15 | ✅ Validé HITL |
 
+| D30 | 2026-07-15 | 5.1 | Validation du **Lot 4 du front (lecteur & gratuit)** : lecteur hls.js/MP4 (H73 Vidstack reporté — React 18 only), page Watch `/regarder/{slug}` avec pré-roll conditionnel (capping session, jamais à la reprise), reprise/heartbeat/historique branchés sur Ma liste, catalogue Gratuit ▶ 7 œuvres (Blender CC BY + domaine public Internet Archive, H75 sources à surveiller) — déployé en production. | Directive « ok je valide » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P30 | 2026-07-15 | 5.1 | Valider le **Lot 4 du front (lecteur & gratuit)** : lecteur vidéo (hls.js + MP4 progressif), page Watch `/regarder/{slug}` (pré-roll conditionnel D6/D17, reprise, écran de fin), catalogue Gratuit ▶ (domaine public/licences ouvertes, H8) | Code + doc du lot |
+| P31 | 2026-07-15 | 5.1 | Valider le **Lot 5 du front (studio & support)** : Studio UGC (tableau de bord + parcours d'upload gouverné par l'interrupteur D11, ingestion réelle en 6.1), FAQ (JSON-LD FAQPage), Contact (motifs dont takedown D11), À propos (attributions D5), CGU/Confidentialité/Cookies/Mentions légales (gabarits H46 — clauses finales à valider juridiquement) | Code + doc du lot |
