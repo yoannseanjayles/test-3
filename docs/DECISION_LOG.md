@@ -38,8 +38,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D25 | 2026-07-15 | 4.1 | Adoption des [Design Guidelines](phase-4/4.1-design-guidelines.md) + tokens, **amendée : nom définitif = Ciné+ / CinePlus** (décision commanditaire, remplace la proposition CinéScope). Palette charbon/ambre/violet définitive, typographie Space Grotesk/Inter/JetBrains Mono, composants avec états, Advertising DS. ⚠️ **Risque R6 ouvert** : « Ciné+ » est une marque Canal+ existante (bouquet cinéma FR) — vérification INPI/EUIPO et avis juridique requis avant production publique. **Clôture de la Phase 4.** | Voir le livrable 4.1 ; directive utilisateur | ✅ Validé HITL |
 
+| D26 | 2026-07-15 | 5.0 | Adoption du [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) : stack **Next.js 15 App Router + TypeScript + Tailwind v4 (tokens D25) + Radix + TanStack Query + Vidstack/hls.js**, architecture server-only/modèles canoniques, budgets perf CI bloquants, plan de tests | Voir le livrable 5.0 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P26 | 2026-07-15 | 5.0 | Adopter le [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | Voir le livrable 5.0 |
+| P27 | 2026-07-15 | 5.1 | Valider le **Lot 1 du front (socle)** : projet Next.js initialisé (`app/`), tokens intégrés, composants du design system en code, layout global (header/bottom-nav/footer) | Code + doc du lot |

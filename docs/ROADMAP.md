@@ -46,8 +46,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) (dont proposition de stack H63) | ⏳ **En attente de validation HITL** |
-| 5.1 Développement | Front-end documenté | À venir |
+| 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | ✅ Validé HITL (D26) |
+| 5.1 Développement | Lot 1 [Socle](phase-5/5.1-frontend/lot-1-socle.md) (`app/`) ⏳ **en attente de validation** · Lots 2-6 à venir | En cours |
 
 ## Phases à venir
 
@@ -61,6 +61,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 5.0 Best Practices Front-end** (dont stack Next.js 15 — H63) ← nous sommes ici
-2. Étape 5.1 — Développement du front
-3. Phases 6 à 9 · médias restants (B7/B8/C2/logo Ciné+) à réceptionner quand fournis · risque R6 (marque) à lever
+1. **Validation HITL du Lot 1 (socle front)** ← nous sommes ici
+2. Lots 2-6 de la 5.1 : catalogue TMDB → compte/interactions → lecteur → studio/support → qualité
+3. Phases 6 à 9 · médias restants (B7/B8/C2/logo Ciné+) · risque R6 (marque) à lever

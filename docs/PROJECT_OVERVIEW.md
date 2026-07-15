@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Pages (D13-D20) · ✅ Phase 3 — Médias (D21-D23, 35 assets réceptionnés) · ✅ Phase 4 — Design System (D24-D25, nom **Ciné+**, risque marque R6 ouvert) |
 | **Phase en cours** | Phase 5 — Front-end |
-| **Sous-étape en cours** | 5.0 Recherche — livrable rédigé (dont proposition de stack Next.js 15), **en attente de validation HITL** |
-| **Dernier livrable** | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) |
+| **Sous-étape en cours** | 5.1 Développement — Lot 1 (socle) livré et buildé, **en attente de validation HITL** |
+| **Dernier livrable** | [Lot 1 — Socle front](phase-5/5.1-frontend/lot-1-socle.md) (code dans `app/`) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail
