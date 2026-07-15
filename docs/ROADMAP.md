@@ -25,21 +25,27 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | 2.1 Conception des pages (14/14) | [Accueil](phase-2/2.1-pages/accueil.md) · [Fiche Film](phase-2/2.1-pages/fiche-film.md) · [Fiche Série](phase-2/2.1-pages/fiche-serie.md) · [Watch](phase-2/2.1-pages/watch.md) · [Recherche](phase-2/2.1-pages/recherche.md) · [Grilles](phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](phase-2/2.1-pages/gratuit.md) · [Ma liste](phase-2/2.1-pages/ma-liste.md) · [Profil/Paramètres](phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](phase-2/2.1-pages/support-legal.md) · [Personne & Listes](phase-2/2.1-pages/personne-listes.md) | D14-D19 |
 | 2.2 Expérience Visionnage | [Video Experience Specification](phase-2/2.2-video-experience-specification.md) | D20 |
 
+### ✅ Phase 3 — Génération des médias (terminée le 2026-07-15)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | D21 |
+| 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | D22 |
+| 3.2 Bibliothèque de prompts IA | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) — familles B3+B4 générées et réceptionnées (`media/interface/src/`) | D23 |
+
 ## Phase en cours
 
-**Phase 3 — Génération des médias**
+**Phase 4 — Design System**
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | ✅ Validé HITL (D21) |
-| 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | ✅ Validé HITL (D22) |
-| 3.2 Bibliothèque de prompts IA | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) | ⏳ **En attente de validation HITL** |
+| 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | ⏳ **En attente de validation HITL** |
+| 4.1 Design System + Advertising Design System | Design Guidelines | À venir |
 
 ## Phases à venir
 
 | Phase | Contenu | Livrables clés |
 |---|---|---|
-| **4 — Design System** | Recherche (4.0) · Design System + Advertising Design System (4.1) | Design Guidelines |
 | **5 — Front-end** | Recherche (5.0) · Développement (5.1) dont lecteur vidéo et composants pub | Front-end documenté |
 | **6 — Back-end** | Recherche (6.0) · Développement (6.1) · Architecture publicitaire (6.2) | Documentation technique, Advertising Technical Specification |
 | **7 — Administration** | Recherche (7.0) · Back-office (7.1) dont modération UGC, pub et revenus | Back-office fonctionnel |
@@ -48,6 +54,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 3.2 Media Prompt Library** ← nous sommes ici (dernière sous-étape de la Phase 3)
-2. Phase 4 — Design System (4.0 recherche, 4.1 design system + advertising design system)
+1. **Validation HITL de la 4.0 Best Practices — Design System** ← nous sommes ici
+2. Étape 4.1 — Design System + Advertising Design System (Design Guidelines)
 3. Phases 5 à 9

@@ -23,10 +23,10 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 
 | Élément | Statut |
 |---|---|
-| **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Définition des pages (D13-D20) |
-| **Phase en cours** | Phase 3 — Génération des médias |
-| **Sous-étape en cours** | 3.2 Bibliothèque de prompts IA — livrable rédigé, **en attente de validation HITL** (dernière sous-étape de la Phase 3) |
-| **Dernier livrable** | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) |
+| **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Pages (D13-D20) · ✅ Phase 3 — Médias (D21-D23, illustrations B3+B4 réceptionnées) |
+| **Phase en cours** | Phase 4 — Design System |
+| **Sous-étape en cours** | 4.0 Recherche — livrable rédigé, **en attente de validation HITL** |
+| **Dernier livrable** | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail

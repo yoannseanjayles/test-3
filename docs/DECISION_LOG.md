@@ -32,8 +32,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 | D21 | 2026-07-15 | 3.0 | Adoption du [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) : médias contenu = TMDB (jamais générés), périmètre IA = interface/marque/marketing/house ads, placeholders blurhash + couleur dominante, OG dynamique, règles CRAFT, interdits légaux | Voir le livrable 3.0 | ✅ Validé HITL |
 | D22 | 2026-07-15 | 3.1 | Adoption du [Media Inventory](phase-3/3.1-media-inventory.md) : ~70 assets en 4 familles avec formats, sources et priorités P0/P1/P2 | Voir le livrable 3.1 | ✅ Validé HITL |
 
+| D23 | 2026-07-15 | 3.2 | Adoption de la [Media Prompt Library](phase-3/3.2-media-prompt-library.md) — validée **par l'usage** : le commanditaire a généré et livré les familles B3+B4 (9 illustrations conformes, réceptionnées dans `media/interface/src/`). **Clôture de la Phase 3.** | Assets produits à partir des prompts 3.2 et intégrés | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P23 | 2026-07-15 | 3.2 | Adopter la [Media Prompt Library](phase-3/3.2-media-prompt-library.md) : STYLE_BLOCK paramétré commun, prompts par famille (états vides, erreurs, 18 genres, chips, onboarding, heros, OG avec texte Ideogram, house ads, storyboards pré-roll, exploration logo), adaptations par modèle | Voir le livrable 3.2 |
+| P24 | 2026-07-15 | 4.0 | Adopter le [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | Voir le livrable 4.0 |
