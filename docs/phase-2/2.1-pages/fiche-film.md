@@ -1,7 +1,7 @@
 # Spécification de page — Fiche Film (`/film/{slug}-{id}`)
 
 > **Étape** : 2.1 (page 2/14, ordre validé D13)
-> **Statut** : ⏳ En attente de validation HITL
+> **Statut** : ✅ Validé HITL le 2026-07-15 (décision D15)
 > **S'appuie sur** : D1 (hiérarchie de fiche, SEO), D5 (TMDB + watch/providers + YouTube), D6 (pub), D7 (lecture), D12 (flows V1/V3), D14 (composants Accueil réutilisés)
 
 ---
