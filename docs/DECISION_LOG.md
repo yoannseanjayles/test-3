@@ -17,8 +17,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 | D10 | 2026-07-15 | 1.4 | Adoption du [Sitemap](phase-1/1.4-sitemap.md) : architecture informationnelle complète, navigation 6 entrées + bottom bar mobile, URLs FR stables slug+ID, règles d'indexation par type de page, cartographie des emplacements publicitaires (D6), back-office incluant l'ingestion vidéo (D8) — **amendé à la validation** : ajout de l'espace créateur UGC (D11) | Voir le livrable 1.4 | ✅ Validé HITL |
 | D11 | 2026-07-15 | Transverse | **Upload vidéo ouvert aux administrateurs ET aux utilisateurs** (lève H15), avec exigence ferme (D9) : **interrupteur d'activation/désactivation de l'upload utilisateur** (`ugc.upload.enabled`, back-office, défaut OFF au lancement). Garde-fous structurels : déclaration de droits/licence obligatoire à l'upload, **modération a priori** (aucune vidéo utilisateur publique sans approbation admin), quotas par utilisateur, procédure de retrait (notice & takedown). | Directive utilisateur du 2026-07-15 ; à spécifier en 2.1 (pages Studio), 6.1 (back-end), 7.1 (modération) | ✅ Validé HITL |
 
+| D12 | 2026-07-15 | 1.5 | Adoption des [User Flows](phase-1/1.5-parcours-utilisateur.md) : 14 parcours (visiteur V1-V5, connecté U1-U6, admin A1-A5) couvrant toutes les exigences validées — **clôture de la Phase 1 (Architecture)** | Voir le livrable 1.5 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P12 | 2026-07-15 | 1.5 | Adopter les [User Flows](phase-1/1.5-parcours-utilisateur.md) : parcours visiteur (découverte, recherche, consultation, visionnage avec pré-roll), utilisateur connecté (onboarding, favoris, historique, reprise, upload UGC si activé), administrateur (ingestion, modération, publicité, analytics) | Voir le livrable 1.5 |
+| P13 | 2026-07-15 | 2.0 | Adopter le [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) : pratiques par famille de pages (catalogue, fiches, watch avec benchmarks vidéo TTFF < 2 s / rebuffer < 1 %, commerciales/support), stratégie FAQPage post-dépréciation Google, règles d'états vides, et **ordre de traitement des 14+ pages pour la 2.1** | Voir le livrable 2.0 |
