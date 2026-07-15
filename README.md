@@ -22,7 +22,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 - [1.5 — Parcours utilisateur](docs/phase-1/1.5-parcours-utilisateur.md) ✅ *(validé HITL — Phase 1 terminée)*
 
 ### Phase 2 — Définition des pages
-- [2.0 — Best Practices Summary : Pages](docs/phase-2/2.0-best-practices-pages.md) ⏳ *(en attente de validation HITL)*
+- [2.0 — Best Practices Summary : Pages](docs/phase-2/2.0-best-practices-pages.md) ✅ *(validé HITL)*
+- 2.1 — Spécifications de pages : [Accueil](docs/phase-2/2.1-pages/accueil.md) ⏳ *(1/14, en attente de validation HITL)*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ## Méthode

@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) |
 | **Phase en cours** | Phase 2 — Définition des pages |
-| **Sous-étape en cours** | 2.0 Recherche — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) |
+| **Sous-étape en cours** | 2.1 Conception des pages — page 1/14 (Accueil) rédigée, **en attente de validation HITL** |
+| **Dernier livrable** | [Spécification Accueil](phase-2/2.1-pages/accueil.md) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail
