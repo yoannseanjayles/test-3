@@ -48,6 +48,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 |---|---|---|
 | 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | ✅ Validé HITL (D26) |
 | 5.1 Développement | Lot 1 [Socle](phase-5/5.1-frontend/lot-1-socle.md) (`app/`) ⏳ **en attente de validation** · Lots 2-6 à venir | En cours |
+| 5.1 Déploiement | [Déploiement Vercel](phase-5/5.1-frontend/deploiement-vercel.md) — build/lint validés, Root Directory = `app`, rattachement Vercel à effectuer | ⏳ Prêt |
 
 ## Phases à venir
 
