@@ -39,8 +39,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | ⏳ **En attente de validation HITL** |
-| 4.1 Design System + Advertising Design System | Design Guidelines | À venir |
+| 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | ✅ Validé HITL (D24) |
+| 4.1 Design System + Advertising Design System | [Design Guidelines](phase-4/4.1-design-guidelines.md) + [tokens.css](../design/tokens.css)/[.json](../design/tokens.json) | ⏳ **En attente de validation HITL** |
 
 ## Phases à venir
 
@@ -54,6 +54,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 4.0 Best Practices — Design System** ← nous sommes ici
-2. Étape 4.1 — Design System + Advertising Design System (Design Guidelines)
-3. Phases 5 à 9
+1. **Validation HITL de la 4.1 Design Guidelines** (dont naming « CinéScope » — H60) ← nous sommes ici (dernière sous-étape de la Phase 4)
+2. Phase 5 — Front-end (5.0 recherche, 5.1 développement)
+3. Phases 6 à 9 · médias restants (B7/B8/C2/logo) à réceptionner quand fournis

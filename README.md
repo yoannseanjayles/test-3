@@ -32,7 +32,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 - [3.2 — Media Prompt Library](docs/phase-3/3.2-media-prompt-library.md) ✅ *(validé HITL — Phase 3 terminée ; illustrations réceptionnées dans [media/interface](media/interface/README.md))*
 
 ### Phase 4 — Design System
-- [4.0 — Best Practices Summary : Design System](docs/phase-4/4.0-best-practices-design-system.md) ⏳ *(en attente de validation HITL)*
+- [4.0 — Best Practices Summary : Design System](docs/phase-4/4.0-best-practices-design-system.md) ✅ *(validé HITL)*
+- [4.1 — Design Guidelines](docs/phase-4/4.1-design-guidelines.md) + [tokens](design/tokens.css) ⏳ *(en attente de validation HITL)*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ## Méthode

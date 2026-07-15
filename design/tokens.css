@@ -1,0 +1,104 @@
+/**
+ * CinéScope — Design Tokens (Phase 4.1, D25 pending)
+ * Source de vérité : docs/phase-4/4.1-design-guidelines.md
+ * Structure : primitifs → sémantiques. Les composants ne consomment QUE les sémantiques.
+ */
+
+:root {
+  /* ===== Primitifs — couleurs ===== */
+  --charcoal-900: #141118;
+  --charcoal-800: #1c1822;
+  --charcoal-700: #241f2b;
+  --charcoal-600: #2e2837;
+  --amber-400: #f5a623;
+  --amber-300: #ffbe4d;
+  --violet-500: #6c4ab6;
+  --violet-300: #9b7fd4;
+  --offwhite: #f2eff5;
+  --green-400: #4caf7a;
+  --red-400: #e5484d;
+  --yellow-400: #f0c000;
+
+  /* ===== Sémantiques — surfaces & texte ===== */
+  --surface-base: var(--charcoal-900);
+  --surface-raised: var(--charcoal-800);
+  --surface-overlay: var(--charcoal-700);
+  --surface-interactive: var(--charcoal-600);
+  --surface-sponsored: color-mix(in srgb, var(--violet-500) 6%, var(--charcoal-800));
+  --text-primary: color-mix(in srgb, var(--offwhite) 87%, transparent);
+  --text-secondary: color-mix(in srgb, var(--offwhite) 60%, transparent);
+  --text-disabled: color-mix(in srgb, var(--offwhite) 38%, transparent);
+  --border-subtle: color-mix(in srgb, var(--offwhite) 12%, transparent);
+
+  /* ===== Sémantiques — accent & états ===== */
+  --accent-brand: var(--amber-400);
+  --accent-brand-hover: var(--amber-300);
+  --on-accent: #1a1408;
+  --link: var(--amber-300);
+  --success: var(--green-400);
+  --danger: var(--red-400);
+  --warning: var(--yellow-400);
+  --focus-ring: var(--amber-400);
+
+  /* ===== Publicité (Advertising DS) ===== */
+  --ad-label-bg: color-mix(in srgb, var(--violet-500) 15%, transparent);
+  --ad-label-text: var(--violet-300);
+
+  /* ===== Typographie ===== */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-text: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --text-display-xl: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  --text-h1: clamp(2rem, 1.3rem + 2vw, 3rem);
+  --text-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-body: 1rem;
+  --text-caption: 0.8125rem;
+  --leading-body: 1.5;
+  --leading-heading: 1.15;
+
+  /* ===== Espacement (échelle 4 px) ===== */
+  --space-1: 4px;  --space-2: 8px;   --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px;  --space-7: 40px; --space-8: 48px;
+  --space-10: 64px; --space-12: 96px;
+
+  /* ===== Rayons ===== */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+  --radius-full: 999px;
+
+  /* ===== Élévation (thème sombre : lumière > ombre) ===== */
+  --glow-accent: 0 0 24px color-mix(in srgb, var(--amber-400) 35%, transparent);
+  --shadow-overlay: 0 16px 48px rgb(0 0 0 / 0.5);
+
+  /* ===== Z-index ===== */
+  --z-rail-controls: 10;
+  --z-header: 100;
+  --z-dropdown: 200;
+  --z-toast: 300;
+  --z-modal: 400;
+  --z-player-fs: 500;
+  --z-cmp: 600;
+
+  /* ===== Motion ===== */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ===== Media scrims (imagerie TMDB) ===== */
+  --scrim-hero: linear-gradient(to top, color-mix(in srgb, var(--charcoal-900) 85%, transparent), transparent 60%);
+  --scrim-card: linear-gradient(to top, color-mix(in srgb, var(--charcoal-900) 70%, transparent), transparent 45%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 100ms;
+    --duration-base: 100ms;
+    --duration-slow: 100ms;
+    /* Les transformations spatiales (scale, slide) sont remplacées par des fondus
+       au niveau composant ; les durées raccourcies couvrent le reste. */
+  }
+}

@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) · ✅ Phase 2 — Pages (D13-D20) · ✅ Phase 3 — Médias (D21-D23, illustrations B3+B4 réceptionnées) |
 | **Phase en cours** | Phase 4 — Design System |
-| **Sous-étape en cours** | 4.0 Recherche — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) |
+| **Sous-étape en cours** | 4.1 Design Guidelines — livrable rédigé (dont proposition de nom définitif « CinéScope »), **en attente de validation HITL** |
+| **Dernier livrable** | [Design Guidelines](phase-4/4.1-design-guidelines.md) + [tokens](../design/tokens.css) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail

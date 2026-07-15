@@ -34,8 +34,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D23 | 2026-07-15 | 3.2 | Adoption de la [Media Prompt Library](phase-3/3.2-media-prompt-library.md) — validée **par l'usage** : le commanditaire a généré et livré les familles B3+B4 (9 illustrations conformes, réceptionnées dans `media/interface/src/`). **Clôture de la Phase 3.** | Assets produits à partir des prompts 3.2 et intégrés | ✅ Validé HITL |
 
+| D24 | 2026-07-15 | 4.0 | Adoption du [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) : tokens 3 couches (spéc W3C), surfaces sombres à paliers, motion fonctionnel reduced-motion, Advertising DS à conteneurs réservés. Familles médias B3-B6 (35 assets) réceptionnées ; B7/B8/C2/logo reportés (« plus tard »). | Voir le livrable 4.0 ; directive utilisateur | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P24 | 2026-07-15 | 4.0 | Adopter le [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | Voir le livrable 4.0 |
+| P25 | 2026-07-15 | 4.1 | Adopter les [Design Guidelines](phase-4/4.1-design-guidelines.md) + tokens (`design/tokens.css`/`.json`) : nom définitif proposé **CinéScope**, palette ambre/violet confirmée (alignée sur les 35 assets produits), typographie Space Grotesk/Inter/JetBrains Mono, tokens complets, bibliothèque de composants avec états, Advertising Design System | Voir le livrable 4.1 |
