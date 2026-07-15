@@ -1,7 +1,7 @@
 # Spécification de page — Accueil (`/`)
 
 > **Étape** : 2.1 (page 1/14, ordre validé D13)
-> **Statut** : ⏳ En attente de validation HITL
+> **Statut** : ✅ Validé HITL le 2026-07-15 (décision D14)
 > **S'appuie sur** : D1 (hero unique, rails explicables), D4 (North Star), D6 (pub ON/OFF), D10 (sitemap), D12 (flows V1/U1), D13 (variété de conteneurs, états vides)
 
 ---

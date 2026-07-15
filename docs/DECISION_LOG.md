@@ -20,9 +20,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 | D12 | 2026-07-15 | 1.5 | Adoption des [User Flows](phase-1/1.5-parcours-utilisateur.md) : 14 parcours (visiteur V1-V5, connecté U1-U6, admin A1-A5) couvrant toutes les exigences validées — **clôture de la Phase 1 (Architecture)** | Voir le livrable 1.5 | ✅ Validé HITL |
 
 | D13 | 2026-07-15 | 2.0 | Adoption du [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) (benchmarks vidéo, FAQPage post-dépréciation, états vides, ordre de traitement 2.1) + **amendement de D11** : le switch upload ne concerne que les rôles non-admin | Voir le livrable 2.0 ; directive utilisateur | ✅ Validé HITL |
+| D14 | 2026-07-15 | 2.1 | Adoption de la [Spécification Accueil](phase-2/2.1-pages/accueil.md) (page 1/14) : hero unique double CTA, 8 conteneurs max dédoublonnés, étagère Gratuit ▶, 2 emplacements pub absents du DOM si pub OFF, 5 états, budgets SEO/perf/a11y | Voir la spécification | ✅ Validé HITL |
 
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P14 | 2026-07-15 | 2.1 | Adopter la [Spécification de la page Accueil](phase-2/2.1-pages/accueil.md) : hero unique à double CTA, 8 rails max ordonnés et explicables, 2 emplacements pub désactivables, états anonyme/connecté/vide, SEO et budgets de performance | Voir la spécification |
+| P15 | 2026-07-15 | 2.1 | Adopter la [Spécification de la page Fiche Film](phase-2/2.1-pages/fiche-film.md) (2/14) : hiérarchie hero → CTA → synopsis → casting → similaires, module « Où regarder » avec fallback, badge Gratuit ▶, JSON-LD Movie complet, OG image composée | Voir la spécification |
