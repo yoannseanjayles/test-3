@@ -36,8 +36,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D24 | 2026-07-15 | 4.0 | Adoption du [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) : tokens 3 couches (spéc W3C), surfaces sombres à paliers, motion fonctionnel reduced-motion, Advertising DS à conteneurs réservés. Familles médias B3-B6 (35 assets) réceptionnées ; B7/B8/C2/logo reportés (« plus tard »). | Voir le livrable 4.0 ; directive utilisateur | ✅ Validé HITL |
 
+| D25 | 2026-07-15 | 4.1 | Adoption des [Design Guidelines](phase-4/4.1-design-guidelines.md) + tokens, **amendée : nom définitif = Ciné+ / CinePlus** (décision commanditaire, remplace la proposition CinéScope). Palette charbon/ambre/violet définitive, typographie Space Grotesk/Inter/JetBrains Mono, composants avec états, Advertising DS. ⚠️ **Risque R6 ouvert** : « Ciné+ » est une marque Canal+ existante (bouquet cinéma FR) — vérification INPI/EUIPO et avis juridique requis avant production publique. **Clôture de la Phase 4.** | Voir le livrable 4.1 ; directive utilisateur | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P25 | 2026-07-15 | 4.1 | Adopter les [Design Guidelines](phase-4/4.1-design-guidelines.md) + tokens (`design/tokens.css`/`.json`) : nom définitif proposé **CinéScope**, palette ambre/violet confirmée (alignée sur les 35 assets produits), typographie Space Grotesk/Inter/JetBrains Mono, tokens complets, bibliothèque de composants avec états, Advertising Design System | Voir le livrable 4.1 |
+| P26 | 2026-07-15 | 5.0 | Adopter le [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | Voir le livrable 5.0 |

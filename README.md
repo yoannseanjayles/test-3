@@ -1,4 +1,4 @@
-# Plateforme Premium de Découverte, Visionnage & Monétisation de Films et Séries
+# Ciné+ (CinePlus) — Plateforme Premium de Découverte, Visionnage & Monétisation de Films et Séries
 
 Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et **monétisation** de films et séries — moderne, rapide, sécurisée, évolutive — construite exclusivement sur des **API et hébergements gratuits ou disposant d'un plan gratuit**.
 
@@ -33,7 +33,10 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 
 ### Phase 4 — Design System
 - [4.0 — Best Practices Summary : Design System](docs/phase-4/4.0-best-practices-design-system.md) ✅ *(validé HITL)*
-- [4.1 — Design Guidelines](docs/phase-4/4.1-design-guidelines.md) + [tokens](design/tokens.css) ⏳ *(en attente de validation HITL)*
+- [4.1 — Design Guidelines](docs/phase-4/4.1-design-guidelines.md) + [tokens](design/tokens.css) ✅ *(validé HITL — Phase 4 terminée ; nom définitif Ciné+/CinePlus)*
+
+### Phase 5 — Front-end
+- [5.0 — Best Practices Summary : Front-end](docs/phase-5/5.0-best-practices-frontend.md) ⏳ *(en attente de validation HITL)*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ## Méthode

@@ -33,14 +33,21 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | 3.1 Inventaire | [Media Inventory](phase-3/3.1-media-inventory.md) | D22 |
 | 3.2 Bibliothèque de prompts IA | [Media Prompt Library](phase-3/3.2-media-prompt-library.md) — familles B3+B4 générées et réceptionnées (`media/interface/src/`) | D23 |
 
+### ✅ Phase 4 — Design System (terminée le 2026-07-15)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | D24 |
+| 4.1 Design System + Advertising DS | [Design Guidelines](phase-4/4.1-design-guidelines.md) + [tokens.css](../design/tokens.css)/[.json](../design/tokens.json) — nom définitif **Ciné+ / CinePlus** (risque marque R6 ouvert) | D25 |
+
 ## Phase en cours
 
-**Phase 4 — Design System**
+**Phase 5 — Front-end**
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | ✅ Validé HITL (D24) |
-| 4.1 Design System + Advertising Design System | [Design Guidelines](phase-4/4.1-design-guidelines.md) + [tokens.css](../design/tokens.css)/[.json](../design/tokens.json) | ⏳ **En attente de validation HITL** |
+| 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) (dont proposition de stack H63) | ⏳ **En attente de validation HITL** |
+| 5.1 Développement | Front-end documenté | À venir |
 
 ## Phases à venir
 
@@ -54,6 +61,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 4.1 Design Guidelines** (dont naming « CinéScope » — H60) ← nous sommes ici (dernière sous-étape de la Phase 4)
-2. Phase 5 — Front-end (5.0 recherche, 5.1 développement)
-3. Phases 6 à 9 · médias restants (B7/B8/C2/logo) à réceptionner quand fournis
+1. **Validation HITL de la 5.0 Best Practices Front-end** (dont stack Next.js 15 — H63) ← nous sommes ici
+2. Étape 5.1 — Développement du front
+3. Phases 6 à 9 · médias restants (B7/B8/C2/logo Ciné+) à réceptionner quand fournis · risque R6 (marque) à lever
