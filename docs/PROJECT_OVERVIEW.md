@@ -4,7 +4,7 @@
 
 Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, de référencement, de visionnage et de monétisation de films et séries** : moderne, rapide, sécurisée, évolutive, entièrement documentée, utilisant **exclusivement des API et hébergements gratuits ou disposant d'un plan gratuit**.
 
-> Brief élargi le 2026-07-15 : la mission couvre désormais aussi le **visionnage vidéo premium**, la **publicité intelligente** et le **modèle économique** (9 phases). Vision produit détaillée : [1.1 Vision Produit v2](phase-1/1.1-vision-produit.md) (en attente de validation).
+> Brief élargi le 2026-07-15 : la mission couvre désormais aussi le **visionnage vidéo premium**, la **publicité intelligente** et le **modèle économique** (9 phases). Vision produit détaillée : [1.1 Vision Produit v2](phase-1/1.1-vision-produit.md) (validée — D4).
 
 ## Fonctionnalités cibles
 
@@ -24,9 +24,9 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 | Élément | Statut |
 |---|---|
 | **Phase en cours** | Phase 1 — Architecture |
-| **Sous-étape en cours** | 1.1 Vision produit v2 — livrable rédigé, **en attente de validation HITL** (avec l'addendum 1.0) |
-| **Derniers livrables** | [Addendum 1.0 — Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) · [Vision Produit v2](phase-1/1.1-vision-produit.md) |
-| **Validé à ce jour** | 1.0 [Best Practices Summary](phase-1/1.0-best-practices-summary.md) (D1) |
+| **Sous-étape en cours** | 1.2 Choix des APIs — livrable rédigé, **en attente de validation HITL** |
+| **Dernier livrable** | [Architecture des APIs](phase-1/1.2-architecture-apis.md) |
+| **Validé à ce jour** | 1.0 [Best Practices Summary](phase-1/1.0-best-practices-summary.md) + [addendum](phase-1/1.0-addendum-visionnage-monetisation.md) (D1-D3) · 1.1 [Vision Produit v2](phase-1/1.1-vision-produit.md) (D4) |
 
 ## Méthode de travail
 

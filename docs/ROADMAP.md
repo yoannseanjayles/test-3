@@ -8,6 +8,8 @@
 
 ### Sous-étapes validées
 - ✅ **1.0 Recherche** — [Best Practices Summary](phase-1/1.0-best-practices-summary.md) (validé HITL le 2026-07-15, décision D1)
+- ✅ **1.0 Recherche (addendum)** — [Best Practices Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) (validé HITL le 2026-07-15, décisions D2-D3)
+- ✅ **1.1 Vision produit** — [Vision Produit v2](phase-1/1.1-vision-produit.md) (validé HITL le 2026-07-15, décision D4)
 
 ## Phase en cours
 
@@ -16,9 +18,9 @@
 | Étape | Livrable | Statut |
 |---|---|---|
 | 1.0 Recherche | [Best Practices Summary](phase-1/1.0-best-practices-summary.md) | ✅ Validé HITL (D1) |
-| 1.0 Recherche (addendum) | [Best Practices — Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) | ⏳ **En attente de validation HITL** |
-| 1.1 Vision produit | [Vision Produit v2](phase-1/1.1-vision-produit.md) (périmètre élargi) | ⏳ **En attente de validation HITL** |
-| 1.2 Choix des APIs | Architecture des APIs | À venir |
+| 1.0 Recherche (addendum) | [Best Practices — Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) | ✅ Validé HITL (D2-D3) |
+| 1.1 Vision produit | [Vision Produit v2](phase-1/1.1-vision-produit.md) (périmètre élargi) | ✅ Validé HITL (D4) |
+| 1.2 Choix des APIs | [Architecture des APIs](phase-1/1.2-architecture-apis.md) | ⏳ **En attente de validation HITL** |
 | 1.3 Architecture Streaming | Video Streaming Architecture | À venir |
 | 1.4 Sitemap | Sitemap | À venir |
 | 1.5 Parcours utilisateur | User Flows | À venir |
@@ -38,9 +40,8 @@
 
 ## Prochaines étapes
 
-1. **Validation HITL de l'addendum 1.0 et du livrable 1.1 Vision produit v2** ← nous sommes ici
-2. Étape 1.2 — Choix des APIs (gratuites / plan gratuit uniquement)
-3. Étape 1.3 — Architecture Streaming
-4. Étape 1.4 — Sitemap
-5. Étape 1.5 — Parcours utilisateur
-6. Phases 2 à 9
+1. **Validation HITL du livrable 1.2 Architecture des APIs** ← nous sommes ici
+2. Étape 1.3 — Architecture Streaming
+3. Étape 1.4 — Sitemap
+4. Étape 1.5 — Parcours utilisateur
+5. Phases 2 à 9
