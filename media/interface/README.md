@@ -16,4 +16,13 @@ Assets générés selon la [Media Prompt Library 3.2](../../docs/phase-3/3.2-med
 | `error-player@1024.jpg` | B4 | Erreur lecteur |
 | `error-410@1024.jpg` | B4 | Contenu retiré (410) |
 
-Réceptionnés le 2026-07-15 (fournis par le commanditaire). Conversion AVIF/WebP + export @480 : étape de build front (Phase 5). La palette définitive (Phase 4) pourra déclencher une regénération — les prompts sont paramétrés (H57).
+## `src/` — cartes de genres 1376×768 (B5, 18 genres)
+
+`genre-{slug}@1376.jpg` : action · animation · aventure · comedie · crime · documentaire · drame · famille · fantastique · guerre · histoire · horreur · musique · mystere · romance · science-fiction · thriller · western.
+Composition : tiers gauche/zone libre pour le texte (posé en CSS).
+
+---
+
+Réceptionnés le 2026-07-15 (fournis par le commanditaire). Conversion AVIF/WebP + exports responsive : étape de build front (Phase 5). La palette définitive (Phase 4) pourra déclencher une regénération — les prompts sont paramétrés (H57).
+
+**Reste à générer** (prompts en [3.2](../../docs/phase-3/3.2-media-prompt-library.md)) : B6 chips d'intention (8) · B7 onboarding (3) · B8 heros (3) · C2 OG statiques (5, Ideogram) · B1 logo (après naming Phase 4) · P1 : B12 (2), D1-D3 house ads.
