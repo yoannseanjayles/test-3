@@ -10,6 +10,7 @@
 - ✅ **1.0 Recherche** — [Best Practices Summary](phase-1/1.0-best-practices-summary.md) (validé HITL le 2026-07-15, décision D1)
 - ✅ **1.0 Recherche (addendum)** — [Best Practices Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) (validé HITL le 2026-07-15, décisions D2-D3)
 - ✅ **1.1 Vision produit** — [Vision Produit v2](phase-1/1.1-vision-produit.md) (validé HITL le 2026-07-15, décision D4)
+- ✅ **1.2 Choix des APIs** — [Architecture des APIs](phase-1/1.2-architecture-apis.md) (validé HITL le 2026-07-15, décisions D5-D6 dont l'exigence « publicité activable/désactivable »)
 
 ## Phase en cours
 
@@ -20,8 +21,8 @@
 | 1.0 Recherche | [Best Practices Summary](phase-1/1.0-best-practices-summary.md) | ✅ Validé HITL (D1) |
 | 1.0 Recherche (addendum) | [Best Practices — Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) | ✅ Validé HITL (D2-D3) |
 | 1.1 Vision produit | [Vision Produit v2](phase-1/1.1-vision-produit.md) (périmètre élargi) | ✅ Validé HITL (D4) |
-| 1.2 Choix des APIs | [Architecture des APIs](phase-1/1.2-architecture-apis.md) | ⏳ **En attente de validation HITL** |
-| 1.3 Architecture Streaming | Video Streaming Architecture | À venir |
+| 1.2 Choix des APIs | [Architecture des APIs](phase-1/1.2-architecture-apis.md) | ✅ Validé HITL (D5) |
+| 1.3 Architecture Streaming | [Video Streaming Architecture](phase-1/1.3-architecture-streaming.md) | ⏳ **En attente de validation HITL** |
 | 1.4 Sitemap | Sitemap | À venir |
 | 1.5 Parcours utilisateur | User Flows | À venir |
 
@@ -40,8 +41,7 @@
 
 ## Prochaines étapes
 
-1. **Validation HITL du livrable 1.2 Architecture des APIs** ← nous sommes ici
-2. Étape 1.3 — Architecture Streaming
-3. Étape 1.4 — Sitemap
-4. Étape 1.5 — Parcours utilisateur
-5. Phases 2 à 9
+1. **Validation HITL du livrable 1.3 Video Streaming Architecture** ← nous sommes ici
+2. Étape 1.4 — Sitemap
+3. Étape 1.5 — Parcours utilisateur
+4. Phases 2 à 9

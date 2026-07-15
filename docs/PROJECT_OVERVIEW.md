@@ -24,9 +24,9 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 | Élément | Statut |
 |---|---|
 | **Phase en cours** | Phase 1 — Architecture |
-| **Sous-étape en cours** | 1.2 Choix des APIs — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Architecture des APIs](phase-1/1.2-architecture-apis.md) |
-| **Validé à ce jour** | 1.0 [Best Practices Summary](phase-1/1.0-best-practices-summary.md) + [addendum](phase-1/1.0-addendum-visionnage-monetisation.md) (D1-D3) · 1.1 [Vision Produit v2](phase-1/1.1-vision-produit.md) (D4) |
+| **Sous-étape en cours** | 1.3 Architecture Streaming — livrable rédigé, **en attente de validation HITL** |
+| **Dernier livrable** | [Video Streaming Architecture](phase-1/1.3-architecture-streaming.md) |
+| **Validé à ce jour** | 1.0 [Best Practices Summary](phase-1/1.0-best-practices-summary.md) + [addendum](phase-1/1.0-addendum-visionnage-monetisation.md) (D1-D3) · 1.1 [Vision Produit v2](phase-1/1.1-vision-produit.md) (D4) · 1.2 [Architecture des APIs](phase-1/1.2-architecture-apis.md) (D5) · Exigence transverse **pub activable/désactivable** (D6) |
 
 ## Méthode de travail
 
