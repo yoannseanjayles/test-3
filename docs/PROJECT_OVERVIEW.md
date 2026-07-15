@@ -25,8 +25,8 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 |---|---|
 | **Phases terminées** | ✅ Phase 1 — Architecture (D1-D12) |
 | **Phase en cours** | Phase 2 — Définition des pages |
-| **Sous-étape en cours** | 2.1 Conception des pages — 3/14 validées, page 4/14 (Watch) rédigée, **en attente de validation HITL** |
-| **Dernier livrable** | [Spécification Watch](phase-2/2.1-pages/watch.md) |
+| **Sous-étape en cours** | 2.2 Expérience Visionnage — livrable rédigé, **en attente de validation HITL** (2.1 terminée : 14/14 pages, validation anticipée D18) |
+| **Dernier livrable** | [Video Experience Specification](phase-2/2.2-video-experience-specification.md) |
 | **Exigences fermes actées** | **pub ON/OFF + pré-roll avant chaque vidéo** (D6) · **ingestion vidéo depuis l'appli** (D8) · **toute option = exigence** (D9) · **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail

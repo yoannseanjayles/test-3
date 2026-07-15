@@ -23,7 +23,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 
 ### Phase 2 — Définition des pages
 - [2.0 — Best Practices Summary : Pages](docs/phase-2/2.0-best-practices-pages.md) ✅ *(validé HITL)*
-- 2.1 — Spécifications de pages : [Accueil](docs/phase-2/2.1-pages/accueil.md) ✅ · [Fiche Film](docs/phase-2/2.1-pages/fiche-film.md) ✅ · [Fiche Série](docs/phase-2/2.1-pages/fiche-serie.md) ✅ · [Watch](docs/phase-2/2.1-pages/watch.md) ⏳ *(4/14, en attente de validation HITL)*
+- 2.1 — Spécifications de pages ✅ **14/14** *(validées, dont validation anticipée D18)* : [Accueil](docs/phase-2/2.1-pages/accueil.md) · [Fiche Film](docs/phase-2/2.1-pages/fiche-film.md) · [Fiche Série](docs/phase-2/2.1-pages/fiche-serie.md) · [Watch](docs/phase-2/2.1-pages/watch.md) · [Recherche](docs/phase-2/2.1-pages/recherche.md) · [Grilles catalogue](docs/phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](docs/phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](docs/phase-2/2.1-pages/gratuit.md) · [Ma liste](docs/phase-2/2.1-pages/ma-liste.md) · [Profil/Paramètres](docs/phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](docs/phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](docs/phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](docs/phase-2/2.1-pages/support-legal.md) · [Personne & Listes](docs/phase-2/2.1-pages/personne-listes.md)
+- [2.2 — Video Experience Specification](docs/phase-2/2.2-video-experience-specification.md) ⏳ *(en attente de validation HITL)*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ## Méthode

@@ -24,8 +24,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 2.0 Recherche | [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) | ✅ Validé HITL (D13) |
-| 2.1 Conception des pages (une à la fois) | ✅ [Accueil](phase-2/2.1-pages/accueil.md) (D14) · ✅ [Fiche Film](phase-2/2.1-pages/fiche-film.md) (D15) · ✅ [Fiche Série](phase-2/2.1-pages/fiche-serie.md) (D16) · ⏳ 4/14 [Watch](phase-2/2.1-pages/watch.md) **en attente de validation** | En cours |
-| 2.2 Expérience Visionnage | Video Experience Specification | À venir |
+| 2.1 Conception des pages | ✅ **14/14** : [Accueil](phase-2/2.1-pages/accueil.md) · [Fiche Film](phase-2/2.1-pages/fiche-film.md) · [Fiche Série](phase-2/2.1-pages/fiche-serie.md) · [Watch](phase-2/2.1-pages/watch.md) · [Recherche](phase-2/2.1-pages/recherche.md) · [Grilles](phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](phase-2/2.1-pages/gratuit.md) · [Ma liste](phase-2/2.1-pages/ma-liste.md) · [Profil/Paramètres](phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](phase-2/2.1-pages/support-legal.md) · [Personne & Listes](phase-2/2.1-pages/personne-listes.md) (D14-D19) | ✅ Terminé |
+| 2.2 Expérience Visionnage | [Video Experience Specification](phase-2/2.2-video-experience-specification.md) | ⏳ **En attente de validation HITL** |
 
 ## Phases à venir
 
@@ -41,7 +41,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la spécification Watch (2.1, page 4/14)** ← nous sommes ici
-2. Pages suivantes (ordre D13) : Recherche → grilles → Gratuit ▶ → Ma liste → Profil/Paramètres → Studio UGC → Auth/Onboarding → Support → Continuer la lecture
-3. Étape 2.2 — Video Experience Specification
-4. Phases 3 à 9
+1. **Validation HITL de la 2.2 Video Experience Specification** ← nous sommes ici (dernière sous-étape de la Phase 2)
+2. Phase 3 — Génération des médias (3.0 recherche, 3.1 inventaire, 3.2 prompts IA)
+3. Phases 4 à 9

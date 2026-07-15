@@ -1,7 +1,7 @@
 # Spécification de page — Watch (`/regarder/{slug}-{id}` · `…/s{n}e{m}`)
 
 > **Étape** : 2.1 (page 4/14, ordre validé D13)
-> **Statut** : ⏳ En attente de validation HITL
+> **Statut** : ✅ Validé HITL le 2026-07-15 (décision D17)
 > **S'appuie sur** : D6 (pré-roll exigence ferme + kill switch), D7 (lecteur hls.js+Vidstack, reprise, sécurité), D13 (benchmarks TTFF < 2 s, fiche allégée sous lecteur), D12 (flow V4), D16 (mode épisode)
 > **Note** : cette page pose la structure ; les comportements fins du lecteur (gestes, TV, file publicitaire) seront consolidés dans la **2.2 Video Experience Specification**.
 
