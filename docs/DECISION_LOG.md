@@ -40,8 +40,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D26 | 2026-07-15 | 5.0 | Adoption du [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) : stack **Next.js 15 App Router + TypeScript + Tailwind v4 (tokens D25) + Radix + TanStack Query + Vidstack/hls.js**, architecture server-only/modèles canoniques, budgets perf CI bloquants, plan de tests | Voir le livrable 5.0 | ✅ Validé HITL |
 
+| D27 | 2026-07-15 | 5.1 | Validation du **Lot 1 du front (socle)** : projet Next.js initialisé (`app/`), tokens intégrés, composants du design system en code, layout global (header/bottom-nav/footer). **Complément : mise en production Vercel effective** — projet `cineplus` (https://cineplus-eight.vercel.app), Root Directory `app`, preset Next.js forcé par `app/vercel.json` (le preset « Other » du dashboard causait des 404 malgré des builds verts), production suivie par la branche par défaut du dépôt. | Site vérifié en ligne (HTTP 200) ; directive « ok super on enchaîne » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P27 | 2026-07-15 | 5.1 | Valider le **Lot 1 du front (socle)** : projet Next.js initialisé (`app/`), tokens intégrés, composants du design system en code, layout global (header/bottom-nav/footer) | Code + doc du lot |
+| P28 | 2026-07-15 | 5.1 | Valider le **Lot 2 du front (catalogue)** : client TMDB server-only (modèles canoniques Zod), accueil en données réelles, fiches Film/Série, grilles Films/Séries/Tendances, recherche | Code + doc du lot |

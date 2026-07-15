@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 1 : Socle front-end
 
 > **Livrable** : projet initialisé + design system en code + layout global (`app/`)
-> **Statut** : ⏳ En attente de validation HITL
+> **Statut** : ✅ Validé HITL (D27)
 > **Stack** (D26) : Next.js **16.2** (App Router, plus récent que le 15 proposé — API identique, params asynchrones et nouveau modèle de cache pris en compte) · TypeScript strict · Tailwind v4 · Radix (installé, utilisé dès les modales) · TanStack Query (installé, utilisé au Lot 3) · Zod.
 
 ## Contenu du lot

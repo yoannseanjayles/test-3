@@ -1,4 +1,5 @@
 import { type ComponentPropsWithoutRef, forwardRef } from "react";
+import Link from "next/link";
 
 type Variant = "primary" | "secondary" | "ghost";
 type Size = "md" | "lg";
@@ -46,3 +47,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     </button>
   );
 });
+
+export interface ButtonLinkProps extends ComponentPropsWithoutRef<typeof Link> {
+  variant?: Variant;
+  size?: Size;
+}
+
+/** Variante lien du bouton — même apparence, sémantique de navigation (a11y). */
+export function ButtonLink({ variant = "primary", size = "md", className = "", ...props }: ButtonLinkProps) {
+  return <Link className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} {...props} />;
+}
