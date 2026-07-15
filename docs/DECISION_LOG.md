@@ -48,8 +48,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D30 | 2026-07-15 | 5.1 | Validation du **Lot 4 du front (lecteur & gratuit)** : lecteur hls.js/MP4 (H73 Vidstack reporté — React 18 only), page Watch `/regarder/{slug}` avec pré-roll conditionnel (capping session, jamais à la reprise), reprise/heartbeat/historique branchés sur Ma liste, catalogue Gratuit ▶ 7 œuvres (Blender CC BY + domaine public Internet Archive, H75 sources à surveiller) — déployé en production. | Directive « ok je valide » du 2026-07-15 | ✅ Validé HITL |
 
+| D31 | 2026-07-15 | 5.1 | Validation du **Lot 5 du front (studio & support)** : Studio UGC gouverné par l'interrupteur D11 (état OFF illustré + règles publiées), FAQ (JSON-LD FAQPage, groupe UGC conditionnel), Contact (motifs complets dont takedown D11, envoi honnêtement désactivé H77), À propos (attributions TMDB/JustWatch D5), 4 pages légales sur gabarit commun (H46 : validation juridique requise avant ouverture publique) — footer sans lien mort, déployé en production. | Directive « ok » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P31 | 2026-07-15 | 5.1 | Valider le **Lot 5 du front (studio & support)** : Studio UGC (tableau de bord + parcours d'upload gouverné par l'interrupteur D11, ingestion réelle en 6.1), FAQ (JSON-LD FAQPage), Contact (motifs dont takedown D11), À propos (attributions D5), CGU/Confidentialité/Cookies/Mentions légales (gabarits H46 — clauses finales à valider juridiquement) | Code + doc du lot |
+| P32 | 2026-07-15 | 5.1 | Valider le **Lot 6 du front (qualité)** : suite de tests Playwright (parcours critiques) + audits d'accessibilité automatisés (axe-core) sur les pages clés, configuration Lighthouse CI (budgets D26) — clôture de la 5.1 et de la Phase 5 | Code + doc du lot |

@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 5 : Studio & Support
 
 > **Livrable** : Studio UGC (gouverné par l'interrupteur D11) + FAQ + Contact + À propos + 4 pages légales — plus aucun lien mort dans le footer (`app/`)
-> **Statut** : ⏳ En attente de validation HITL (P31)
+> **Statut** : ✅ Validé HITL (D31) — déployé en production
 
 ## Contenu du lot
 
