@@ -24,9 +24,9 @@ Concevoir et livrer une **plateforme premium (« 6 étoiles ») de découverte, 
 | Élément | Statut |
 |---|---|
 | **Phase en cours** | Phase 1 — Architecture |
-| **Sous-étape en cours** | 1.4 Sitemap — livrable rédigé, **en attente de validation HITL** |
-| **Dernier livrable** | [Sitemap](phase-1/1.4-sitemap.md) |
-| **Validé à ce jour** | 1.0 + [addendum](phase-1/1.0-addendum-visionnage-monetisation.md) (D1-D3) · 1.1 [Vision Produit v2](phase-1/1.1-vision-produit.md) (D4) · 1.2 [APIs](phase-1/1.2-architecture-apis.md) (D5) · 1.3 [Streaming](phase-1/1.3-architecture-streaming.md) (D7) · Exigences transverses : **pub ON/OFF** (D6), **ingestion vidéo depuis l'appli** (D8) |
+| **Sous-étape en cours** | 1.5 Parcours utilisateur — livrable rédigé, **en attente de validation HITL** (dernière sous-étape de la Phase 1) |
+| **Dernier livrable** | [User Flows](phase-1/1.5-parcours-utilisateur.md) |
+| **Validé à ce jour** | 1.0 + [addendum](phase-1/1.0-addendum-visionnage-monetisation.md) (D1-D3) · 1.1 [Vision v2](phase-1/1.1-vision-produit.md) (D4) · 1.2 [APIs](phase-1/1.2-architecture-apis.md) (D5) · 1.3 [Streaming](phase-1/1.3-architecture-streaming.md) (D7) · 1.4 [Sitemap](phase-1/1.4-sitemap.md) (D10) · Exigences fermes : **pub ON/OFF + pré-roll** (D6), **ingestion depuis l'appli** (D8), **toute option = exigence** (D9), **upload utilisateur avec interrupteur** (D11) |
 
 ## Méthode de travail
 

@@ -12,6 +12,7 @@
 - ✅ **1.1 Vision produit** — [Vision Produit v2](phase-1/1.1-vision-produit.md) (validé HITL le 2026-07-15, décision D4)
 - ✅ **1.2 Choix des APIs** — [Architecture des APIs](phase-1/1.2-architecture-apis.md) (validé HITL le 2026-07-15, décisions D5-D6 dont l'exigence « publicité activable/désactivable »)
 - ✅ **1.3 Architecture Streaming** — [Video Streaming Architecture](phase-1/1.3-architecture-streaming.md) (validé HITL le 2026-07-15, décisions D7-D8 dont l'exigence « héberger et diffuser depuis l'appli »)
+- ✅ **1.4 Sitemap** — [Sitemap](phase-1/1.4-sitemap.md) (validé HITL le 2026-07-15, décisions D9-D11 dont l'upload utilisateur avec interrupteur)
 
 ## Phase en cours
 
@@ -24,8 +25,8 @@
 | 1.1 Vision produit | [Vision Produit v2](phase-1/1.1-vision-produit.md) (périmètre élargi) | ✅ Validé HITL (D4) |
 | 1.2 Choix des APIs | [Architecture des APIs](phase-1/1.2-architecture-apis.md) | ✅ Validé HITL (D5) |
 | 1.3 Architecture Streaming | [Video Streaming Architecture](phase-1/1.3-architecture-streaming.md) | ✅ Validé HITL (D7-D8) |
-| 1.4 Sitemap | [Sitemap](phase-1/1.4-sitemap.md) | ⏳ **En attente de validation HITL** |
-| 1.5 Parcours utilisateur | User Flows | À venir |
+| 1.4 Sitemap | [Sitemap](phase-1/1.4-sitemap.md) | ✅ Validé HITL (D10-D11) |
+| 1.5 Parcours utilisateur | [User Flows](phase-1/1.5-parcours-utilisateur.md) | ⏳ **En attente de validation HITL** |
 
 ## Phases à venir
 
@@ -42,6 +43,6 @@
 
 ## Prochaines étapes
 
-1. **Validation HITL du livrable 1.4 Sitemap** ← nous sommes ici
-2. Étape 1.5 — Parcours utilisateur
-3. Phases 2 à 9
+1. **Validation HITL du livrable 1.5 User Flows** ← nous sommes ici (dernière sous-étape de la Phase 1)
+2. Phase 2 — Définition des pages (2.0 recherche, 2.1 pages une à une, 2.2 expérience visionnage)
+3. Phases 3 à 9
