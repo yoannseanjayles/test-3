@@ -17,21 +17,28 @@
 
 Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vidéo depuis l'appli** (D8), **toute option = exigence ferme** (D9), **upload utilisateur avec interrupteur** (D11).
 
+### ✅ Phase 2 — Définition des pages (terminée le 2026-07-15)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 2.0 Recherche | [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) | D13 |
+| 2.1 Conception des pages (14/14) | [Accueil](phase-2/2.1-pages/accueil.md) · [Fiche Film](phase-2/2.1-pages/fiche-film.md) · [Fiche Série](phase-2/2.1-pages/fiche-serie.md) · [Watch](phase-2/2.1-pages/watch.md) · [Recherche](phase-2/2.1-pages/recherche.md) · [Grilles](phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](phase-2/2.1-pages/gratuit.md) · [Ma liste](phase-2/2.1-pages/ma-liste.md) · [Profil/Paramètres](phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](phase-2/2.1-pages/support-legal.md) · [Personne & Listes](phase-2/2.1-pages/personne-listes.md) | D14-D19 |
+| 2.2 Expérience Visionnage | [Video Experience Specification](phase-2/2.2-video-experience-specification.md) | D20 |
+
 ## Phase en cours
 
-**Phase 2 — Définition des pages**
+**Phase 3 — Génération des médias**
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 2.0 Recherche | [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) | ✅ Validé HITL (D13) |
-| 2.1 Conception des pages | ✅ **14/14** : [Accueil](phase-2/2.1-pages/accueil.md) · [Fiche Film](phase-2/2.1-pages/fiche-film.md) · [Fiche Série](phase-2/2.1-pages/fiche-serie.md) · [Watch](phase-2/2.1-pages/watch.md) · [Recherche](phase-2/2.1-pages/recherche.md) · [Grilles](phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](phase-2/2.1-pages/gratuit.md) · [Ma liste](phase-2/2.1-pages/ma-liste.md) · [Profil/Paramètres](phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](phase-2/2.1-pages/support-legal.md) · [Personne & Listes](phase-2/2.1-pages/personne-listes.md) (D14-D19) | ✅ Terminé |
-| 2.2 Expérience Visionnage | [Video Experience Specification](phase-2/2.2-video-experience-specification.md) | ⏳ **En attente de validation HITL** |
+| 3.0 Recherche | [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) | ⏳ **En attente de validation HITL** |
+| 3.1 Inventaire | Media Inventory | À venir |
+| 3.2 Bibliothèque de prompts IA | Media Prompt Library | À venir |
 
 ## Phases à venir
 
 | Phase | Contenu | Livrables clés |
 |---|---|---|
-| **3 — Génération des médias** | Recherche (3.0) · Inventaire (3.1) · Prompts IA (3.2) | Media Inventory, Media Prompt Library |
 | **4 — Design System** | Recherche (4.0) · Design System + Advertising Design System (4.1) | Design Guidelines |
 | **5 — Front-end** | Recherche (5.0) · Développement (5.1) dont lecteur vidéo et composants pub | Front-end documenté |
 | **6 — Back-end** | Recherche (6.0) · Développement (6.1) · Architecture publicitaire (6.2) | Documentation technique, Advertising Technical Specification |
@@ -41,6 +48,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la 2.2 Video Experience Specification** ← nous sommes ici (dernière sous-étape de la Phase 2)
-2. Phase 3 — Génération des médias (3.0 recherche, 3.1 inventaire, 3.2 prompts IA)
-3. Phases 4 à 9
+1. **Validation HITL de la 3.0 Best Practices — Médias** ← nous sommes ici
+2. Étape 3.1 — Media Inventory
+3. Étape 3.2 — Media Prompt Library
+4. Phases 4 à 9

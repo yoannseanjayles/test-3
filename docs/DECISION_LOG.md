@@ -28,8 +28,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D19 | 2026-07-15 | 2.1 | Adoption (au titre de D18) des **10 lots restants de spécifications de pages** : [Recherche](phase-2/2.1-pages/recherche.md) · [Grilles catalogue](phase-2/2.1-pages/grilles-catalogue.md) · [Découverte/Tendances/Nouveautés](phase-2/2.1-pages/decouverte-tendances-nouveautes.md) · [Gratuit ▶](phase-2/2.1-pages/gratuit.md) · [Ma liste](phase-2/2.1-pages/ma-liste.md) (incl. Continuer la lecture) · [Profil/Paramètres](phase-2/2.1-pages/profil-parametres.md) · [Studio UGC](phase-2/2.1-pages/studio-ugc.md) · [Auth/Onboarding](phase-2/2.1-pages/auth-onboarding.md) · [Support & légal](phase-2/2.1-pages/support-legal.md) · [Personne & Listes](phase-2/2.1-pages/personne-listes.md) — **étape 2.1 complète (14/14)** | Validation anticipée D18 ; amendements a posteriori possibles | ✅ Validé HITL (anticipé) |
 
+| D20 | 2026-07-15 | 2.2 | Adoption de la [Video Experience Specification](phase-2/2.2-video-experience-specification.md) : matrice d'états du lecteur, gestes mobiles, mode 10-feet, contrat sous-titres/audio (EAA), contrat publicitaire in-player, budgets qualité gelés — **clôture de la Phase 2** | Voir le livrable 2.2 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P20 | 2026-07-15 | 2.2 | Adopter la [Video Experience Specification](phase-2/2.2-video-experience-specification.md) : matrice d'états du lecteur, gestes mobiles, mode grand écran/TV léger, contrat sous-titres/audio (EAA), règles de continuité, **contrat publicitaire in-player** (pré-roll seul en v1, capping, interdits), budgets qualité gelés | Voir le livrable 2.2 |
+| P21 | 2026-07-15 | 3.0 | Adopter le [Best Practices Summary — Médias](phase-3/3.0-best-practices-medias.md) : médias contenu = TMDB (jamais générés), périmètre IA = interface/marque/marketing/house ads, placeholders blurhash + couleur dominante, OG 1200×630 dynamique, règles de prompt CRAFT par modèle, interdits légaux | Voir le livrable 3.0 |
