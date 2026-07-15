@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Rail } from "@/components/ui/Rail";
 import { TitleCard } from "@/components/ui/TitleCard";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { WatchlistButton } from "@/components/library/WatchlistButton";
 import type { TitleDetails } from "@/lib/tmdb/models";
 
 /**
@@ -93,6 +94,19 @@ export function TitleDetailPage({ details }: { details: TitleDetails }) {
                 ))}
               </ul>
             )}
+            {/* CTA — « Regarder » arrive avec le lecteur (Lot 4) ; Ma liste : optimiste, store local (Lot 3) */}
+            <div className="mt-5">
+              <WatchlistButton
+                title={{
+                  id: details.id,
+                  kind,
+                  title,
+                  year,
+                  posterUrl,
+                  href: details.href,
+                }}
+              />
+            </div>
           </div>
         </div>
 
