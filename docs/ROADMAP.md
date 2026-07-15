@@ -24,7 +24,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 2.0 Recherche | [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) | ✅ Validé HITL (D13) |
-| 2.1 Conception des pages (une à la fois) | ✅ [Accueil](phase-2/2.1-pages/accueil.md) (D14) · ✅ [Fiche Film](phase-2/2.1-pages/fiche-film.md) (D15) · ⏳ 3/14 [Fiche Série](phase-2/2.1-pages/fiche-serie.md) **en attente de validation** | En cours |
+| 2.1 Conception des pages (une à la fois) | ✅ [Accueil](phase-2/2.1-pages/accueil.md) (D14) · ✅ [Fiche Film](phase-2/2.1-pages/fiche-film.md) (D15) · ✅ [Fiche Série](phase-2/2.1-pages/fiche-serie.md) (D16) · ⏳ 4/14 [Watch](phase-2/2.1-pages/watch.md) **en attente de validation** | En cours |
 | 2.2 Expérience Visionnage | Video Experience Specification | À venir |
 
 ## Phases à venir
@@ -41,7 +41,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL de la spécification Fiche Série (2.1, page 3/14)** ← nous sommes ici
-2. Pages suivantes (ordre D13) : Watch → Recherche → grilles → Gratuit ▶ → Ma liste → Profil/Paramètres → Studio UGC → Auth/Onboarding → Support → Continuer la lecture
+1. **Validation HITL de la spécification Watch (2.1, page 4/14)** ← nous sommes ici
+2. Pages suivantes (ordre D13) : Recherche → grilles → Gratuit ▶ → Ma liste → Profil/Paramètres → Studio UGC → Auth/Onboarding → Support → Continuer la lecture
 3. Étape 2.2 — Video Experience Specification
 4. Phases 3 à 9

@@ -22,9 +22,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 | D13 | 2026-07-15 | 2.0 | Adoption du [Best Practices Summary — Pages](phase-2/2.0-best-practices-pages.md) (benchmarks vidéo, FAQPage post-dépréciation, états vides, ordre de traitement 2.1) + **amendement de D11** : le switch upload ne concerne que les rôles non-admin | Voir le livrable 2.0 ; directive utilisateur | ✅ Validé HITL |
 | D14 | 2026-07-15 | 2.1 | Adoption de la [Spécification Accueil](phase-2/2.1-pages/accueil.md) (page 1/14) : hero unique double CTA, 8 conteneurs max dédoublonnés, étagère Gratuit ▶, 2 emplacements pub absents du DOM si pub OFF, 5 états, budgets SEO/perf/a11y | Voir la spécification | ✅ Validé HITL |
 | D15 | 2026-07-15 | 2.1 | Adoption de la [Spécification Fiche Film](phase-2/2.1-pages/fiche-film.md) (2/14) : 12 sections, CTA avec reprise, Où regarder avec fallback, JSON-LD Movie + WatchAction, OG composée, anti-thin-content | Voir la spécification | ✅ Validé HITL |
+| D16 | 2026-07-15 | 2.1 | Adoption de la [Spécification Fiche Série + Saison](phase-2/2.1-pages/fiche-serie.md) (3/14) : CTA contextuel progression, saisons/épisodes spoiler-safe, pas de pages épisode (H27), JSON-LD TVSeries/TVSeason | Voir la spécification | ✅ Validé HITL |
 
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P16 | 2026-07-15 | 2.1 | Adopter la [Spécification Fiche Série + Saison](phase-2/2.1-pages/fiche-serie.md) (3/14) : gabarit film étendu (saisons/épisodes, reprise contextuelle « Reprendre S2E4 », badges de fraîcheur, JSON-LD TVSeries/TVSeason) | Voir la spécification |
+| P17 | 2026-07-15 | 2.1 | Adopter la [Spécification page Watch](phase-2/2.1-pages/watch.md) (4/14) : lecteur dominant, pré-roll conditionnel D6 avec frequency capping, fiche allégée sous le lecteur, écran de fin, mode épisode, benchmarks D13 | Voir la spécification |

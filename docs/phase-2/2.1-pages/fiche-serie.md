@@ -1,7 +1,7 @@
 # Spécification de page — Fiche Série (`/serie/{slug}-{id}`) + Saison (`…/saison-{n}`)
 
 > **Étape** : 2.1 (page 3/14, ordre validé D13)
-> **Statut** : ⏳ En attente de validation HITL
+> **Statut** : ✅ Validé HITL le 2026-07-15 (décision D16)
 > **S'appuie sur** : D15 (gabarit Fiche Film — seules les **différences** sont spécifiées ici), D7 (progression), D10 (URLs saison)
 
 ---
