@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 3 : Compte & interactions
 
 > **Livrable** : Ma liste (favoris/en-cours/historique) avec UI optimiste + bouton Ma liste sur les fiches + pages Connexion/Inscription + page d'attente Gratuit ▶ (`app/`)
-> **Statut** : ⏳ En attente de validation HITL (P29)
+> **Statut** : ✅ Validé HITL (D29) — déployé en production
 
 ## Contenu du lot
 

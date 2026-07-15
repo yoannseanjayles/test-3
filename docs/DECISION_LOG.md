@@ -44,8 +44,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D28 | 2026-07-15 | 5.1 | Validation du **Lot 2 du front (catalogue)** : client TMDB server-only (modèles canoniques Zod), accueil en données réelles, fiches Film/Série (JSON-LD, OG), grilles Films/Séries/Découvrir, recherche sans JS requis, 404 illustrée — déployé en production. Reste : `TMDB_ACCESS_TOKEN` à configurer sur Vercel pour activer les données réelles (repli démo propre en attendant). | Directive « ok on continu » du 2026-07-15 | ✅ Validé HITL |
 
+| D29 | 2026-07-15 | 5.1 | Validation du **Lot 3 du front (compte & interactions)** : Ma liste locale (favoris/en-cours/historique, UI optimiste, persistance navigateur H70), bouton Ma liste sur les fiches, pages Connexion/Inscription (comptes actifs en 6.1), page d'attente Gratuit ▶ — déployé en production. | Directive « ok on attaque » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P29 | 2026-07-15 | 5.1 | Valider le **Lot 3 du front (compte & interactions)** : Ma liste locale (favoris/historique/en-cours, UI optimiste, persistance navigateur en attendant le back-end 6.1), bouton Ma liste sur les fiches, pages Connexion/Inscription (parcours annoncé, comptes actifs en 6.1) | Code + doc du lot |
+| P30 | 2026-07-15 | 5.1 | Valider le **Lot 4 du front (lecteur & gratuit)** : lecteur vidéo (hls.js + MP4 progressif), page Watch `/regarder/{slug}` (pré-roll conditionnel D6/D17, reprise, écran de fin), catalogue Gratuit ▶ (domaine public/licences ouvertes, H8) | Code + doc du lot |

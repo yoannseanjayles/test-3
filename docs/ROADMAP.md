@@ -47,7 +47,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | ✅ Validé HITL (D26) |
-| 5.1 Développement | Lot 1 [Socle](phase-5/5.1-frontend/lot-1-socle.md) ✅ (D27) · Lot 2 [Catalogue](phase-5/5.1-frontend/lot-2-catalogue.md) ✅ (D28) · Lot 3 [Compte & interactions](phase-5/5.1-frontend/lot-3-compte-interactions.md) ⏳ **en attente de validation (P29)** · Lots 4-6 à venir | En cours |
+| 5.1 Développement | Lot 1 [Socle](phase-5/5.1-frontend/lot-1-socle.md) ✅ (D27) · Lot 2 [Catalogue](phase-5/5.1-frontend/lot-2-catalogue.md) ✅ (D28) · Lot 3 [Compte & interactions](phase-5/5.1-frontend/lot-3-compte-interactions.md) ✅ (D29) · Lot 4 [Lecteur & gratuit](phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) ⏳ **en attente de validation (P30)** · Lots 5-6 à venir | En cours |
 | 5.1 Déploiement | [Déploiement Vercel](phase-5/5.1-frontend/deploiement-vercel.md) ✅ — **en ligne : [cineplus-eight.vercel.app](https://cineplus-eight.vercel.app)** (Root Directory `app`, preset Next.js via `app/vercel.json`) | ✅ D27 |
 
 ## Phases à venir
