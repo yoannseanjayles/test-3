@@ -3,6 +3,9 @@
 import { useSyncExternalStore } from "react";
 import type { TitleKind } from "@/lib/tmdb/models";
 
+/** Les listes acceptent aussi les vidéos hors TMDB (catalogue gratuit, UGC — sitemap /video). */
+export type LibraryKind = TitleKind | "video";
+
 /**
  * Ma liste — favoris / historique / en-cours (D19 Ma liste, Lot 3).
  * Persistance navigateur (localStorage) en attendant le back-end 6.1 (H70) :
@@ -14,14 +17,16 @@ export type LibraryList = "favorites" | "history" | "resume";
 
 export interface LibraryEntry {
   id: number;
-  kind: TitleKind;
+  kind: LibraryKind;
   title: string;
   year: number | null;
   posterUrl: string | null;
   href: string;
   addedAt: number;
-  /** Progression 0-1 (liste « en cours » — alimentée par le lecteur au Lot 4). */
+  /** Progression 0-1 (liste « en cours » — alimentée par le lecteur). */
   progress?: number;
+  /** Position de lecture en secondes, pour la reprise exacte (D7/D17). */
+  positionSeconds?: number;
 }
 
 export type LibraryState = Record<LibraryList, LibraryEntry[]>;
@@ -79,7 +84,7 @@ export function useLibrary(): LibraryState {
   return useSyncExternalStore(subscribe, read, () => EMPTY_STATE);
 }
 
-export function isInList(state: LibraryState, list: LibraryList, kind: TitleKind, id: number): boolean {
+export function isInList(state: LibraryState, list: LibraryList, kind: LibraryKind, id: number): boolean {
   return state[list].some((e) => e.kind === kind && e.id === id);
 }
 
@@ -94,7 +99,39 @@ export function toggleFavorite(entry: Omit<LibraryEntry, "addedAt">): void {
   });
 }
 
-export function removeFromList(list: LibraryList, kind: TitleKind, id: number): void {
+export function removeFromList(list: LibraryList, kind: LibraryKind, id: number): void {
   const state = read();
   write({ ...state, [list]: state[list].filter((e) => !(e.kind === kind && e.id === id)) });
+}
+
+/** Position de reprise connue pour un titre (heartbeat du lecteur). */
+export function getResumeEntry(kind: LibraryKind, id: number): LibraryEntry | undefined {
+  return read().resume.find((e) => e.kind === kind && e.id === id);
+}
+
+/** Heartbeat du lecteur (D17) : met à jour « en cours », dédoublonné en tête de liste. */
+export function saveResumeProgress(
+  entry: Omit<LibraryEntry, "addedAt" | "progress" | "positionSeconds">,
+  progress: number,
+  positionSeconds: number,
+): void {
+  const state = read();
+  const rest = state.resume.filter((e) => !(e.kind === entry.kind && e.id === entry.id));
+  write({
+    ...state,
+    resume: [{ ...entry, addedAt: Date.now(), progress, positionSeconds }, ...rest].slice(0, 50),
+  });
+}
+
+/** Visionnage terminé : sort d'« en cours », entre dans l'historique (D17 écran de fin). */
+export function markCompleted(entry: Omit<LibraryEntry, "addedAt" | "progress" | "positionSeconds">): void {
+  const state = read();
+  write({
+    ...state,
+    resume: state.resume.filter((e) => !(e.kind === entry.kind && e.id === entry.id)),
+    history: [
+      { ...entry, addedAt: Date.now() },
+      ...state.history.filter((e) => !(e.kind === entry.kind && e.id === entry.id)),
+    ].slice(0, 200),
+  });
 }

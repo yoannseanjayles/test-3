@@ -11,6 +11,7 @@ import {
   isTmdbConfigured,
 } from "@/lib/tmdb/queries";
 import type { Title } from "@/lib/tmdb/models";
+import { FREE_CATALOG, watchHref } from "@/lib/free-catalog";
 
 /**
  * Accueil — structure D14 (hero → rails → étagère Gratuit → pub → éditorial).
@@ -30,13 +31,14 @@ const DEMO_TRENDING: TitleCardData[] = [
   { href: "#", title: "Placeholder", year: 2022, dominantColor: "#3a2d4d" },
 ];
 
-const DEMO_FREE: TitleCardData[] = [
-  { href: "#", title: "Classique du domaine public", year: 1948, dominantColor: "#241f2b", isFree: true },
-  { href: "#", title: "Film noir", year: 1946, dominantColor: "#1c1822", isFree: true },
-  { href: "#", title: "Open movie", year: 2019, dominantColor: "#2d4d3a", isFree: true },
-  { href: "#", title: "Sérial classique", year: 1941, dominantColor: "#4d3a2d", isFree: true },
-  { href: "#", title: "Comédie muette", year: 1927, dominantColor: "#3a2d4d", isFree: true },
-];
+// Étagère Gratuit ▶ (D14) : catalogue visionnable réel — cartes vers le lecteur.
+const FREE_RAIL: TitleCardData[] = FREE_CATALOG.map((v) => ({
+  href: watchHref(v),
+  title: v.title,
+  year: v.year,
+  posterUrl: v.artwork,
+  isFree: true,
+}));
 
 function toCard(t: Title): TitleCardData {
   return { href: t.href, title: t.title, year: t.year ?? undefined, posterUrl: t.posterUrl };
@@ -123,8 +125,8 @@ export default async function HomePage() {
         )}
 
         <Rail title="Gratuit ▶" seeAllHref="/gratuit" explanation="Des classiques à regarder immédiatement, légalement.">
-          {DEMO_FREE.map((t) => (
-            <TitleCard key={t.title} {...t} />
+          {FREE_RAIL.map((t) => (
+            <TitleCard key={t.href} {...t} />
           ))}
         </Rail>
 
