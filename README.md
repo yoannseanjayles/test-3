@@ -37,9 +37,12 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 
 ### Phase 5 — Front-end
 - [5.0 — Best Practices Summary : Front-end](docs/phase-5/5.0-best-practices-frontend.md) ✅ *(validé HITL)*
-- 5.1 — Développement : [Lot 1 — Socle](docs/phase-5/5.1-frontend/lot-1-socle.md) ✅ *(D27)* · [Lot 2 — Catalogue](docs/phase-5/5.1-frontend/lot-2-catalogue.md) ✅ *(D28)* · [Lot 3 — Compte & interactions](docs/phase-5/5.1-frontend/lot-3-compte-interactions.md) ✅ *(D29)* · [Lot 4 — Lecteur & gratuit](docs/phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) ✅ *(D30)* · [Lot 5 — Studio & support](docs/phase-5/5.1-frontend/lot-5-studio-support.md) ✅ *(D31)* · [Lot 6 — Qualité](docs/phase-5/5.1-frontend/lot-6-qualite.md) (code dans [`app/`](app/)) ⏳ *(en attente de validation HITL — P32)*
+- 5.1 — Développement ✅ **6/6 lots validés (D27-D32) — Phase 5 terminée** : [Socle](docs/phase-5/5.1-frontend/lot-1-socle.md) · [Catalogue TMDB](docs/phase-5/5.1-frontend/lot-2-catalogue.md) · [Compte & interactions](docs/phase-5/5.1-frontend/lot-3-compte-interactions.md) · [Lecteur & gratuit](docs/phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) · [Studio & support](docs/phase-5/5.1-frontend/lot-5-studio-support.md) · [Qualité](docs/phase-5/5.1-frontend/lot-6-qualite.md) (code dans [`app/`](app/))
 - 5.1 — Déploiement : [Déploiement Vercel](docs/phase-5/5.1-frontend/deploiement-vercel.md) ✅ *(en ligne : [cineplus-eight.vercel.app](https://cineplus-eight.vercel.app))*
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
+
+### Phase 6 — Back-end
+- [6.0 — Best Practices Summary : Back-end](docs/phase-6/6.0-best-practices-backend.md) ⏳ *(en attente de validation HITL — P33)*
 
 ## Méthode
 

@@ -40,15 +40,23 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | 4.0 Recherche | [Best Practices Summary — Design System](phase-4/4.0-best-practices-design-system.md) | D24 |
 | 4.1 Design System + Advertising DS | [Design Guidelines](phase-4/4.1-design-guidelines.md) + [tokens.css](../design/tokens.css)/[.json](../design/tokens.json) — nom définitif **Ciné+ / CinePlus** (risque marque R6 ouvert) | D25 |
 
+### ✅ Phase 5 — Front-end (terminée le 2026-07-15)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | D26 |
+| 5.1 Développement (6 lots) | [Socle](phase-5/5.1-frontend/lot-1-socle.md) · [Catalogue TMDB](phase-5/5.1-frontend/lot-2-catalogue.md) · [Compte & interactions](phase-5/5.1-frontend/lot-3-compte-interactions.md) · [Lecteur & gratuit](phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) · [Studio & support](phase-5/5.1-frontend/lot-5-studio-support.md) · [Qualité](phase-5/5.1-frontend/lot-6-qualite.md) (19 tests E2E + axe) | D27-D32 |
+| 5.1 Déploiement | [Vercel](phase-5/5.1-frontend/deploiement-vercel.md) — **en production : [cineplus-eight.vercel.app](https://cineplus-eight.vercel.app)** | D27 |
+
 ## Phase en cours
 
-**Phase 5 — Front-end**
+**Phase 6 — Back-end**
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 5.0 Recherche | [Best Practices Summary — Front-end](phase-5/5.0-best-practices-frontend.md) | ✅ Validé HITL (D26) |
-| 5.1 Développement | Lot 1 [Socle](phase-5/5.1-frontend/lot-1-socle.md) ✅ (D27) · Lot 2 [Catalogue](phase-5/5.1-frontend/lot-2-catalogue.md) ✅ (D28) · Lot 3 [Compte & interactions](phase-5/5.1-frontend/lot-3-compte-interactions.md) ✅ (D29) · Lot 4 [Lecteur & gratuit](phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) ✅ (D30) · Lot 5 [Studio & support](phase-5/5.1-frontend/lot-5-studio-support.md) ✅ (D31) · Lot 6 [Qualité](phase-5/5.1-frontend/lot-6-qualite.md) ⏳ **en attente de validation (P32)** | En cours |
-| 5.1 Déploiement | [Déploiement Vercel](phase-5/5.1-frontend/deploiement-vercel.md) ✅ — **en ligne : [cineplus-eight.vercel.app](https://cineplus-eight.vercel.app)** (Root Directory `app`, preset Next.js via `app/vercel.json`) | ✅ D27 |
+| 6.0 Recherche | [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) | ⏳ **en attente de validation (P33)** |
+| 6.1 Développement | BFF, auth, base, ingestion vidéo (D7/D8), activation des formulaires (H77) | À venir |
+| 6.2 Architecture publicitaire | Advertising Technical Specification (VAST/VMAP, TCF, capping D6) | À venir |
 
 ## Phases à venir
 
@@ -62,6 +70,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL du Lot 1 (socle front)** ← nous sommes ici
-2. Lots 2-6 de la 5.1 : catalogue TMDB → compte/interactions → lecteur → studio/support → qualité
-3. Phases 6 à 9 · médias restants (B7/B8/C2/logo Ciné+) · risque R6 (marque) à lever
+1. **Validation HITL du 6.0 (Best Practices Back-end, P33)** ← nous sommes ici
+2. 6.1 back-end par lots (BFF/auth/base → Ma liste sync → ingestion vidéo → formulaires) · 6.2 architecture publicitaire
+3. Phases 7 à 9 · TMDB_ACCESS_TOKEN à configurer sur Vercel · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever

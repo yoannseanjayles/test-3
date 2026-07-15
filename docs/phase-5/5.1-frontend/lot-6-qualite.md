@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 6 : Qualité
 
 > **Livrable** : suite E2E Playwright (parcours critiques) + audits d'accessibilité automatisés (axe-core, bloquants) + configuration Lighthouse CI (budgets D26) — **clôture de la 5.1**
-> **Statut** : ⏳ En attente de validation HITL (P32)
+> **Statut** : ✅ Validé HITL (D32) — déployé en production, Phase 5 close
 
 ## Contenu du lot
 

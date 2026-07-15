@@ -50,8 +50,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D31 | 2026-07-15 | 5.1 | Validation du **Lot 5 du front (studio & support)** : Studio UGC gouverné par l'interrupteur D11 (état OFF illustré + règles publiées), FAQ (JSON-LD FAQPage, groupe UGC conditionnel), Contact (motifs complets dont takedown D11, envoi honnêtement désactivé H77), À propos (attributions TMDB/JustWatch D5), 4 pages légales sur gabarit commun (H46 : validation juridique requise avant ouverture publique) — footer sans lien mort, déployé en production. | Directive « ok » du 2026-07-15 | ✅ Validé HITL |
 
+| D32 | 2026-07-15 | 5.1 | Validation du **Lot 6 du front (qualité)** : 19 tests Playwright verts contre le build de production (9 parcours critiques dont pub-OFF-absente-du-DOM et footer-sans-lien-mort ; 10 audits axe WCAG 2.1 AA bloquants), 11 violations de contraste réelles corrigées, budgets Lighthouse CI configurés (H79 : exécution en CI avec la Phase 6) — **clôture de la 5.1 et de la Phase 5**, déployé en production. | Directive « ok on enchaîne » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P32 | 2026-07-15 | 5.1 | Valider le **Lot 6 du front (qualité)** : suite de tests Playwright (parcours critiques) + audits d'accessibilité automatisés (axe-core) sur les pages clés, configuration Lighthouse CI (budgets D26) — clôture de la 5.1 et de la Phase 5 | Code + doc du lot |
+| P33 | 2026-07-15 | 6.0 | Adopter le **Best Practices Summary — Back-end** : BFF dans Next.js (route handlers + server actions), Auth.js + adaptateur base, **Postgres serverless free tier (Neon)**, ingestion vidéo ffmpeg hors-Workers vers R2 (D7), flags runtime en base (levée du redéploiement D6), observabilité minimale | Voir le livrable 6.0 |
