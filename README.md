@@ -42,7 +42,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
   - Rapports de recherche détaillés : [architecture](docs/phase-1/research/architecture.md) · [UX & navigation](docs/phase-1/research/ux-navigation.md) · [recherche & recommandations](docs/phase-1/research/recherche-recommandations.md) · [SEO, performance & accessibilité](docs/phase-1/research/seo-performance-accessibilite.md)
 
 ### Phase 6 — Back-end
-- [6.0 — Best Practices Summary : Back-end](docs/phase-6/6.0-best-practices-backend.md) ⏳ *(en attente de validation HITL — P33)*
+- [6.0 — Best Practices Summary : Back-end](docs/phase-6/6.0-best-practices-backend.md) ✅ *(D33)*
+- 6.1 — Développement : [Lot 1 — Socle données](docs/phase-6/6.1-backend/lot-1-socle-donnees.md) ⏳ *(en attente de validation HITL — P34)*
 
 ## Méthode
 

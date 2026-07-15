@@ -52,8 +52,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D32 | 2026-07-15 | 5.1 | Validation du **Lot 6 du front (qualité)** : 19 tests Playwright verts contre le build de production (9 parcours critiques dont pub-OFF-absente-du-DOM et footer-sans-lien-mort ; 10 audits axe WCAG 2.1 AA bloquants), 11 violations de contraste réelles corrigées, budgets Lighthouse CI configurés (H79 : exécution en CI avec la Phase 6) — **clôture de la 5.1 et de la Phase 5**, déployé en production. | Directive « ok on enchaîne » du 2026-07-15 | ✅ Validé HITL |
 
+| D33 | 2026-07-15 | 6.0 | Adoption du [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) : BFF dans Next.js (route handlers + server actions), **Neon Postgres + Drizzle**, **Auth.js v5** (migration H70), **flags runtime en base** (levée du redéploiement D6, env = amorçage + kill switch), ingestion ffmpeg→HLS→R2 via GitHub Actions (H82), sécurité/observabilité/CI (H84) | Directive « je valide » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P33 | 2026-07-15 | 6.0 | Adopter le **Best Practices Summary — Back-end** : BFF dans Next.js (route handlers + server actions), Auth.js + adaptateur base, **Postgres serverless free tier (Neon)**, ingestion vidéo ffmpeg hors-Workers vers R2 (D7), flags runtime en base (levée du redéploiement D6), observabilité minimale | Voir le livrable 6.0 |
+| P34 | 2026-07-15 | 6.1 | Valider le **Lot 1 du back-end (socle données)** : schéma Drizzle complet (users/lists/videos/moderation/app_config/contact) + migrations versionnées, client Neon avec repli propre sans `DATABASE_URL`, **flags D6 lus en base à effet immédiat** (env = kill switch prioritaire), `/api/health`, CI GitHub Actions (lint+build+E2E bloquants). Auth.js + synchro Ma liste re-découpés au Lot 2 (livrables dès `DATABASE_URL` fournie). | Code + doc du lot |
