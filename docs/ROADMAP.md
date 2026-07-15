@@ -1,5 +1,7 @@
 # Roadmap
 
+> **Note** : le brief de mission a été élargi le 2026-07-15 (visionnage vidéo + publicité + monétisation). La roadmap passe de 7 à **9 phases** ; les sous-étapes de la Phase 1 sont renumérotées (le Sitemap passe de 1.3 à 1.4, etc.).
+
 ## Phases terminées
 
 *Aucune phase complète pour le moment.*
@@ -13,16 +15,32 @@
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 1.0 Recherche | [Best Practices Summary](phase-1/1.0-best-practices-summary.md) | ✅ Validé HITL |
-| 1.1 Vision produit | [Vision Produit](phase-1/1.1-vision-produit.md) | ⏳ **En attente de validation HITL** |
+| 1.0 Recherche | [Best Practices Summary](phase-1/1.0-best-practices-summary.md) | ✅ Validé HITL (D1) |
+| 1.0 Recherche (addendum) | [Best Practices — Visionnage & Monétisation](phase-1/1.0-addendum-visionnage-monetisation.md) | ⏳ **En attente de validation HITL** |
+| 1.1 Vision produit | [Vision Produit v2](phase-1/1.1-vision-produit.md) (périmètre élargi) | ⏳ **En attente de validation HITL** |
 | 1.2 Choix des APIs | Architecture des APIs | À venir |
-| 1.3 Sitemap | Sitemap | À venir |
-| 1.4 Parcours utilisateur | User Flows | À venir |
+| 1.3 Architecture Streaming | Video Streaming Architecture | À venir |
+| 1.4 Sitemap | Sitemap | À venir |
+| 1.5 Parcours utilisateur | User Flows | À venir |
+
+## Phases à venir
+
+| Phase | Contenu | Livrables clés |
+|---|---|---|
+| **2 — Définition des pages** | Recherche (2.0) · Conception page par page (2.1) · Expérience visionnage (2.2) | Spécifications de pages, Video Experience Specification |
+| **3 — Génération des médias** | Recherche (3.0) · Inventaire (3.1) · Prompts IA (3.2) | Media Inventory, Media Prompt Library |
+| **4 — Design System** | Recherche (4.0) · Design System + Advertising Design System (4.1) | Design Guidelines |
+| **5 — Front-end** | Recherche (5.0) · Développement (5.1) dont lecteur vidéo et composants pub | Front-end documenté |
+| **6 — Back-end** | Recherche (6.0) · Développement (6.1) · Architecture publicitaire (6.2) | Documentation technique, Advertising Technical Specification |
+| **7 — Administration** | Recherche (7.0) · Back-office (7.1) dont gestion pub et revenus | Back-office fonctionnel |
+| **8 — Modèle économique** | Recherche (8.0) · Business Model Canvas (8.1) · Stratégie monétisation (8.2) | Business Model Canvas, Monetization Strategy |
+| **9 — Analytics & croissance** | KPIs utilisateurs et business, dashboards, rapports | Growth & Analytics Roadmap |
 
 ## Prochaines étapes
 
-1. **Validation HITL du livrable 1.1 Vision produit** ← nous sommes ici
+1. **Validation HITL de l'addendum 1.0 et du livrable 1.1 Vision produit v2** ← nous sommes ici
 2. Étape 1.2 — Choix des APIs (gratuites / plan gratuit uniquement)
-3. Étape 1.3 — Sitemap
-4. Étape 1.4 — Parcours utilisateur
-5. Phases 2 à 7 : Définition des pages → Génération des médias → Design System → Front-end → Back-end → Administration
+3. Étape 1.3 — Architecture Streaming
+4. Étape 1.4 — Sitemap
+5. Étape 1.5 — Parcours utilisateur
+6. Phases 2 à 9
