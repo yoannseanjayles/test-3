@@ -42,8 +42,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D27 | 2026-07-15 | 5.1 | Validation du **Lot 1 du front (socle)** : projet Next.js initialisé (`app/`), tokens intégrés, composants du design system en code, layout global (header/bottom-nav/footer). **Complément : mise en production Vercel effective** — projet `cineplus` (https://cineplus-eight.vercel.app), Root Directory `app`, preset Next.js forcé par `app/vercel.json` (le preset « Other » du dashboard causait des 404 malgré des builds verts), production suivie par la branche par défaut du dépôt. | Site vérifié en ligne (HTTP 200) ; directive « ok super on enchaîne » du 2026-07-15 | ✅ Validé HITL |
 
+| D28 | 2026-07-15 | 5.1 | Validation du **Lot 2 du front (catalogue)** : client TMDB server-only (modèles canoniques Zod), accueil en données réelles, fiches Film/Série (JSON-LD, OG), grilles Films/Séries/Découvrir, recherche sans JS requis, 404 illustrée — déployé en production. Reste : `TMDB_ACCESS_TOKEN` à configurer sur Vercel pour activer les données réelles (repli démo propre en attendant). | Directive « ok on continu » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P28 | 2026-07-15 | 5.1 | Valider le **Lot 2 du front (catalogue)** : client TMDB server-only (modèles canoniques Zod), accueil en données réelles, fiches Film/Série, grilles Films/Séries/Tendances, recherche | Code + doc du lot |
+| P29 | 2026-07-15 | 5.1 | Valider le **Lot 3 du front (compte & interactions)** : Ma liste locale (favoris/historique/en-cours, UI optimiste, persistance navigateur en attendant le back-end 6.1), bouton Ma liste sur les fiches, pages Connexion/Inscription (parcours annoncé, comptes actifs en 6.1) | Code + doc du lot |

@@ -1,7 +1,7 @@
 # Phase 5.1 — Lot 2 : Catalogue (TMDB)
 
 > **Livrable** : client TMDB server-only + accueil en données réelles + fiches Film/Série + grilles + recherche (`app/`)
-> **Statut** : ⏳ En attente de validation HITL (P28)
+> **Statut** : ✅ Validé HITL (D28) — déployé en production
 > **Pré-requis d'activation** : configurer `TMDB_ACCESS_TOKEN` (ou `TMDB_API_KEY`) — voir « Activation » ci-dessous. Sans clé, toutes les pages restent fonctionnelles en mode repli (démo/états vides), jamais d'erreur.
 
 ## Contenu du lot
