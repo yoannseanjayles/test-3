@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { db, schema } from "@/lib/db";
 import { invalidateConfigCache } from "@/lib/ads/flags";
+import { invalidateSettingsCache, SETTINGS_REGISTRY, type SettingKey } from "@/lib/settings";
 import { requireAdmin } from "./guard";
 
 /**
@@ -112,6 +113,22 @@ export async function setFlagAction(formData: FormData): Promise<void> {
     .onConflictDoUpdate({ target: schema.appConfig.key, set: { value, updatedBy: admin.id, updatedAt: new Date() } });
   invalidateConfigCache();
   revalidatePath("/admin/publicite");
+}
+
+/** Paramètres typés (7.1 Lot 1) — clés du registre uniquement, bornées par leur spec. */
+export async function setSettingAction(formData: FormData): Promise<void> {
+  const admin = await requireAdmin();
+  const key = z
+    .enum(Object.keys(SETTINGS_REGISTRY) as [SettingKey, ...SettingKey[]])
+    .parse(formData.get("key"));
+  const spec = SETTINGS_REGISTRY[key];
+  const value = z.coerce.number().int().min(spec.min).max(spec.max).parse(formData.get("value"));
+  await db()
+    .insert(schema.appSettings)
+    .values({ key, value, updatedBy: admin.id })
+    .onConflictDoUpdate({ target: schema.appSettings.key, set: { value, updatedBy: admin.id, updatedAt: new Date() } });
+  invalidateSettingsCache();
+  revalidatePath("/admin/parametres");
 }
 
 /** Cycle de traitement des messages de contact (new → in_progress → closed). */

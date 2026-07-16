@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { db, isDbConfigured, schema } from "@/lib/db";
+import { clientIp, limit, RATE_LIMITED_MESSAGE } from "@/lib/rate-limit";
 
 /**
  * Formulaire de contact (levée H77, 6.1 Lot 2) — enregistré en base,
@@ -33,6 +34,9 @@ const contactSchema = z.object({
 export async function submitContactAction(_prev: ContactFormState, formData: FormData): Promise<ContactFormState> {
   if (!isDbConfigured()) {
     return { error: "L'envoi n'est pas encore actif — réessayez très bientôt." };
+  }
+  if (!(await limit("contact.submit", await clientIp(), 5, 3600))) {
+    return { error: RATE_LIMITED_MESSAGE };
   }
 
   const parsed = contactSchema.safeParse({

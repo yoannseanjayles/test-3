@@ -4,6 +4,7 @@ import { AuthError } from "next-auth";
 import { hash } from "@node-rs/argon2";
 import { z } from "zod";
 import { db, schema } from "@/lib/db";
+import { clientIp, limit, RATE_LIMITED_MESSAGE } from "@/lib/rate-limit";
 import { isAuthConfigured, isBootstrapAdmin, signIn, signOut } from "./config";
 
 /**
@@ -25,6 +26,7 @@ const registerSchema = z.object({
 
 export async function registerAction(_prev: AuthFormState, formData: FormData): Promise<AuthFormState> {
   if (!isAuthConfigured()) return { error: "Les comptes ne sont pas encore ouverts." };
+  if (!(await limit("auth.register", await clientIp(), 5, 3600))) return { error: RATE_LIMITED_MESSAGE };
 
   const parsed = registerSchema.safeParse({
     email: formData.get("email"),
@@ -59,6 +61,7 @@ export async function registerAction(_prev: AuthFormState, formData: FormData): 
 export async function loginAction(_prev: AuthFormState, formData: FormData): Promise<AuthFormState> {
   if (!isAuthConfigured()) return { error: "Les comptes ne sont pas encore ouverts." };
   if (formData.get("website")) return { error: "Formulaire invalide." };
+  if (!(await limit("auth.login", await clientIp(), 10, 900))) return { error: RATE_LIMITED_MESSAGE };
 
   try {
     await signIn("credentials", {

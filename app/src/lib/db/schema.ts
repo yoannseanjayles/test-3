@@ -121,6 +121,28 @@ export const appConfig = pgTable("app_config", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+// ── Paramètres typés (7.0 §1 — quotas, plafonds, SLA) ─────────────────────────
+
+export const appSettings = pgTable("app_settings", {
+  key: text("key").primaryKey(), // uniquement les clés du registre lib/settings
+  value: jsonb("value").notNull(),
+  updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ── Anti-abus : fenêtres de rate limiting (7.0 §2, H88) ───────────────────────
+
+export const rateLimits = pgTable(
+  "rate_limits",
+  {
+    bucket: text("bucket").notNull(), // ex. auth.login, contact.submit
+    subject: text("subject").notNull(), // IP, e-mail haché ou userId selon le bucket
+    count: integer("count").notNull().default(0),
+    windowStart: timestamp("window_start", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("rate_limits_pk").on(t.bucket, t.subject)],
+);
+
 // ── Contact & takedown (D11, activation des formulaires H77) ─────────────────
 
 export const contactMessages = pgTable(

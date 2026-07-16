@@ -144,7 +144,7 @@ export function UploadForm({ authEnabled }: { authEnabled: boolean }) {
         <form onSubmit={onSubmit} className="mt-4 space-y-5">
           <div>
             <label htmlFor="file" className="mb-1.5 block text-sm font-medium">
-              Fichier vidéo <span className="text-secondary">(2 Go max)</span>
+              Fichier vidéo
             </label>
             <input id="file" name="file" type="file" accept="video/*" required className={`${inputClass} file:mr-3 file:rounded-full file:border-0 file:bg-brand file:px-4 file:py-1.5 file:text-sm file:font-medium file:text-on-brand`} />
           </div>

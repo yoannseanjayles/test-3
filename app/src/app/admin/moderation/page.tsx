@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { asc, eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { approveVideoAction, rejectVideoAction } from "@/lib/admin/actions";
-import { presignRead } from "@/lib/storage/r2";
-import { isR2Configured, publicUrl } from "@/lib/storage/r2";
+import { isR2Configured, presignRead, publicUrl } from "@/lib/storage/r2";
+import { getSetting } from "@/lib/settings";
 
 export const metadata: Metadata = { title: "Modération" };
 export const dynamic = "force-dynamic";
@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
  * Aperçu du rendu HLS (lien), approbation en un clic, refus avec motif obligatoire.
  */
 export default async function ModerationPage() {
+  const slaHours = await getSetting("moderation.sla_hours");
   const queue = await db()
     .select()
     .from(schema.videos)
@@ -38,7 +39,7 @@ export default async function ModerationPage() {
       <h1 className="text-2xl font-bold md:text-3xl">Modération</h1>
       <p className="mt-1 text-sm text-secondary">
         {queue.length > 0
-          ? `${queue.length} vidéo${queue.length > 1 ? "s" : ""} en attente — la plus ancienne d'abord.`
+          ? `${queue.length} vidéo${queue.length > 1 ? "s" : ""} en attente — la plus ancienne d'abord (SLA cible : ${slaHours} h).`
           : "File vide : aucune vidéo en attente. ✅"}
       </p>
 

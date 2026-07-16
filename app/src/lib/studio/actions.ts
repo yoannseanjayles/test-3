@@ -7,6 +7,8 @@ import { isUgcUploadEnabled } from "@/lib/ads/flags";
 import { db, isDbConfigured, schema } from "@/lib/db";
 import { slugify } from "@/lib/tmdb/models";
 import { isR2Configured, presignSourceUpload } from "@/lib/storage/r2";
+import { getSetting } from "@/lib/settings";
+import { limit, RATE_LIMITED_MESSAGE } from "@/lib/rate-limit";
 
 /**
  * Parcours de dépôt Studio (D8/D11, 6.1 Lot 3) :
@@ -20,8 +22,6 @@ import { isR2Configured, presignSourceUpload } from "@/lib/storage/r2";
  *    `pending_review` — la modération (7.1) publiera.
  */
 
-const MAX_VIDEOS_PER_USER = 5; // quota v1 (D11/H91)
-const MAX_UPLOAD_BYTES = 2 * 1024 * 1024 * 1024; // 2 Go
 
 export interface CreateUploadResult {
   error?: string;
@@ -39,7 +39,7 @@ const createSchema = z.object({
     .min(20, "La déclaration de droits est obligatoire (20 caractères minimum)."),
   fileName: z.string().max(300),
   fileType: z.string().regex(/^video\//, "Le fichier doit être une vidéo."),
-  fileSize: z.number().int().positive().max(MAX_UPLOAD_BYTES, "2 Go maximum."),
+  fileSize: z.number().int().positive(),
 });
 
 async function canUpload(): Promise<{ userId: string; isAdmin: boolean } | { error: string }> {
@@ -65,15 +65,24 @@ export async function createUploadAction(input: unknown): Promise<CreateUploadRe
   if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Formulaire invalide." };
   const data = parsed.data;
 
+  if (!(await limit("studio.upload", gate.userId, 10, 3600))) return { error: RATE_LIMITED_MESSAGE };
+
+  // Plafonds paramétrables depuis le back-office (7.1 Lot 1).
+  const maxMb = await getSetting("ugc.upload.max_mb");
+  if (data.fileSize > maxMb * 1024 * 1024) {
+    return { error: `Fichier trop volumineux (${maxMb} Mo maximum).` };
+  }
+
   const client = db();
 
   if (!gate.isAdmin) {
+    const quota = await getSetting("ugc.quota.videos_per_user");
     const [row] = await client
       .select({ n: count() })
       .from(schema.videos)
       .where(and(eq(schema.videos.ownerId, gate.userId)));
-    if ((row?.n ?? 0) >= MAX_VIDEOS_PER_USER) {
-      return { error: `Quota atteint (${MAX_VIDEOS_PER_USER} vidéos par compte pour l'instant).` };
+    if ((row?.n ?? 0) >= quota) {
+      return { error: `Quota atteint (${quota} vidéo${quota > 1 ? "s" : ""} par compte pour l'instant).` };
     }
   }
 
