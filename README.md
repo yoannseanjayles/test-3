@@ -47,7 +47,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 - [6.2 — Advertising Technical Specification](docs/phase-6/6.2-advertising-technical-specification.md) ✅ *(D39 — Phase 6 terminée)*
 
 ### Phase 7 — Administration
-- [7.0 — Best Practices Summary : Administration](docs/phase-7/7.0-best-practices-administration.md) ⏳ *(en attente de validation HITL — P39)*
+- [7.0 — Best Practices Summary : Administration](docs/phase-7/7.0-best-practices-administration.md) ✅ *(D40)*
+- 7.1 — Développement : [Lot 1 — Paramètres & anti-abus](docs/phase-7/7.1-administration/lot-1-parametres-anti-abus.md) ⏳ *(en attente de validation HITL — P40)*
 
 ## Méthode
 

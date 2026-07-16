@@ -62,8 +62,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 7.0 Recherche | [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) | ⏳ **en attente de validation (P39)** |
-| 7.1 Développement | Config typée & quotas · rate limiting (H88) · `ad_events` + Revenus (P-1 du 6.2) · notifications créateurs (H94) | À venir |
+| 7.0 Recherche | [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) | ✅ Validé HITL (D40) |
+| 7.1 Développement | Lot 1 [Paramètres & anti-abus](phase-7/7.1-administration/lot-1-parametres-anti-abus.md) ⏳ **en attente de validation (P40)** · Lot 2 (mesure & revenus) · Lot 3 (notifications & opérations) | En cours |
 
 ## Phases à venir
 
@@ -77,6 +77,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL du 7.0 (Best Practices Administration, P39)** ← nous sommes ici
+1. **Validation HITL du 7.1 Lot 1 (Paramètres & anti-abus, P40)** ← nous sommes ici
 2. Activation des services (variables Vercel) : `DATABASE_URL` + `AUTH_SECRET` + `ADMIN_EMAILS` → comptes/synchro/back-office · clés R2 + GitHub → ingestion vidéo · `TMDB_ACCESS_TOKEN` → catalogue réel
 3. Phases 7 à 9 (7 recentrée : compléments du back-office) · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever

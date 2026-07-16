@@ -65,8 +65,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D39 | 2026-07-16 | 6.2 | Adoption de l'[Advertising Technical Specification](phase-6/6.2-advertising-technical-specification.md) : **v1 en régie directe** (house ads + campagnes directes, décision servie par `lib/ads/decision.ts`), v2 VAST 4.x programmatique ; plafonds fermes par emplacement (pré-roll seule pub de Watch, ≤ 2 display/natif par page) ; TCF v2.2 (CMP maison v1 → IAB v2) ; mesure `ad_events` + viewabilité MRC ; **R1 (licence TMDB commerciale) bloquant avant activation (H99)** — **clôture de la Phase 6**. | Directive « on peut lancer la phase 7 ? » du 2026-07-16 | ✅ Validé HITL |
 
+| D40 | 2026-07-16 | 7.0 | Adoption du [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) : registre `app_settings` typé (quotas paramétrables, lève H96 à terme), rate limiting en base (H88), socle d'événements unique (Revenus + Phase 9), notifications créateurs (H94), runbook & seuils free tier — découpage 7.1 en 3 lots adopté. | Directive « ok » du 2026-07-16 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P39 | 2026-07-16 | 7.0 | Adopter le **Best Practices Summary — Administration** (Phase 7 recentrée D36) : config runtime typée (quotas/plafonds numériques), rate limiting en base (levée H88), événements produit (`ad_events` + analytics socle Phase 9), tableau Revenus (palier P-1 du 6.2), notifications créateurs (in-app puis Resend H83), runbook opérationnel | Voir le livrable 7.0 |
+| P40 | 2026-07-16 | 7.1 | Valider le **Lot 1 (paramètres & anti-abus)** : registre `app_settings` typé + écran back-office Paramètres (quota UGC, taille max d'upload, plafond pré-roll, SLA modération — bornés Zod), **rate limiting en base** appliqué à connexion/inscription/contact/upload (fenêtre fixe, jamais sur la modération admin) | Code + doc du lot |
