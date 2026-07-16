@@ -75,4 +75,5 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
+| P43 | 2026-07-16 | Transverse | Adopter l'[Audit de complétude](AUDIT-COMPLETUDE.md) et son plan en 5 lots : **C1 vérification live** (prérequis : clés commanditaire) → C2 mobile & compte → C3 cœur découverte (Regarder/Où regarder, saisons, genres) → C4 SEO/sécurité/cohérence → C5 qualité — puis Phases 8-9 | Audit du 2026-07-16 (22 constats vérifiés dans le code) |
 | P42 | 2026-07-16 | 7.1 | Valider le **Lot 3 (notifications & opérations)** : notifications créateurs in-app (cloche, modération/encodage) + e-mails Resend si configuré (H83), alerte admin sur takedown, suppression de compte RGPD, runbook `docs/OPERATIONS.md`, surveillance hebdomadaire des seuils free tier (H81) — **clôture de la 7.1** | Code + doc du lot |
