@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { db, isDbConfigured, schema } from "@/lib/db";
 import { clientIp, limit, RATE_LIMITED_MESSAGE } from "@/lib/rate-limit";
+import { notifyAdmins } from "@/lib/notifications";
 
 /**
  * Formulaire de contact (levée H77, 6.1 Lot 2) — enregistré en base,
@@ -67,6 +68,10 @@ export async function submitContactAction(_prev: ContactFormState, formData: For
   } catch (error) {
     console.error("[contact] enregistrement impossible :", error);
     return { error: "Une erreur est survenue — merci de réessayer." };
+  }
+
+  if (motif === "Ayants droit / demande de retrait") {
+    await notifyAdmins("takedown.received", { email });
   }
 
   return { ok: true };

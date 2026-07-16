@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { logoutAction } from "@/lib/auth/actions";
+import { NotificationsBell } from "@/components/notifications/NotificationsBell";
 import { useSessionLite } from "./useSessionLite";
 
 /**
@@ -24,6 +25,7 @@ export function HeaderAuth({ enabled }: { enabled: boolean }) {
 
   return (
     <span className="flex items-center gap-2">
+      <NotificationsBell />
       {user.role === "admin" && (
         <Link
           href="/admin"

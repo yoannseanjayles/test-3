@@ -1,0 +1,26 @@
+# Surveillance hebdomadaire des seuils free tier (7.0 §6, H81) :
+# appelle /api/ops/usage qui alerte les admins (cloche + e-mail) à 80 % d'un quota.
+# Secrets requis : APP_BASE_URL (ou valeur par défaut ci-dessous), INGEST_WEBHOOK_SECRET.
+name: Surveillance des quotas
+
+on:
+  schedule:
+    - cron: "0 8 * * 1" # lundi 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Interroger /api/ops/usage
+        run: |
+          curl -sS -X POST "${{ secrets.APP_BASE_URL || 'https://cineplus-eight.vercel.app' }}/api/ops/usage" \
+            -H "authorization: Bearer ${{ secrets.INGEST_WEBHOOK_SECRET }}" \
+            -H "content-type: application/json" | tee usage.json
+      - name: Échouer si alertes (visibilité dans l'onglet Actions)
+        run: |
+          if grep -q '"alerts":\[\]' usage.json; then
+            echo "Quotas sains ✅"
+          else
+            echo "::warning::Des seuils free tier sont approchés — voir usage.json et docs/OPERATIONS.md"
+          fi
