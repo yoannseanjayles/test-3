@@ -1,7 +1,7 @@
 # Phase 6.1 — Lot 4 : Back-office complet (D36)
 
 > **Livrable** : espace `/admin` complet — tableau de bord, modération avec audit, gestion des vidéos, pilotage publicité/UGC à effet immédiat, messages & takedown, utilisateurs & rôles, ingestion admin
-> **Statut** : ⏳ En attente de validation HITL (P37)
+> **Statut** : ✅ Validé HITL (D38) — déployé en production ; clôture de la 6.1
 > **Périmètre** : back-office **complet** (directive D36) — il absorbe l'essentiel du périmètre prévu en 7.1 ; la Phase 7 se recentrera sur les compléments (revenus, quotas paramétrables, affinages).
 
 ## Accès & sécurité

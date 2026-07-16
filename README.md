@@ -43,7 +43,8 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 
 ### Phase 6 — Back-end
 - [6.0 — Best Practices Summary : Back-end](docs/phase-6/6.0-best-practices-backend.md) ✅ *(D33)*
-- 6.1 — Développement : [Lot 1 — Socle données](docs/phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ *(D34)* · [Lot 2 — Comptes & synchro](docs/phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ *(D35)* · [Lot 3 — Ingestion vidéo](docs/phase-6/6.1-backend/lot-3-ingestion-video.md) ⏳ *(P36)* · [Lot 4 — Back-office complet](docs/phase-6/6.1-backend/lot-4-back-office.md) ⏳ *(en attente de validation HITL — P37, périmètre D36)*
+- 6.1 — Développement : [Lot 1 — Socle données](docs/phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ *(D34)* · [Lot 2 — Comptes & synchro](docs/phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ *(D35)* · [Lot 3 — Ingestion vidéo](docs/phase-6/6.1-backend/lot-3-ingestion-video.md) ✅ *(D37)* · [Lot 4 — Back-office complet](docs/phase-6/6.1-backend/lot-4-back-office.md) ✅ *(D38 — 6.1 terminée)*
+- [6.2 — Advertising Technical Specification](docs/phase-6/6.2-advertising-technical-specification.md) ⏳ *(en attente de validation HITL — P38)*
 
 ## Méthode
 

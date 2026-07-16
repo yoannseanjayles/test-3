@@ -55,8 +55,8 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 6.0 Recherche | [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) | ✅ Validé HITL (D33) |
-| 6.1 Développement | Lot 1 [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ (D34) · Lot 2 [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ (D35) · Lot 3 [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) ⏳ (P36) · Lot 4 [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) ⏳ **en attente de validation (P37)** | En cours |
-| 6.2 Architecture publicitaire | Advertising Technical Specification (VAST/VMAP, TCF, capping D6) | À venir |
+| 6.1 Développement | Lot 1 [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ (D34) · Lot 2 [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ (D35) · Lot 3 [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) ✅ (D37) · Lot 4 [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) ✅ (D38) — **6.1 terminée** | En cours |
+| 6.2 Architecture publicitaire | [Advertising Technical Specification](phase-6/6.2-advertising-technical-specification.md) | ⏳ **en attente de validation (P38)** |
 
 ## Phases à venir
 
@@ -70,6 +70,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL du 6.0 (Best Practices Back-end, P33)** ← nous sommes ici
-2. 6.1 back-end par lots (BFF/auth/base → Ma liste sync → ingestion vidéo → formulaires) · 6.2 architecture publicitaire
-3. Phases 7 à 9 · TMDB_ACCESS_TOKEN à configurer sur Vercel · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever
+1. **Validation HITL du 6.2 (Advertising Technical Specification, P38)** ← nous sommes ici — clôture de la Phase 6
+2. Activation des services (variables Vercel) : `DATABASE_URL` + `AUTH_SECRET` + `ADMIN_EMAILS` → comptes/synchro/back-office · clés R2 + GitHub → ingestion vidéo · `TMDB_ACCESS_TOKEN` → catalogue réel
+3. Phases 7 à 9 (7 recentrée : compléments du back-office) · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever

@@ -1,7 +1,7 @@
 # Phase 6.1 — Lot 3 : Ingestion vidéo
 
 > **Livrable** : stockage R2 (uploads présignés), pipeline d'encodage ffmpeg→HLS sur GitHub Actions, parcours de dépôt réel du Studio, diffusion des vidéos publiées
-> **Statut** : ⏳ En attente de validation HITL (P36)
+> **Statut** : ✅ Validé HITL (D37) — déployé en production (prêt-à-activer)
 > **Prêt-à-activer** (D34/D35) : sans les variables R2, le Studio garde ses états actuels — 19/19 tests verts inchangés.
 
 ## Le flux complet (D7/D8/D11)
