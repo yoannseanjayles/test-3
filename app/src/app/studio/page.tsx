@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { isUgcUploadEnabled } from "@/lib/ads/flags";
+import { isAuthConfigured } from "@/lib/auth/config";
+import { UploadForm } from "@/components/studio/UploadForm";
 
 export const metadata: Metadata = {
   title: "Studio",
@@ -37,6 +39,7 @@ const RULES = [
 
 export default async function StudioPage() {
   const open = await isUgcUploadEnabled();
+  const authEnabled = isAuthConfigured();
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 md:px-6">
@@ -49,19 +52,10 @@ export default async function StudioPage() {
         <section aria-label="Déposer une vidéo" className="mt-8 rounded-(--radius-l) bg-surface-raised p-6">
           <h2 className="text-xl font-bold">Déposer une vidéo</h2>
           <p className="mt-2 text-sm leading-relaxed text-secondary">
-            Le parcours de dépôt (fichier → détails → licence → récapitulatif) s&apos;active avec la
-            chaîne d&apos;ingestion vidéo, en cours de mise en service. Vos dépôts passeront par
-            l&apos;encodage multi-qualités puis la file de modération.
+            Fichier → détails → licence → déclaration de droits. Votre vidéo est encodée en
+            plusieurs qualités puis vérifiée par notre équipe avant d&apos;être visible (D11).
           </p>
-          <button
-            type="button"
-            disabled
-            aria-disabled="true"
-            title="S'active avec la chaîne d'ingestion vidéo"
-            className="mt-4 inline-flex h-12 items-center rounded-full bg-brand px-7 font-medium text-on-brand opacity-45"
-          >
-            Déposer une vidéo — bientôt actif
-          </button>
+          <UploadForm authEnabled={authEnabled} />
         </section>
       ) : (
         <EmptyState

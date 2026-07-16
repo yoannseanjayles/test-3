@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { FREE_CATALOG, watchHref } from "@/lib/free-catalog";
+import { getPublishedVideos } from "@/lib/videos/published";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Gratuit ▶",
@@ -15,7 +18,8 @@ export const metadata: Metadata = {
  * domaine public + licences ouvertes, chaque carte mène au lecteur.
  * La section UGC apparaîtra ici après le Studio (Lot 5) et la modération (7.1).
  */
-export default function GratuitPage() {
+export default async function GratuitPage() {
+  const community = await getPublishedVideos(12);
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
       <h1 className="text-3xl font-bold md:text-4xl">Gratuit ▶</h1>
@@ -65,10 +69,39 @@ export default function GratuitPage() {
         ))}
       </ul>
 
+      {community.length > 0 && (
+        <section aria-label="Créations de la communauté" className="mt-12">
+          <h2 className="text-2xl font-bold">Créations de la communauté</h2>
+          <p className="mt-1 text-sm text-secondary">
+            Des vidéos déposées par les créateurs Ciné+, vérifiées avant publication.
+          </p>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {community.map((video) => (
+              <li key={video.uuid}>
+                <Link
+                  href={`/regarder/${video.slug}`}
+                  className="group block rounded-(--radius-l) bg-surface-raised p-4 transition-colors duration-(--duration-fast) hover:bg-surface-interactive"
+                >
+                  <h3 className="font-bold">
+                    {video.title}{" "}
+                    {video.year && <span className="font-normal text-secondary">({video.year})</span>}
+                  </h3>
+                  {video.overview && <p className="mt-1 line-clamp-2 text-sm text-secondary">{video.overview}</p>}
+                  <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-secondary">
+                    <Badge tone="license">{video.licence}</Badge>
+                    {video.durationMinutes ? `${video.durationMinutes} min · ` : ""}{video.attribution}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <p className="mt-10 max-w-2xl text-xs leading-relaxed text-secondary">
         Les œuvres de cette page sont dans le domaine public ou diffusées sous licence ouverte
         (l&apos;attribution est affichée sur chaque page de lecture). Les vidéos de la communauté
-        rejoindront cette page avec le Studio de création.
+        y apparaissent après vérification par notre équipe.
       </p>
     </div>
   );

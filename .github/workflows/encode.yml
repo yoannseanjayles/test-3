@@ -1,0 +1,70 @@
+# Worker d'encodage vidéo (D7/D8, 6.0 §5 — H82) : déclenché par l'application
+# via repository_dispatch. ffmpeg → HLS 3 qualités → R2 → webhook de complétion.
+# Secrets requis (Settings → Secrets and variables → Actions) :
+#   R2_ACCOUNT_ID · R2_ACCESS_KEY_ID · R2_SECRET_ACCESS_KEY · R2_BUCKET
+#   INGEST_WEBHOOK_SECRET (le même que sur Vercel)
+name: Encodage vidéo
+
+on:
+  repository_dispatch:
+    types: [encode-video]
+
+concurrency:
+  group: encode-${{ github.event.client_payload.video_id }}
+  cancel-in-progress: false
+
+jobs:
+  encode:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: auto
+      AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+      AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+      ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+      BUCKET: ${{ secrets.R2_BUCKET }}
+      VIDEO_ID: ${{ github.event.client_payload.video_id }}
+      SOURCE_KEY: ${{ github.event.client_payload.source_key }}
+      CALLBACK_URL: ${{ github.event.client_payload.callback_url }}
+    steps:
+      - name: Télécharger la source depuis R2
+        run: aws s3 cp "s3://$BUCKET/$SOURCE_KEY" source.video --endpoint-url "$ENDPOINT"
+
+      - name: Encoder en HLS (3 qualités — D7)
+        run: |
+          mkdir -p hls
+          DURATION=$(ffprobe -v error -show_entries format=duration -of csv=p=0 source.video | cut -d. -f1)
+          echo "duration=$DURATION" >> "$GITHUB_ENV"
+          ffmpeg -hide_banner -y -i source.video \
+            -filter_complex "[0:v]split=3[v1][v2][v3];[v1]scale=w=-2:h=1080[v1o];[v2]scale=w=-2:h=720[v2o];[v3]scale=w=-2:h=480[v3o]" \
+            -map "[v1o]" -map 0:a? -c:v:0 libx264 -b:v:0 5000k -maxrate:v:0 5350k -bufsize:v:0 7500k \
+            -map "[v2o]" -map 0:a? -c:v:1 libx264 -b:v:1 2800k -maxrate:v:1 2996k -bufsize:v:1 4200k \
+            -map "[v3o]" -map 0:a? -c:v:2 libx264 -b:v:2 1400k -maxrate:v:2 1498k -bufsize:v:2 2100k \
+            -c:a aac -b:a 128k -ac 2 \
+            -preset veryfast -g 48 -keyint_min 48 -sc_threshold 0 \
+            -f hls -hls_time 6 -hls_playlist_type vod \
+            -hls_segment_filename "hls/%v/seg_%04d.ts" \
+            -master_pl_name master.m3u8 \
+            -var_stream_map "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p" \
+            "hls/%v/index.m3u8"
+
+      - name: Publier les rendus dans R2
+        run: aws s3 cp hls "s3://$BUCKET/hls/$VIDEO_ID/" --recursive --endpoint-url "$ENDPOINT"
+
+      - name: Notifier l'application (succès)
+        if: success()
+        run: |
+          curl -sS -X POST "$CALLBACK_URL" \
+            -H "authorization: Bearer ${{ secrets.INGEST_WEBHOOK_SECRET }}" \
+            -H "content-type: application/json" \
+            -d "{\"video_id\":\"$VIDEO_ID\",\"ok\":true,\"hls_manifest_key\":\"hls/$VIDEO_ID/master.m3u8\",\"duration_seconds\":${duration:-0}}"
+
+      - name: Notifier l'application (échec)
+        if: failure()
+        run: |
+          curl -sS -X POST "$CALLBACK_URL" \
+            -H "authorization: Bearer ${{ secrets.INGEST_WEBHOOK_SECRET }}" \
+            -H "content-type: application/json" \
+            -d "{\"video_id\":\"$VIDEO_ID\",\"ok\":false,\"error\":\"encodage échoué (voir le run Actions)\"}"
