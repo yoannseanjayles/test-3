@@ -48,15 +48,22 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | 5.1 Développement (6 lots) | [Socle](phase-5/5.1-frontend/lot-1-socle.md) · [Catalogue TMDB](phase-5/5.1-frontend/lot-2-catalogue.md) · [Compte & interactions](phase-5/5.1-frontend/lot-3-compte-interactions.md) · [Lecteur & gratuit](phase-5/5.1-frontend/lot-4-lecteur-gratuit.md) · [Studio & support](phase-5/5.1-frontend/lot-5-studio-support.md) · [Qualité](phase-5/5.1-frontend/lot-6-qualite.md) (19 tests E2E + axe) | D27-D32 |
 | 5.1 Déploiement | [Vercel](phase-5/5.1-frontend/deploiement-vercel.md) — **en production : [cineplus-eight.vercel.app](https://cineplus-eight.vercel.app)** | D27 |
 
+### ✅ Phase 6 — Back-end (terminée le 2026-07-16)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 6.0 Recherche | [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) | D33 |
+| 6.1 Développement (4 lots) | [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) · [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) · [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) · [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) — prêt-à-activer (variables Vercel) | D34, D35, D37, D38 |
+| 6.2 Architecture publicitaire | [Advertising Technical Specification](phase-6/6.2-advertising-technical-specification.md) — v1 régie directe, v2 VAST/TCF | D39 |
+
 ## Phase en cours
 
-**Phase 6 — Back-end**
+**Phase 7 — Administration** (recentrée D36 : compléments du back-office)
 
 | Étape | Livrable | Statut |
 |---|---|---|
-| 6.0 Recherche | [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) | ✅ Validé HITL (D33) |
-| 6.1 Développement | Lot 1 [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ (D34) · Lot 2 [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ (D35) · Lot 3 [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) ✅ (D37) · Lot 4 [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) ✅ (D38) — **6.1 terminée** | En cours |
-| 6.2 Architecture publicitaire | [Advertising Technical Specification](phase-6/6.2-advertising-technical-specification.md) | ⏳ **en attente de validation (P38)** |
+| 7.0 Recherche | [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) | ⏳ **en attente de validation (P39)** |
+| 7.1 Développement | Config typée & quotas · rate limiting (H88) · `ad_events` + Revenus (P-1 du 6.2) · notifications créateurs (H94) | À venir |
 
 ## Phases à venir
 
@@ -70,6 +77,6 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL du 6.2 (Advertising Technical Specification, P38)** ← nous sommes ici — clôture de la Phase 6
+1. **Validation HITL du 7.0 (Best Practices Administration, P39)** ← nous sommes ici
 2. Activation des services (variables Vercel) : `DATABASE_URL` + `AUTH_SECRET` + `ADMIN_EMAILS` → comptes/synchro/back-office · clés R2 + GitHub → ingestion vidéo · `TMDB_ACCESS_TOKEN` → catalogue réel
 3. Phases 7 à 9 (7 recentrée : compléments du back-office) · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever
