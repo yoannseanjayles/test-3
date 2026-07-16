@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
+import { ManageConsentButton } from "@/components/consent/ManageConsentButton";
 
 export const metadata: Metadata = {
   title: "Cookies",
@@ -89,20 +90,12 @@ export default function CookiesPage() {
           body: (
             <>
               <p>
-                La publicité et la mesure d&apos;audience étant actuellement désactivées, aucun
-                consentement n&apos;est requis aujourd&apos;hui. Dès leur activation, un module de gestion
-                du consentement (conforme TCF) s&apos;affichera à la première visite, et le bouton
-                ci-dessous permettra de modifier vos choix à tout moment.
+                Tant que la publicité est désactivée, aucun consentement n&apos;est requis et le
+                bouton ci-dessous n&apos;a rien à rouvrir. Dès son activation, le bandeau de
+                consentement s&apos;affiche à la première visite — et ce bouton permet de
+                modifier votre choix à tout moment.
               </p>
-              <button
-                type="button"
-                disabled
-                aria-disabled="true"
-                title="S'activera avec la publicité / l'analytics"
-                className="mt-2 inline-flex h-11 items-center rounded-full bg-surface-raised px-5 text-sm text-primary opacity-45"
-              >
-                Gérer mes préférences — bientôt actif
-              </button>
+              <ManageConsentButton />
             </>
           ),
         },

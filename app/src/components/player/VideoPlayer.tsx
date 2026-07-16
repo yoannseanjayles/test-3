@@ -113,8 +113,22 @@ export function VideoPlayer({
 
   useEffect(() => () => hlsRef.current?.destroy(), []);
 
+  // Mesure d'audience anonyme (H101) : une vue par chargement, au lancement effectif.
+  const viewSent = useRef(false);
+  const trackView = useCallback(() => {
+    if (viewSent.current) return;
+    viewSent.current = true;
+    fetch("/api/events", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name: "video.view", props: { title: video.entry.title, kind: video.entry.kind, id: video.entry.id } }),
+      keepalive: true,
+    }).catch(() => {});
+  }, [video.entry.title, video.entry.kind, video.entry.id]);
+
   const startContent = useCallback(
     async (fromSeconds: number | null) => {
+      trackView();
       setPhase("playing");
       const el = videoRef.current;
       if (!el) return;
@@ -126,7 +140,7 @@ export function VideoPlayer({
         /* lecture bloquée par le navigateur : l'utilisateur relancera via les contrôles */
       });
     },
-    [attachSource],
+    [attachSource, trackView],
   );
 
   const launch = useCallback(

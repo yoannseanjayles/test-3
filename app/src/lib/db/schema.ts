@@ -130,6 +130,21 @@ export const appSettings = pgTable("app_settings", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+// ── Événements produit (7.0 §3) — socle unique Revenus (ad.*) + analytics Phase 9
+
+export const events = pgTable(
+  "events",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull(), // domaine.action : ad.impression, video.view, contact.submit…
+    sessionAnon: text("session_anon").notNull(), // hash anonyme rotatif quotidien (H101)
+    userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+    props: jsonb("props").notNull().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("events_name_idx").on(t.name, t.createdAt)],
+);
+
 // ── Anti-abus : fenêtres de rate limiting (7.0 §2, H88) ───────────────────────
 
 export const rateLimits = pgTable(

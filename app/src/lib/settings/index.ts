@@ -42,6 +42,14 @@ export const SETTINGS_REGISTRY = {
     label: "Plafond de pré-rolls par titre et par session",
     description: "Capping D17 (consommé par la décision publicitaire, Lot 2). 0 = pré-roll désactivé.",
   },
+  "ads.ecpm_cents": {
+    default: 200,
+    min: 0,
+    max: 100000,
+    unit: "¢/1000 imp.",
+    label: "eCPM estimé (centimes)",
+    description: "Revenu estimé pour 1000 impressions (régie directe v1) — alimente l'écran Revenus.",
+  },
   "moderation.sla_hours": {
     default: 72,
     min: 1,

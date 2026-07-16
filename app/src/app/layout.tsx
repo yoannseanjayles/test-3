@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Footer } from "@/components/layout/Footer";
 import { LibrarySync } from "@/components/library/LibrarySync";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { isAuthConfigured } from "@/lib/auth/config";
 
 const spaceGrotesk = Space_Grotesk({
@@ -65,6 +66,8 @@ export default function RootLayout({
         <BottomNav />
         {/* Synchro Ma liste locale ↔ serveur dès qu'une session existe (H70/H87) */}
         <LibrarySync enabled={authEnabled} />
+        {/* CMP dormante : ne s'affiche que si la pub est activée et sans choix stocké (6.2 §4) */}
+        <ConsentBanner />
       </body>
     </html>
   );

@@ -15,6 +15,7 @@ const NAV = [
   { href: "/admin/videos", label: "Vidéos" },
   { href: "/admin/publicite", label: "Publicité & flags" },
   { href: "/admin/parametres", label: "Paramètres" },
+  { href: "/admin/revenus", label: "Revenus" },
   { href: "/admin/messages", label: "Messages" },
   { href: "/admin/utilisateurs", label: "Utilisateurs" },
   { href: "/admin/ingestion", label: "Ingestion" },
