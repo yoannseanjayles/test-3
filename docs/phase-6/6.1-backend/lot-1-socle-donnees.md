@@ -1,7 +1,7 @@
 # Phase 6.1 — Lot 1 : Socle données
 
 > **Livrable** : schéma Drizzle + migrations versionnées, client Neon avec repli sans base, flags D6 lus en base à effet immédiat, `/api/health`, CI GitHub Actions
-> **Statut** : ⏳ En attente de validation HITL (P34)
+> **Statut** : ✅ Validé HITL (D34) — déployé en production (inerte sans DATABASE_URL)
 > **Re-découpage** : Auth.js + synchro Ma liste passent au Lot 2 — livrables dès que `DATABASE_URL` existe (voir « Activation »).
 
 ## Contenu du lot

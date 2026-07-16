@@ -54,8 +54,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D33 | 2026-07-15 | 6.0 | Adoption du [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) : BFF dans Next.js (route handlers + server actions), **Neon Postgres + Drizzle**, **Auth.js v5** (migration H70), **flags runtime en base** (levée du redéploiement D6, env = amorçage + kill switch), ingestion ffmpeg→HLS→R2 via GitHub Actions (H82), sécurité/observabilité/CI (H84) | Directive « je valide » du 2026-07-15 | ✅ Validé HITL |
 
+| D34 | 2026-07-15 | 6.1 | Validation du **Lot 1 du back-end (socle données)** : schéma Drizzle + migrations versionnées, client Neon (repli complet sans `DATABASE_URL`), flags D6 en base à effet immédiat (env = kill switch), `/api/health`, CI GitHub Actions active (H84 levée). **Poursuite sans credentials actée** : les lots suivants sont construits prêts-à-activer, la vérification live se fera à la fourniture de `DATABASE_URL`. | Directive « on peut avancer quand même ? » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P34 | 2026-07-15 | 6.1 | Valider le **Lot 1 du back-end (socle données)** : schéma Drizzle complet (users/lists/videos/moderation/app_config/contact) + migrations versionnées, client Neon avec repli propre sans `DATABASE_URL`, **flags D6 lus en base à effet immédiat** (env = kill switch prioritaire), `/api/health`, CI GitHub Actions (lint+build+E2E bloquants). Auth.js + synchro Ma liste re-découpés au Lot 2 (livrables dès `DATABASE_URL` fournie). | Code + doc du lot |
+| P35 | 2026-07-15 | 6.1 | Valider le **Lot 2 du back-end (comptes & synchro)** : Auth.js v5 (credentials + argon2, sessions JWT), inscription/connexion réelles (progressive enhancement, activées si base + `AUTH_SECRET` configurés — replis actuels sinon), **synchro bidirectionnelle Ma liste** (migration H70 : fusion local↔serveur à la connexion), activation du formulaire de contact (levée H77) | Code + doc du lot |
