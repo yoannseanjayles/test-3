@@ -123,6 +123,11 @@ export function saveResumeProgress(
   });
 }
 
+/** Remplace l'état local par l'état consolidé du serveur (synchro Lot 2, H87). */
+export function replaceLibrary(next: LibraryState): void {
+  write(next);
+}
+
 /** Visionnage terminé : sort d'« en cours », entre dans l'historique (D17 écran de fin). */
 export function markCompleted(entry: Omit<LibraryEntry, "addedAt" | "progress" | "positionSeconds">): void {
   const state = read();

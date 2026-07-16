@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Footer } from "@/components/layout/Footer";
+import { LibrarySync } from "@/components/library/LibrarySync";
+import { isAuthConfigured } from "@/lib/auth/config";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -41,6 +43,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Lecture d'env uniquement (pas de cookies) : le layout reste statique.
+  const authEnabled = isAuthConfigured();
   return (
     <html
       lang="fr"
@@ -53,12 +57,14 @@ export default function RootLayout({
         >
           Aller au contenu
         </a>
-        <Header />
+        <Header authEnabled={authEnabled} />
         <main id="contenu" className="flex-1 pb-20 md:pb-0">
           {children}
         </main>
         <Footer />
         <BottomNav />
+        {/* Synchro Ma liste locale ↔ serveur dès qu'une session existe (H70/H87) */}
+        <LibrarySync enabled={authEnabled} />
       </body>
     </html>
   );

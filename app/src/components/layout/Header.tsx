@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
+import { HeaderAuth } from "@/components/auth/HeaderAuth";
 
 /** Navigation globale desktop — 6 entrées (D10 §1). En mobile, la BottomNav prend le relais. */
 const NAV = [
@@ -11,7 +12,7 @@ const NAV = [
   { href: "/ma-liste", label: "Ma liste" },
 ] as const;
 
-export function Header() {
+export function Header({ authEnabled }: { authEnabled: boolean }) {
   return (
     <header className="sticky top-0 z-100 border-b border-subtle bg-surface-base/85 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-6 px-4 md:h-16 md:px-6">
@@ -45,12 +46,9 @@ export function Header() {
               <path d="m20 20-3.5-3.5" />
             </svg>
           </Link>
-          <Link
-            href="/connexion"
-            className="hidden rounded-full bg-surface-raised px-4 py-2 text-sm font-medium text-primary transition-colors duration-(--duration-fast) hover:bg-surface-interactive md:block"
-          >
-            Connexion
-          </Link>
+          <span className="hidden md:block">
+            <HeaderAuth enabled={authEnabled} />
+          </span>
         </div>
       </div>
     </header>
