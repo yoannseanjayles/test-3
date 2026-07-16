@@ -17,6 +17,15 @@ export function isAuthConfigured(): boolean {
   return isDbConfigured() && Boolean(process.env.AUTH_SECRET);
 }
 
+/** Amorçage des administrateurs (D36) : e-mails listés dans ADMIN_EMAILS (séparés par des virgules). */
+export function isBootstrapAdmin(email: string): boolean {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean)
+    .includes(email.toLowerCase());
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   // Placeholder inerte : sans AUTH_SECRET, isAuthConfigured() bloque toute connexion.
   secret: process.env.AUTH_SECRET ?? "placeholder-inactif-sans-auth-secret",
@@ -36,7 +45,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!user?.passwordHash) return null;
         const valid = await verify(user.passwordHash, password).catch(() => false);
         if (!valid) return null;
-        return { id: user.id, email: user.email, name: user.displayName ?? undefined, role: user.role };
+        // Promotion d'amorçage (D36) : un e-mail listé dans ADMIN_EMAILS devient admin à la connexion.
+        let role = user.role;
+        if (role !== "admin" && isBootstrapAdmin(email)) {
+          role = "admin";
+          await db().update(schema.users).set({ role }).where(eq(schema.users.id, user.id));
+        }
+        return { id: user.id, email: user.email, name: user.displayName ?? undefined, role };
       },
     }),
   ],

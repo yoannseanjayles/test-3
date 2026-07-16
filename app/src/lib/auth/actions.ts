@@ -4,7 +4,7 @@ import { AuthError } from "next-auth";
 import { hash } from "@node-rs/argon2";
 import { z } from "zod";
 import { db, schema } from "@/lib/db";
-import { isAuthConfigured, signIn, signOut } from "./config";
+import { isAuthConfigured, isBootstrapAdmin, signIn, signOut } from "./config";
 
 /**
  * Actions d'authentification (6.1 Lot 2) — progressive enhancement :
@@ -39,7 +39,14 @@ export async function registerAction(_prev: AuthFormState, formData: FormData): 
 
   try {
     const passwordHash = await hash(password);
-    await db().insert(schema.users).values({ email, passwordHash, displayName: displayName ?? null });
+    await db()
+      .insert(schema.users)
+      .values({
+        email,
+        passwordHash,
+        displayName: displayName ?? null,
+        role: isBootstrapAdmin(email) ? "admin" : "user",
+      });
   } catch {
     // Violation d'unicité ou base indisponible — message neutre (pas d'énumération d'adresses).
     return { error: "Impossible de créer un compte avec cette adresse." };

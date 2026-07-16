@@ -55,7 +55,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | Étape | Livrable | Statut |
 |---|---|---|
 | 6.0 Recherche | [Best Practices Summary — Back-end](phase-6/6.0-best-practices-backend.md) | ✅ Validé HITL (D33) |
-| 6.1 Développement | Lot 1 [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ (D34) · Lot 2 [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ (D35) · Lot 3 [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) ⏳ **en attente de validation (P36)** · Lot 4 (back-office flags) | En cours |
+| 6.1 Développement | Lot 1 [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) ✅ (D34) · Lot 2 [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) ✅ (D35) · Lot 3 [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) ⏳ (P36) · Lot 4 [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) ⏳ **en attente de validation (P37)** | En cours |
 | 6.2 Architecture publicitaire | Advertising Technical Specification (VAST/VMAP, TCF, capping D6) | À venir |
 
 ## Phases à venir
@@ -64,7 +64,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 |---|---|---|
 | **5 — Front-end** | Recherche (5.0) · Développement (5.1) dont lecteur vidéo et composants pub | Front-end documenté |
 | **6 — Back-end** | Recherche (6.0) · Développement (6.1) · Architecture publicitaire (6.2) | Documentation technique, Advertising Technical Specification |
-| **7 — Administration** | Recherche (7.0) · Back-office (7.1) dont modération UGC, pub et revenus | Back-office fonctionnel |
+| **7 — Administration** | Recherche (7.0) · Compléments du back-office (7.1) : revenus, quotas paramétrables, affinages — le back-office complet est livré en 6.1 Lot 4 (D36) | Back-office consolidé |
 | **8 — Modèle économique** | Recherche (8.0) · Business Model Canvas (8.1) · Stratégie monétisation (8.2) | Business Model Canvas, Monetization Strategy |
 | **9 — Analytics & croissance** | KPIs utilisateurs et business, dashboards, rapports | Growth & Analytics Roadmap |
 

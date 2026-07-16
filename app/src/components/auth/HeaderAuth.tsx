@@ -24,6 +24,14 @@ export function HeaderAuth({ enabled }: { enabled: boolean }) {
 
   return (
     <span className="flex items-center gap-2">
+      {user.role === "admin" && (
+        <Link
+          href="/admin"
+          className="inline-flex h-9 items-center rounded-full bg-violet/20 px-4 text-sm text-primary transition-colors duration-(--duration-fast) hover:bg-violet/35"
+        >
+          Back-office
+        </Link>
+      )}
       <Link
         href="/ma-liste"
         className="inline-flex h-9 max-w-36 items-center truncate rounded-full bg-surface-raised px-4 text-sm text-primary transition-colors duration-(--duration-fast) hover:bg-surface-interactive"

@@ -58,8 +58,11 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D35 | 2026-07-15 | 6.1 | Validation du **Lot 2 du back-end (comptes & synchro)** : Auth.js v5 (credentials argon2, JWT, header resté statique via session client), synchro bidirectionnelle Ma liste (H70/H87 — UI local-first, serveur vérité durable), contact actif (levée H77, takedown D11) — prêt-à-activer, comportements par défaut inchangés (19/19 tests). Vérification live à la fourniture des variables (H89). | Directive « ok on continue » du 2026-07-15 | ✅ Validé HITL |
 
+| D36 | 2026-07-16 | Transverse | **Back-office complet exigé** (application de D9) : le Lot 4 du back-end n'est pas un back-office « minimal » mais le **back-office complet** — il absorbe le périmètre prévu en 7.1 : tableau de bord, modération UGC avec motifs + audit trail, gestion du catalogue vidéo (retrait, relance d'encodage), pilotage publicité/UGC à effet immédiat (D6), messages de contact + takedown prioritaire (D11), gestion des utilisateurs et des rôles, ingestion admin (D8). La Phase 7 se recentrera sur les compléments (revenus, quotas paramétrables, affinages). | Directive utilisateur du 2026-07-16 : « je veux pas un back office minimal, je veux un back office complet » | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
 | P36 | 2026-07-15 | 6.1 | Valider le **Lot 3 du back-end (ingestion vidéo)** : stockage R2 (uploads présignés, quota D11), pipeline d'encodage ffmpeg→HLS sur GitHub Actions (H82) avec webhook de complétion signé, parcours d'upload réel du Studio (licence + déclaration de droits obligatoires, modération a priori), diffusion des vidéos publiées dans /gratuit et /regarder | Code + doc du lot |
+| P37 | 2026-07-16 | 6.1 | Valider le **Lot 4 du back-end (back-office complet, D36)** : espace `/admin` réservé au rôle admin (amorçage `ADMIN_EMAILS`) — tableau de bord, modération (publier/refuser avec motif, audit `moderation_events`), vidéos (retrait/takedown, relance d'encodage), publicité & flags D6 (effet immédiat), messages (statuts, takedown en tête), utilisateurs (rôles), ingestion admin (D8) | Code + doc du lot |
