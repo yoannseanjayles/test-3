@@ -67,8 +67,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D40 | 2026-07-16 | 7.0 | Adoption du [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) : registre `app_settings` typé (quotas paramétrables, lève H96 à terme), rate limiting en base (H88), socle d'événements unique (Revenus + Phase 9), notifications créateurs (H94), runbook & seuils free tier — découpage 7.1 en 3 lots adopté. | Directive « ok » du 2026-07-16 | ✅ Validé HITL |
 
+| D41 | 2026-07-16 | 7.1 | Validation du **Lot 1 (paramètres & anti-abus)** : registre `app_settings` typé + écran Paramètres (quotas paramétrables — lève H96/H91), rate limiting en base fail-open sur connexion/inscription/contact/upload (lève H88). | Directive « on continu » du 2026-07-16 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P40 | 2026-07-16 | 7.1 | Valider le **Lot 1 (paramètres & anti-abus)** : registre `app_settings` typé + écran back-office Paramètres (quota UGC, taille max d'upload, plafond pré-roll, SLA modération — bornés Zod), **rate limiting en base** appliqué à connexion/inscription/contact/upload (fenêtre fixe, jamais sur la modération admin) | Code + doc du lot |
+| P41 | 2026-07-16 | 7.1 | Valider le **Lot 2 (mesure & revenus)** : socle d'événements unique `events` (serveur, anonyme), décision publicitaire `lib/ads/decision.ts` (house ads régie directe v1, P-1 du 6.2) branchée sur les AdSlots avec mesure impression/viewabilité, écran back-office **Revenus** (état vide honnête pub OFF), **CMP maison dormante** (accepter/refuser symétriques, bouton /cookies câblé) | Code + doc du lot |

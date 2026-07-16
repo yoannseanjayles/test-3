@@ -1,7 +1,7 @@
 # Phase 7.1 — Lot 1 : Paramètres & anti-abus
 
 > **Livrable** : registre de paramètres typés + écran back-office « Paramètres » (quotas paramétrables) + rate limiting en base sur les mutations sensibles
-> **Statut** : ⏳ En attente de validation HITL (P40)
+> **Statut** : ✅ Validé HITL (D41) — déployé en production
 > **Lève** : H96 (config numérique) · H88 (rate limiting) · H91 (quota constant → paramétrable)
 
 ## Contenu du lot
