@@ -1,7 +1,7 @@
 # Phase 6.1 — Lot 2 : Comptes & synchro
 
 > **Livrable** : Auth.js v5 (credentials + argon2), inscription/connexion réelles, synchro bidirectionnelle Ma liste (migration H70), formulaire de contact actif (levée H77)
-> **Statut** : ⏳ En attente de validation HITL (P35)
+> **Statut** : ✅ Validé HITL (D35) — déployé en production (prêt-à-activer)
 > **Construit prêt-à-activer** (D34) : sans `DATABASE_URL` + `AUTH_SECRET`, l'application garde exactement ses comportements actuels (annonces honnêtes, listes locales) — 19/19 tests verts inchangés.
 
 ## Contenu du lot

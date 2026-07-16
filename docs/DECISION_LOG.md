@@ -56,8 +56,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D34 | 2026-07-15 | 6.1 | Validation du **Lot 1 du back-end (socle données)** : schéma Drizzle + migrations versionnées, client Neon (repli complet sans `DATABASE_URL`), flags D6 en base à effet immédiat (env = kill switch), `/api/health`, CI GitHub Actions active (H84 levée). **Poursuite sans credentials actée** : les lots suivants sont construits prêts-à-activer, la vérification live se fera à la fourniture de `DATABASE_URL`. | Directive « on peut avancer quand même ? » du 2026-07-15 | ✅ Validé HITL |
 
+| D35 | 2026-07-15 | 6.1 | Validation du **Lot 2 du back-end (comptes & synchro)** : Auth.js v5 (credentials argon2, JWT, header resté statique via session client), synchro bidirectionnelle Ma liste (H70/H87 — UI local-first, serveur vérité durable), contact actif (levée H77, takedown D11) — prêt-à-activer, comportements par défaut inchangés (19/19 tests). Vérification live à la fourniture des variables (H89). | Directive « ok on continue » du 2026-07-15 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P35 | 2026-07-15 | 6.1 | Valider le **Lot 2 du back-end (comptes & synchro)** : Auth.js v5 (credentials + argon2, sessions JWT), inscription/connexion réelles (progressive enhancement, activées si base + `AUTH_SECRET` configurés — replis actuels sinon), **synchro bidirectionnelle Ma liste** (migration H70 : fusion local↔serveur à la connexion), activation du formulaire de contact (levée H77) | Code + doc du lot |
+| P36 | 2026-07-15 | 6.1 | Valider le **Lot 3 du back-end (ingestion vidéo)** : stockage R2 (uploads présignés, quota D11), pipeline d'encodage ffmpeg→HLS sur GitHub Actions (H82) avec webhook de complétion signé, parcours d'upload réel du Studio (licence + déclaration de droits obligatoires, modération a priori), diffusion des vidéos publiées dans /gratuit et /regarder | Code + doc du lot |
