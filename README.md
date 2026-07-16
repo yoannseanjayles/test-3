@@ -48,7 +48,7 @@ Plateforme « 6 étoiles » de découverte, référencement, **visionnage** et *
 
 ### Phase 7 — Administration
 - [7.0 — Best Practices Summary : Administration](docs/phase-7/7.0-best-practices-administration.md) ✅ *(D40)*
-- 7.1 — Développement : [Lot 1 — Paramètres & anti-abus](docs/phase-7/7.1-administration/lot-1-parametres-anti-abus.md) ✅ *(D41)* · [Lot 2 — Mesure & revenus](docs/phase-7/7.1-administration/lot-2-mesure-revenus.md) ⏳ *(en attente de validation HITL — P41)*
+- 7.1 — Développement : [Lot 1 — Paramètres & anti-abus](docs/phase-7/7.1-administration/lot-1-parametres-anti-abus.md) ✅ *(D41)* · [Lot 2 — Mesure & revenus](docs/phase-7/7.1-administration/lot-2-mesure-revenus.md) ✅ *(D42)* · [Lot 3 — Notifications & opérations](docs/phase-7/7.1-administration/lot-3-notifications-operations.md) ⏳ *(en attente de validation HITL — P42)*
 
 ## Méthode
 

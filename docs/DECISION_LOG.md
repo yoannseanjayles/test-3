@@ -69,8 +69,10 @@ Historique des décisions importantes du projet. Une décision n'est inscrite ic
 
 | D41 | 2026-07-16 | 7.1 | Validation du **Lot 1 (paramètres & anti-abus)** : registre `app_settings` typé + écran Paramètres (quotas paramétrables — lève H96/H91), rate limiting en base fail-open sur connexion/inscription/contact/upload (lève H88). | Directive « on continu » du 2026-07-16 | ✅ Validé HITL |
 
+| D42 | 2026-07-16 | 7.1 | Validation du **Lot 2 (mesure & revenus)** : socle `events` anonyme (hash rotatif quotidien, H101), house ads régie directe sur les AdSlots avec impression MRC côté client (H106), écran Revenus avec eCPM paramétrable (lève H95), CMP maison dormante câblée à /cookies — pub OFF = toujours rien dans le DOM (test D6 vert). | Directive « ok on enchaine » du 2026-07-16 | ✅ Validé HITL |
+
 ## Décisions proposées (en attente de validation)
 
 | # | Date | Étape | Proposition | Justification |
 |---|---|---|---|---|
-| P41 | 2026-07-16 | 7.1 | Valider le **Lot 2 (mesure & revenus)** : socle d'événements unique `events` (serveur, anonyme), décision publicitaire `lib/ads/decision.ts` (house ads régie directe v1, P-1 du 6.2) branchée sur les AdSlots avec mesure impression/viewabilité, écran back-office **Revenus** (état vide honnête pub OFF), **CMP maison dormante** (accepter/refuser symétriques, bouton /cookies câblé) | Code + doc du lot |
+| P42 | 2026-07-16 | 7.1 | Valider le **Lot 3 (notifications & opérations)** : notifications créateurs in-app (cloche, modération/encodage) + e-mails Resend si configuré (H83), alerte admin sur takedown, suppression de compte RGPD, runbook `docs/OPERATIONS.md`, surveillance hebdomadaire des seuils free tier (H81) — **clôture de la 7.1** | Code + doc du lot |

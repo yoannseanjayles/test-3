@@ -1,7 +1,7 @@
 # Phase 7.1 — Lot 2 : Mesure & revenus
 
 > **Livrable** : socle d'événements unique, décision publicitaire house ads branchée sur les AdSlots (palier P-1 du 6.2), écran back-office « Revenus », CMP maison dormante
-> **Statut** : ⏳ En attente de validation HITL (P41)
+> **Statut** : ✅ Validé HITL (D42) — déployé en production (dormant pub OFF)
 > **Lève** : H95 (tableau Revenus) · met en œuvre P-1 (6.2/D39) — le tout dormant tant que la pub est OFF (D6)
 
 ## Contenu du lot
