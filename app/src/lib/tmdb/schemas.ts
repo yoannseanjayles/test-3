@@ -57,6 +57,33 @@ const videoSchema = z.object({
   official: z.boolean().optional().default(false),
 });
 
+const providerSchema = z.object({
+  provider_name: z.string(),
+  logo_path: z.string().nullable().optional().default(null),
+});
+
+const watchProvidersSchema = z.object({
+  results: z
+    .record(z.string(), z.object({
+      link: z.string().optional(),
+      flatrate: z.array(providerSchema).optional(),
+      rent: z.array(providerSchema).optional(),
+      buy: z.array(providerSchema).optional(),
+    }))
+    .optional()
+    .default({}),
+});
+
+const seasonSchema = z.object({
+  id: z.number(),
+  season_number: z.number(),
+  name: z.string(),
+  episode_count: z.number().optional().default(0),
+  air_date: z.string().nullable().optional().default(null),
+  overview: z.string().optional().default(""),
+  poster_path: z.string().nullable().optional().default(null),
+});
+
 const detailsCommon = {
   backdrop_path: z.string().nullable().optional().default(null),
   poster_path: z.string().nullable().optional().default(null),
@@ -71,6 +98,7 @@ const detailsCommon = {
   videos: z
     .object({ results: z.array(videoSchema).optional().default([]) })
     .optional(),
+  "watch/providers": watchProvidersSchema.optional(),
 };
 
 export const tmdbMovieDetailsSchema = z.object({
@@ -88,6 +116,7 @@ export const tmdbTvDetailsSchema = z.object({
   first_air_date: z.string().optional().default(""),
   number_of_seasons: z.number().optional().default(0),
   number_of_episodes: z.number().optional().default(0),
+  seasons: z.array(seasonSchema).optional().default([]),
   ...detailsCommon,
   similar: paginatedSchema(tmdbTvListItemSchema).optional(),
 });

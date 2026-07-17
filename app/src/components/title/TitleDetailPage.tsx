@@ -4,6 +4,7 @@ import { Rail } from "@/components/ui/Rail";
 import { TitleCard } from "@/components/ui/TitleCard";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { WatchlistButton } from "@/components/library/WatchlistButton";
+import { ButtonLink } from "@/components/ui/Button";
 import type { TitleDetails } from "@/lib/tmdb/models";
 
 /**
@@ -14,7 +15,7 @@ import type { TitleDetails } from "@/lib/tmdb/models";
 
 const formatRuntime = (minutes: number) => `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")}`;
 
-export function TitleDetailPage({ details }: { details: TitleDetails }) {
+export function TitleDetailPage({ details, freeWatchHref }: { details: TitleDetails; freeWatchHref?: string }) {
   const {
     title,
     year,
@@ -94,8 +95,13 @@ export function TitleDetailPage({ details }: { details: TitleDetails }) {
                 ))}
               </ul>
             )}
-            {/* CTA — « Regarder » arrive avec le lecteur (Lot 4) ; Ma liste : optimiste, store local (Lot 3) */}
-            <div className="mt-5">
+            {/* CTA (D15) : Regarder si le titre est dans le catalogue gratuit + Ma liste */}
+            <div className="mt-5 flex flex-wrap gap-3">
+              {freeWatchHref && (
+                <ButtonLink size="lg" href={freeWatchHref}>
+                  ▶ Regarder gratuitement
+                </ButtonLink>
+              )}
               <WatchlistButton
                 title={{
                   id: details.id,
@@ -109,6 +115,47 @@ export function TitleDetailPage({ details }: { details: TitleDetails }) {
             </div>
           </div>
         </div>
+
+        {/* Où regarder (D15/D5 §3.3 — données JustWatch via TMDB, lève H68) */}
+        <section aria-label="Où regarder" className="mt-8 max-w-3xl">
+          <h2 className="text-xl font-bold">Où regarder</h2>
+          {freeWatchHref ? (
+            <p className="mt-2 text-sm leading-relaxed text-secondary">
+              Ce titre est disponible <strong className="text-primary">gratuitement sur Ciné+</strong> —
+              lancez la lecture avec le bouton ci-dessus.
+            </p>
+          ) : details.watchOffers.length > 0 ? (
+            <>
+              <ul className="mt-3 flex flex-wrap gap-3">
+                {details.watchOffers.map((offer) => (
+                  <li key={offer.name} className="flex items-center gap-2 rounded-(--radius-m) bg-surface-raised px-3 py-2">
+                    {offer.logoUrl && (
+                      <Image src={offer.logoUrl} alt="" width={24} height={24} className="rounded" />
+                    )}
+                    <span className="text-sm">{offer.name}</span>
+                    <span className="text-xs text-secondary">({offer.kind})</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-xs text-secondary">
+                Disponibilités France fournies par JustWatch
+                {details.watchLink && (
+                  <>
+                    {" · "}
+                    <a href={details.watchLink} rel="noopener" target="_blank" className="underline hover:text-brand">
+                      détail des offres
+                    </a>
+                  </>
+                )}
+              </p>
+            </>
+          ) : (
+            <p className="mt-2 text-sm leading-relaxed text-secondary">
+              Aucune plateforme française référencée pour ce titre actuellement — revenez plus tard,
+              les disponibilités évoluent chaque semaine.
+            </p>
+          )}
+        </section>
 
         {/* Synopsis */}
         {overview && (
@@ -153,6 +200,33 @@ export function TitleDetailPage({ details }: { details: TitleDetails }) {
                   </div>
                   <p className="mt-2 truncate text-xs font-medium text-primary">{member.name}</p>
                   {member.character && <p className="truncate text-xs text-secondary">{member.character}</p>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Saisons (D16 — spoiler-safe : jamais de résumé d'épisode) */}
+        {details.seasons.length > 0 && (
+          <section aria-label="Saisons" className="mt-10">
+            <h2 className="text-xl font-bold">Saisons</h2>
+            <ul className="mt-3 space-y-2">
+              {details.seasons.map((season) => (
+                <li key={season.id} className="flex items-center gap-4 rounded-(--radius-m) bg-surface-raised p-3">
+                  <div className="relative h-20 w-14 shrink-0 overflow-hidden rounded bg-surface-overlay">
+                    {season.posterUrl && (
+                      <Image src={season.posterUrl} alt="" fill sizes="56px" className="object-cover" />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-medium">
+                      {season.name}{" "}
+                      {season.year && <span className="text-sm font-normal text-secondary">({season.year})</span>}
+                    </p>
+                    <p className="text-sm text-secondary">
+                      {season.episodeCount} épisode{season.episodeCount > 1 ? "s" : ""}
+                    </p>
+                  </div>
                 </li>
               ))}
             </ul>

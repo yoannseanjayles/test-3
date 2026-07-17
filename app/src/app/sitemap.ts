@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { FREE_CATALOG, watchHref } from "@/lib/free-catalog";
+import { GENRES } from "@/lib/tmdb/models";
 import { getPublishedVideos } from "@/lib/videos/published";
 
 /**
@@ -9,7 +10,7 @@ import { getPublishedVideos } from "@/lib/videos/published";
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = (process.env.APP_BASE_URL ?? "https://cineplus-eight.vercel.app").replace(/\/$/, "");
-  const staticPages = ["", "/films", "/series", "/decouvrir", "/gratuit", "/faq", "/a-propos", "/cgu", "/confidentialite", "/cookies", "/mentions-legales"];
+  const staticPages = ["", "/films", "/series", "/decouvrir", "/nouveautes", ...GENRES.map((g) => `/genre/${g.slug}`), "/gratuit", "/faq", "/a-propos", "/cgu", "/confidentialite", "/cookies", "/mentions-legales"];
   const published = await getPublishedVideos(500).catch(() => []);
 
   return [

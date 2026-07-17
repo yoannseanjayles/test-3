@@ -23,6 +23,8 @@ export interface FreeVideo {
     hls?: string;
     mp4?: string;
   };
+  /** ID TMDB pour le pont fiche ↔ lecteur (audit A1) — absent si incertain. */
+  tmdbId?: number;
   /** Illustration d'ambiance (B5) en attendant les affiches dédiées. */
   artwork: string;
   genre: string;
@@ -32,6 +34,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 1,
     slug: "big-buck-bunny",
+    tmdbId: 10378,
     title: "Big Buck Bunny",
     year: 2008,
     overview:
@@ -50,6 +53,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 2,
     slug: "elephants-dream",
+    tmdbId: 9761,
     title: "Elephants Dream",
     year: 2006,
     overview:
@@ -67,6 +71,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 3,
     slug: "sintel",
+    tmdbId: 45745,
     title: "Sintel",
     year: 2010,
     overview:
@@ -84,6 +89,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 4,
     slug: "tears-of-steel",
+    tmdbId: 133701,
     title: "Tears of Steel",
     year: 2012,
     overview:
@@ -101,6 +107,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 5,
     slug: "night-of-the-living-dead",
+    tmdbId: 10331,
     title: "Night of the Living Dead",
     year: 1968,
     overview:
@@ -117,6 +124,7 @@ export const FREE_CATALOG: FreeVideo[] = [
   {
     id: 6,
     slug: "his-girl-friday",
+    tmdbId: 3085,
     title: "His Girl Friday",
     year: 1940,
     overview:
@@ -153,3 +161,8 @@ export function getFreeVideoBySlug(slug: string): FreeVideo | undefined {
 }
 
 export const watchHref = (video: FreeVideo) => `/regarder/${video.slug}`;
+
+/** Pont fiche TMDB → catalogue gratuit (audit A1). */
+export function getFreeVideoByTmdbId(tmdbId: number): FreeVideo | undefined {
+  return FREE_CATALOG.find((v) => v.tmdbId === tmdbId);
+}

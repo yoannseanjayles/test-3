@@ -94,7 +94,7 @@ export const getTopRatedSeries = (page = 1) => fetchTvPage("/tv/top_rated", { pa
 export async function getMovieDetails(id: number): Promise<TitleDetails | null> {
   try {
     const data = tmdbMovieDetailsSchema.parse(
-      await tmdbFetch(`/movie/${id}`, { append_to_response: "credits,videos,similar" }, 21600),
+      await tmdbFetch(`/movie/${id}`, { append_to_response: "credits,videos,similar,watch/providers" }, 21600),
     );
     return movieToDetails(data);
   } catch (error) {
@@ -106,7 +106,7 @@ export async function getMovieDetails(id: number): Promise<TitleDetails | null> 
 export async function getSeriesDetails(id: number): Promise<TitleDetails | null> {
   try {
     const data = tmdbTvDetailsSchema.parse(
-      await tmdbFetch(`/tv/${id}`, { append_to_response: "credits,videos,similar" }, 21600),
+      await tmdbFetch(`/tv/${id}`, { append_to_response: "credits,videos,similar,watch/providers" }, 21600),
     );
     return tvToDetails(data);
   } catch (error) {
@@ -116,6 +116,10 @@ export async function getSeriesDetails(id: number): Promise<TitleDetails | null>
 }
 
 /** Recherche multi (films + séries uniquement — les personnes arrivent avec la page Personne). */
+/** Grille par genre (D19 facettes) — discover trié par popularité. */
+export const getMoviesByGenre = (genreId: number, page = 1) =>
+  fetchMoviePage("/discover/movie", { with_genres: genreId, sort_by: "popularity.desc", page });
+
 export async function searchTitles(query: string, page = 1): Promise<TitlePage> {
   const q = query.trim();
   if (!q) return EMPTY_PAGE;

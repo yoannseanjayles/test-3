@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { TitleDetailPage, titleJsonLd } from "@/components/title/TitleDetailPage";
 import { parseSlugId, titleHref } from "@/lib/tmdb/models";
 import { getMovieDetails, isTmdbConfigured } from "@/lib/tmdb/queries";
+import { getFreeVideoByTmdbId, watchHref } from "@/lib/free-catalog";
 
 /** Fiche Film (D15) — URL FR stable `/film/titre-ID` (D10) : seul l'ID fait foi. */
 
@@ -47,7 +48,13 @@ export default async function FilmPage({ params }: { params: Promise<{ slug: str
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(titleJsonLd(details, canonical)) }}
       />
-      <TitleDetailPage details={details} />
+      <TitleDetailPage
+        details={details}
+        freeWatchHref={(() => {
+          const free = getFreeVideoByTmdbId(details.id);
+          return free ? watchHref(free) : undefined;
+        })()}
+      />
     </>
   );
 }
