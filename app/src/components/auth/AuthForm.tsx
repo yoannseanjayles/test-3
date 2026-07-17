@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { loginAction, registerAction, type AuthFormState } from "@/lib/auth/actions";
+import { PasswordField } from "./PasswordField";
 
 /**
  * Formulaire connexion/inscription (D19 Auth) — server actions, fonctionne
@@ -11,7 +12,7 @@ import { loginAction, registerAction, type AuthFormState } from "@/lib/auth/acti
 const inputClass =
   "h-12 w-full rounded-(--radius-m) border border-white/10 bg-surface-raised px-4 text-primary placeholder:text-secondary focus:border-brand focus:outline-none";
 
-export function AuthForm({ mode }: { mode: "login" | "register" }) {
+export function AuthForm({ mode, next }: { mode: "login" | "register"; next?: string }) {
   const [state, formAction, pending] = useActionState<AuthFormState, FormData>(
     mode === "login" ? loginAction : registerAction,
     {},
@@ -33,20 +34,16 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         </label>
         <input id="email" name="email" type="email" required autoComplete="email" className={inputClass} />
       </div>
-      <div>
-        <label htmlFor="password" className="mb-1.5 block text-sm font-medium">
-          Mot de passe {mode === "register" && <span className="text-secondary">(8 caractères min.)</span>}
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          minLength={mode === "register" ? 8 : undefined}
-          autoComplete={mode === "register" ? "new-password" : "current-password"}
-          className={inputClass}
-        />
-      </div>
+      <PasswordField
+        id="password"
+        name="password"
+        label={`Mot de passe${mode === "register" ? " (8 caractères min.)" : ""}`}
+        required
+        minLength={mode === "register" ? 8 : undefined}
+        autoComplete={mode === "register" ? "new-password" : "current-password"}
+        showStrength={mode === "register"}
+      />
+      {next && <input type="hidden" name="next" value={next} />}
       {/* Honeypot anti-bot (D13) — invisible pour les humains */}
       <div className="sr-only" aria-hidden>
         <label htmlFor="website">Ne pas remplir</label>

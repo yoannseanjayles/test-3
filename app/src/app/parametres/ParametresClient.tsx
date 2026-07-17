@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useSessionLite } from "@/components/auth/useSessionLite";
+import { PasswordField } from "@/components/auth/PasswordField";
+import { useLibrary } from "@/lib/library/store";
 import {
   changePasswordAction,
   deleteMyAccountAction,
@@ -21,6 +23,62 @@ function Status({ state }: { state: AccountFormState }) {
   );
 }
 
+function LocalDataSection() {
+  const library = useLibrary();
+  const [erased, setErased] = useState(false);
+  const total = library.favorites.length + library.history.length + library.resume.length;
+
+  const exportLocal = () => {
+    const blob = new Blob([JSON.stringify(library, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cineplus-donnees-locales.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const eraseLocal = () => {
+    if (!window.confirm("Effacer toutes les données locales de cet appareil (favoris, en cours, historique) ? Cette action est irréversible.")) return;
+    window.localStorage.removeItem("cineplus.library.v1");
+    window.localStorage.removeItem("cineplus.player.v1");
+    setErased(true);
+    window.location.reload();
+  };
+
+  return (
+    <section aria-label="Données locales" className="mt-8 rounded-(--radius-l) bg-surface-raised p-6">
+      <h2 className="text-lg font-bold">Données locales sur cet appareil</h2>
+      <p className="mt-1 text-sm leading-relaxed text-secondary">
+        Sans compte, votre liste et votre historique sont conservés uniquement dans ce navigateur.
+      </p>
+      <p className="mt-3 text-sm text-secondary">
+        <strong className="text-primary">{total}</strong> entrée{total > 1 ? "s" : ""} enregistrée{total > 1 ? "s" : ""}{" "}
+        ({library.favorites.length} favori{library.favorites.length > 1 ? "s" : ""}, {library.resume.length} en cours,{" "}
+        {library.history.length} dans l&apos;historique).
+      </p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={exportLocal}
+          disabled={total === 0}
+          className="inline-flex h-10 items-center rounded-full bg-surface-overlay px-5 text-sm text-primary transition-colors duration-(--duration-fast) hover:bg-surface-interactive disabled:opacity-45"
+        >
+          ⬇ Exporter mes données locales
+        </button>
+        <button
+          type="button"
+          onClick={eraseLocal}
+          disabled={total === 0 || erased}
+          className="inline-flex h-10 items-center rounded-full bg-red-500/20 px-5 text-sm font-medium text-red-300 transition-colors duration-(--duration-fast) hover:bg-red-500/35 disabled:opacity-45"
+        >
+          Effacer les données de cet appareil
+        </button>
+      </div>
+    </section>
+  );
+}
+
 export function ParametresClient({ authEnabled }: { authEnabled: boolean }) {
   const { user, loaded } = useSessionLite(authEnabled);
   const [pwdState, pwdAction, pwdPending] = useActionState(changePasswordAction, {});
@@ -29,15 +87,18 @@ export function ParametresClient({ authEnabled }: { authEnabled: boolean }) {
 
   if (!authEnabled || (loaded && !user)) {
     return (
-      <div className="mt-6 rounded-(--radius-l) bg-surface-raised p-5 text-sm leading-relaxed text-secondary">
-        {authEnabled ? (
-          <>
-            <Link href="/connexion" className="text-link underline hover:text-brand">Connectez-vous</Link> pour
-            gérer votre compte.
-          </>
-        ) : (
-          <>Les comptes ne sont pas encore ouverts — vos réglages arriveront avec eux.</>
-        )}
+      <div>
+        <div className="mt-6 rounded-(--radius-l) bg-surface-raised p-5 text-sm leading-relaxed text-secondary">
+          {authEnabled ? (
+            <>
+              <Link href="/connexion" className="text-link underline hover:text-brand">Connectez-vous</Link> pour
+              gérer votre compte.
+            </>
+          ) : (
+            <>Les comptes ne sont pas encore ouverts — vos réglages arriveront avec eux.</>
+          )}
+        </div>
+        <LocalDataSection />
       </div>
     );
   }
@@ -47,16 +108,16 @@ export function ParametresClient({ authEnabled }: { authEnabled: boolean }) {
       <section aria-label="Mot de passe" className="rounded-(--radius-l) bg-surface-raised p-6">
         <h2 className="text-lg font-bold">Changer de mot de passe</h2>
         <form action={pwdAction} className="mt-4 max-w-sm space-y-4">
-          <div>
-            <label htmlFor="current" className="mb-1.5 block text-sm font-medium">Mot de passe actuel</label>
-            <input id="current" name="current" type="password" required autoComplete="current-password" className={inputClass} />
-          </div>
-          <div>
-            <label htmlFor="next" className="mb-1.5 block text-sm font-medium">
-              Nouveau mot de passe <span className="text-secondary">(8 caractères min.)</span>
-            </label>
-            <input id="next" name="next" type="password" required minLength={8} autoComplete="new-password" className={inputClass} />
-          </div>
+          <PasswordField id="current" name="current" label="Mot de passe actuel" required autoComplete="current-password" />
+          <PasswordField
+            id="next"
+            name="next"
+            label="Nouveau mot de passe (8 caractères min.)"
+            required
+            minLength={8}
+            autoComplete="new-password"
+            showStrength
+          />
           <Status state={pwdState} />
           <button
             type="submit"

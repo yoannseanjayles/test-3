@@ -10,9 +10,20 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
+function safeNext(raw: string | undefined): string | undefined {
+  if (raw && raw.startsWith("/") && !raw.startsWith("//") && !raw.startsWith("/api")) return raw;
+  return undefined;
+}
+
 /** Inscription (D19 Auth) — formulaire réel si l'auth est configurée, annonce sinon (H77). */
-export default function InscriptionPage() {
+export default async function InscriptionPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string | string[] }>;
+}) {
   const active = isAuthConfigured();
+  const nextParam = (await searchParams).next;
+  const next = safeNext(Array.isArray(nextParam) ? nextParam[0] : nextParam);
 
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-16 md:px-6">
@@ -24,10 +35,10 @@ export default function InscriptionPage() {
             Liste synchronisée, reprise de lecture multi-écrans, historique — et votre liste
             locale actuelle sera automatiquement rattachée à votre compte.
           </p>
-          <AuthForm mode="register" />
+          <AuthForm mode="register" next={next} />
           <p className="mt-8 text-sm text-secondary">
             Déjà inscrit ?{" "}
-            <Link href="/connexion" className="text-link underline hover:text-brand">
+            <Link href={next ? `/connexion?next=${encodeURIComponent(next)}` : "/connexion"} className="text-link underline hover:text-brand">
               Connexion
             </Link>
           </p>
