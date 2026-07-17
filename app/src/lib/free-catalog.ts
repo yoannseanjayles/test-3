@@ -28,6 +28,14 @@ export interface FreeVideo {
   /** Illustration d'ambiance (B5) en attendant les affiches dédiées. */
   artwork: string;
   genre: string;
+  /** Réalisateur (contexte éditorial, lecture-5) — sobre, sans jugement de valeur. */
+  director?: string;
+  /** Pays de production. */
+  country?: string;
+  /** Regroupement en étagères sur /gratuit (lecture-4). */
+  collection?: "open-movie" | "domaine-public";
+  /** Contexte historique factuel (« Pourquoi c'est culte », lecture-5) — 2-3 phrases sobres. */
+  editorialNote?: string;
 }
 
 export const FREE_CATALOG: FreeVideo[] = [
@@ -49,6 +57,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-animation.jpg",
     genre: "Animation",
+    director: "Blender Foundation",
+    country: "Pays-Bas",
+    collection: "open-movie",
+    editorialNote:
+      "Diffusé sous licence Creative Commons dès sa sortie, ce court-métrage a démontré la viabilité d'une production entièrement réalisée avec des logiciels libres. Il reste l'une des vidéos les plus utilisées au monde pour tester des lecteurs et des codecs vidéo.",
   },
   {
     id: 2,
@@ -67,6 +80,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-science-fiction.jpg",
     genre: "Science-fiction",
+    director: "Blender Foundation",
+    country: "Pays-Bas",
+    collection: "open-movie",
+    editorialNote:
+      "Premier film au monde entièrement produit avec des outils open source, il a ouvert la voie aux « open movies » de la fondation Blender. Ses fichiers sources ont été publiés intégralement, une démarche rare pour l'époque.",
   },
   {
     id: 3,
@@ -85,6 +103,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-fantastique.jpg",
     genre: "Fantastique",
+    director: "Blender Foundation",
+    country: "Pays-Bas",
+    collection: "open-movie",
+    editorialNote:
+      "Troisième open movie de la fondation Blender, salué pour la qualité de son animation et sa bande originale. Il a contribué à populariser Blender auprès des studios d'animation indépendants.",
   },
   {
     id: 4,
@@ -103,6 +126,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-action.jpg",
     genre: "Science-fiction",
+    director: "Blender Foundation",
+    country: "Pays-Bas",
+    collection: "open-movie",
+    editorialNote:
+      "Quatrième et dernier des grands open movies Blender, il mêle prises de vue réelles et effets générés par ordinateur pour démontrer les capacités de Blender en composition et effets visuels.",
   },
   {
     id: 5,
@@ -120,6 +148,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-horreur.jpg",
     genre: "Horreur",
+    director: "George A. Romero",
+    country: "États-Unis",
+    collection: "domaine-public",
+    editorialNote:
+      "Tombé dans le domaine public par erreur : la mention de copyright requise à l'époque avait été omise sur les copies diffusées en salles. Ce film indépendant à petit budget a posé les codes du cinéma de zombies moderne.",
   },
   {
     id: 6,
@@ -137,6 +170,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-comedie.jpg",
     genre: "Comédie",
+    director: "Howard Hawks",
+    country: "États-Unis",
+    collection: "domaine-public",
+    editorialNote:
+      "Comme plusieurs films de cette époque, il est tombé dans le domaine public faute de renouvellement du copyright aux États-Unis. Il reste une référence de la « screwball comedy » et de son dialogue à débit rapide.",
   },
   {
     id: 7,
@@ -153,6 +191,11 @@ export const FREE_CATALOG: FreeVideo[] = [
     },
     artwork: "/media/interface/genre-science-fiction.jpg",
     genre: "Science-fiction",
+    director: "Ed Wood",
+    country: "États-Unis",
+    collection: "domaine-public",
+    editorialNote:
+      "Diffusé dans le domaine public faute de renouvellement du copyright, ce film à très petit budget est devenu culte pour ses défauts de production assumés — souvent cité comme le sommet du cinéma dit « nanar ».",
   },
 ];
 
@@ -165,4 +208,19 @@ export const watchHref = (video: FreeVideo) => `/regarder/${video.slug}`;
 /** Pont fiche TMDB → catalogue gratuit (audit A1). */
 export function getFreeVideoByTmdbId(tmdbId: number): FreeVideo | undefined {
   return FREE_CATALOG.find((v) => v.tmdbId === tmdbId);
+}
+
+/** Numéro de semaine ISO 8601 (fonction pure, stable côté serveur — compatible ISR, lecture-4). */
+function isoWeekNumber(date: Date): number {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d.getTime() - yearStart.getTime()) / 86_400_000 + 1) / 7);
+}
+
+/** Film gratuit de la semaine (hero /gratuit, lecture-4) : rotation déterministe sur le catalogue. */
+export function getFreeOfTheWeek(): FreeVideo {
+  const week = isoWeekNumber(new Date());
+  return FREE_CATALOG[week % FREE_CATALOG.length];
 }
