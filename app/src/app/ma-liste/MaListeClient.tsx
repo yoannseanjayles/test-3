@@ -53,6 +53,25 @@ function EntryGrid({ list, entries }: { list: LibraryList; entries: LibraryEntry
       {entries.map((entry) => (
         <li key={`${entry.kind}-${entry.id}`} className="relative [&>a]:w-full">
           <TitleCard href={entry.href} title={entry.title} year={entry.year ?? undefined} posterUrl={entry.posterUrl} />
+          {list === "resume" && typeof entry.progress === "number" && (
+            <div className="mt-1.5">
+              <div
+                role="progressbar"
+                aria-valuenow={Math.round(entry.progress * 100)}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`Progression : ${Math.round(entry.progress * 100)} %`}
+                className="h-1 overflow-hidden rounded-full bg-surface-overlay"
+              >
+                <div className="h-full bg-brand" style={{ width: `${Math.round(entry.progress * 100)}%` }} />
+              </div>
+              {typeof entry.positionSeconds === "number" && (
+                <p className="mt-1 text-xs text-secondary">
+                  Reprendre à {Math.floor(entry.positionSeconds / 60)}:{String(entry.positionSeconds % 60).padStart(2, "0")}
+                </p>
+              )}
+            </div>
+          )}
           <button
             type="button"
             onClick={() => removeFromList(list, entry.kind, entry.id)}

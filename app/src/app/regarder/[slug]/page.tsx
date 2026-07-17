@@ -5,6 +5,7 @@ import { VideoPlayer } from "@/components/player/VideoPlayer";
 import { Badge } from "@/components/ui/Badge";
 import { FREE_CATALOG, getFreeVideoBySlug, watchHref } from "@/lib/free-catalog";
 import { isAdPlacementEnabled } from "@/lib/ads/flags";
+import { getSetting } from "@/lib/settings";
 import { getPublishedVideoBySlug } from "@/lib/videos/published";
 
 /**
@@ -89,6 +90,7 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
   if (!video) notFound();
 
   const prerollEnabled = await isAdPlacementEnabled("video.preroll");
+  const prerollCap = await getSetting("ads.preroll.session_cap");
   const suggestions = FREE_CATALOG.filter((v) => v.slug !== slug)
     .slice(0, 3)
     .map((v) => ({ href: watchHref(v), title: v.title }));
@@ -123,6 +125,7 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
           attribution: video.attribution,
         }}
         prerollEnabled={prerollEnabled}
+        prerollCap={prerollCap}
         suggestions={suggestions}
       />
 

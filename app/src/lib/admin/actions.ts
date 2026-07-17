@@ -157,6 +157,7 @@ export async function deleteUserAction(formData: FormData): Promise<void> {
   const admin = await requireAdmin();
   const userId = uuid.parse(formData.get("userId"));
   if (userId === admin.id) return;
+  if (formData.get("confirm") !== "SUPPRIMER") return; // confirmation explicite (audit D3)
   await db().delete(schema.users).where(eq(schema.users.id, userId));
   revalidatePath("/admin/utilisateurs");
 }

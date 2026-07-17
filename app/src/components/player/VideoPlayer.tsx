@@ -31,17 +31,18 @@ type Phase = "intro" | "preroll" | "playing" | "ended" | "error";
 const PREROLL_SECONDS = 15;
 const PREROLL_SKIP_AFTER = 5;
 
-function prerollAlreadyServed(slugKey: string): boolean {
+/** Capping D17 : nombre de pré-rolls servis pour ce titre dans la session (plafond paramétrable — audit A4). */
+function prerollServedCount(slugKey: string): number {
   try {
-    return window.sessionStorage.getItem(`cineplus.preroll.${slugKey}`) === "1";
+    return Number(window.sessionStorage.getItem(`cineplus.preroll.${slugKey}`) ?? "0") || 0;
   } catch {
-    return true; // stockage bloqué → on ne sert pas de pub plutôt que d'en servir trop
+    return Number.MAX_SAFE_INTEGER; // stockage bloqué → on ne sert pas de pub plutôt que d'en servir trop
   }
 }
 
 function rememberPreroll(slugKey: string) {
   try {
-    window.sessionStorage.setItem(`cineplus.preroll.${slugKey}`, "1");
+    window.sessionStorage.setItem(`cineplus.preroll.${slugKey}`, String(prerollServedCount(slugKey) + 1));
   } catch {
     /* sans stockage, tant pis pour le capping de cette session */
   }
@@ -53,10 +54,13 @@ const formatTime = (seconds: number) =>
 export function VideoPlayer({
   video,
   prerollEnabled,
+  prerollCap = 1,
   suggestions,
 }: {
   video: PlayableVideo;
   prerollEnabled: boolean;
+  /** Plafond de pré-rolls par titre et par session (paramètre back-office, 0 = aucun). */
+  prerollCap?: number;
   suggestions: { href: string; title: string }[];
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -145,7 +149,7 @@ export function VideoPlayer({
 
   const launch = useCallback(
     (fromSeconds: number | null) => {
-      const wantPreroll = prerollEnabled && fromSeconds === null && !prerollAlreadyServed(slugKey);
+      const wantPreroll = prerollEnabled && prerollCap > 0 && fromSeconds === null && prerollServedCount(slugKey) < prerollCap;
       if (wantPreroll) {
         rememberPreroll(slugKey);
         setPrerollLeft(PREROLL_SECONDS);
@@ -154,7 +158,7 @@ export function VideoPlayer({
         void startContent(fromSeconds);
       }
     },
-    [prerollEnabled, slugKey, startContent],
+    [prerollEnabled, prerollCap, slugKey, startContent],
   );
 
   // Compte à rebours du pré-roll (placeholder maison — VAST réel en 6.2).

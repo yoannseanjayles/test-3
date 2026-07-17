@@ -2,6 +2,7 @@
 
 > **Objet** : audit honnête et professionnel — cohérence, fonctionnalités, UX/UI, SEO, sécurité, qualité — dans le but de compléter le projet.
 > **Méthode** : revue systématique code ↔ spécifications validées (D1-D42), vérification de chaque constat dans le dépôt (grep/lecture), état de la production.
+> **Suivi (2026-07-16, D43)** : correctifs appliqués — ✅ A3, A4, A6, B1, B2, B3, B4, B7, C1, C2, D1, D3. Restent ouverts : §0/E3 (vérification live — clés commanditaire), A1, A2, A5, A7, A8, B5, B6 partiel (logo), D2 (arbitrage juridique), D4, E1, E2 → lots C1/C3/C5.
 > **Réserve d'honnêteté** : cet audit est réalisé par l'auteur du code — un regard externe et des tests utilisateurs réels restent irremplaçables. Les sévérités sont assumées, y compris quand elles fâchent.
 
 ## 0. Limite n°1, avant toute chose

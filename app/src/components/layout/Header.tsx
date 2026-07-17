@@ -46,9 +46,7 @@ export function Header({ authEnabled }: { authEnabled: boolean }) {
               <path d="m20 20-3.5-3.5" />
             </svg>
           </Link>
-          <span className="hidden md:block">
-            <HeaderAuth enabled={authEnabled} />
-          </span>
+          <HeaderAuth enabled={authEnabled} />
         </div>
       </div>
     </header>

@@ -44,8 +44,6 @@ export function NotificationsBell() {
     }
   };
 
-  if (items.length === 0 && unread === 0) return null;
-
   return (
     <div className="relative" ref={panelRef}>
       <button
@@ -72,6 +70,9 @@ export function NotificationsBell() {
           className="absolute right-0 top-11 z-150 w-80 rounded-(--radius-l) border border-white/10 bg-surface-overlay p-2 shadow-xl"
         >
           <ul className="max-h-96 space-y-1 overflow-y-auto">
+            {items.length === 0 && (
+              <li className="p-3 text-sm text-secondary">Aucune notification pour l&apos;instant.</li>
+            )}
             {items.map((n) => (
               <li key={n.id} className={`rounded-(--radius-m) p-3 ${n.read ? "" : "bg-surface-raised"}`}>
                 <p className="text-sm font-medium">{n.title}</p>

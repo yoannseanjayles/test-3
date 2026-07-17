@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Pagination, TitleGrid } from "@/components/ui/TitleGrid";
 import { getTrending, isTmdbConfigured } from "@/lib/tmdb/queries";
@@ -9,6 +10,7 @@ export const revalidate = 1800;
 
 export const metadata: Metadata = {
   title: "Découvrir",
+  alternates: { canonical: "/decouvrir" },
   description: "Les films et séries qui font l'actualité cette semaine.",
 };
 
@@ -35,6 +37,7 @@ export default async function DecouvrirPage({
           <div className="mt-8">
             <TitleGrid titles={data.titles} />
           </div>
+          <AdSlot placement="display.browse" />
           <Pagination basePath="/decouvrir" page={data.page} totalPages={data.totalPages} />
         </>
       ) : (

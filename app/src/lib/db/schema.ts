@@ -30,6 +30,8 @@ export const users = pgTable("users", {
   passwordHash: text("password_hash"),
   displayName: text("display_name"),
   role: userRoleEnum("role").notNull().default("user"),
+  /** Opt-out des échos e-mail de notifications (H108) — l'in-app reste toujours actif. */
+  emailOptOut: boolean("email_opt_out").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

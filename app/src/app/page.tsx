@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { Rail } from "@/components/ui/Rail";
 import { TitleCard, type TitleCardData } from "@/components/ui/TitleCard";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { ConversionBanner } from "@/components/home/ConversionBanner";
+import { isAuthConfigured } from "@/lib/auth/config";
 import {
   getNowPlayingMovies,
   getPopularSeries,
@@ -133,24 +134,8 @@ export default async function HomePage() {
         {/* Emplacement pub — absent du DOM tant que ADS_ENABLED n'est pas true (D6/D14) */}
         <AdSlot placement="display.home" />
 
-        {/* Bandeau conversion (anonyme) — D14 §11 */}
-        <section
-          aria-label="Créer un compte"
-          className="mt-12 flex flex-col items-start gap-4 rounded-(--radius-l) bg-surface-raised p-6 md:flex-row md:items-center md:justify-between md:p-8"
-        >
-          <div>
-            <h2 className="text-xl font-bold md:text-2xl">Votre cinéma personnel. Gratuit.</h2>
-            <p className="mt-1 text-sm text-secondary">
-              Reprenez où vous en êtes, sur tous vos écrans — et gardez chaque titre qui vous tente.
-            </p>
-          </div>
-          <Link
-            href="/inscription"
-            className="inline-flex h-12 shrink-0 items-center rounded-full bg-brand px-6 font-medium text-on-brand transition-all duration-(--duration-fast) hover:bg-brand-hover hover:shadow-(--glow-accent)"
-          >
-            Créer un compte
-          </Link>
-        </section>
+        {/* Bandeau conversion — visiteurs anonymes uniquement (D14 §11, audit B4) */}
+        <ConversionBanner authEnabled={isAuthConfigured()} />
       </div>
     </>
   );

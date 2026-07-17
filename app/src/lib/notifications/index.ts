@@ -70,7 +70,7 @@ async function sendEmailEcho(userId: string, type: NotificationType, payload: Re
   const from = process.env.EMAIL_FROM;
   if (!apiKey || !from) return;
   const [user] = await db().select().from(schema.users).where(eq(schema.users.id, userId)).limit(1);
-  if (!user?.email) return;
+  if (!user?.email || user.emailOptOut) return; // opt-out H108 — l'in-app fait foi
   const { title, body } = MESSAGES[type](payload);
   await fetch("https://api.resend.com/emails", {
     method: "POST",

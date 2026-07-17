@@ -39,8 +39,19 @@ export default async function AdminUtilisateursPage() {
                     {user.role === "admin" ? "Rétrograder" : "Promouvoir admin"}
                   </button>
                 </form>
-                <form action={deleteUserAction}>
+                <form action={deleteUserAction} className="flex items-center gap-2">
                   <input type="hidden" name="userId" value={user.id} />
+                  <label htmlFor={`confirm-${user.id}`} className="sr-only">
+                    Taper SUPPRIMER pour confirmer
+                  </label>
+                  <input
+                    id={`confirm-${user.id}`}
+                    name="confirm"
+                    required
+                    pattern="SUPPRIMER"
+                    placeholder="Taper SUPPRIMER"
+                    className="h-9 w-36 rounded-(--radius-m) border border-white/10 bg-surface-overlay px-3 text-xs text-primary placeholder:text-secondary focus:border-brand focus:outline-none"
+                  />
                   <button
                     type="submit"
                     title="Suppression RGPD : listes et notifications effacées, vidéos publiées anonymisées"

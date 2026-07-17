@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Pagination, TitleGrid } from "@/components/ui/TitleGrid";
 import { getPopularSeries, isTmdbConfigured } from "@/lib/tmdb/queries";
@@ -9,6 +10,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Séries",
+  alternates: { canonical: "/series" },
   description: "Toutes les séries populaires du moment : affiches, notes et fiches détaillées.",
 };
 
@@ -35,6 +37,7 @@ export default async function SeriesPage({
           <div className="mt-8">
             <TitleGrid titles={data.titles} />
           </div>
+          <AdSlot placement="display.browse" />
           <Pagination basePath="/series" page={data.page} totalPages={data.totalPages} />
         </>
       ) : (

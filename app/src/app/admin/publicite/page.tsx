@@ -16,7 +16,7 @@ const FLAGS: { key: string; label: string; description: string; envDefault: bool
   { key: "ads.display.home", label: "Display — Accueil", description: "Bannière de l'accueil (suit le global si non défini).", envDefault: true },
   { key: "ads.display.browse", label: "Display — Grilles", description: "Bannière des pages catalogue.", envDefault: true },
   { key: "ads.display.fiche", label: "Display — Fiches", description: "Bannière des fiches film/série.", envDefault: true },
-  { key: "ads.native.rail", label: "Natif — Rails", description: "Cartes sponsorisées dans les rails.", envDefault: true },
+  { key: "ads.native.rail", label: "Natif — Rails", description: "Cartes sponsorisées dans les rails — emplacement livré avec les campagnes directes (palier P-2 du 6.2) : ce flag est préparatoire, aucun rendu actif aujourd\u2019hui.", envDefault: true },
   { key: "ads.video.preroll", label: "Pré-roll vidéo", description: "Publicité avant lecture (exigence D6) : 15 s, passable après 5 s, 1/titre/session, jamais à la reprise.", envDefault: true },
   { key: "ugc.upload.enabled", label: "Dépôt de vidéos (communauté)", description: "Interrupteur D11 — ne concerne pas les admins, qui peuvent toujours déposer.", envDefault: false },
 ];

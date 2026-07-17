@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { count, sql } from "drizzle-orm";
+import { count, lt, sql } from "drizzle-orm";
 import { db, isDbConfigured, schema } from "@/lib/db";
 import { notifyAdmins } from "@/lib/notifications";
 
@@ -28,6 +28,11 @@ export async function POST(request: Request) {
   const dbRatio = dbBytes / DB_LIMIT_BYTES;
 
   const [videos] = await client.select({ n: count() }).from(schema.videos);
+
+  // Rétention des événements : 13 mois (engagement page Cookies / 7.0 §3 — audit A6).
+  const cutoff = new Date();
+  cutoff.setMonth(cutoff.getMonth() - 13);
+  await client.delete(schema.events).where(lt(schema.events.createdAt, cutoff));
 
   const alerts: string[] = [];
   if (dbRatio >= 0.8) {
