@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TitleDetailPage, titleJsonLd } from "@/components/title/TitleDetailPage";
-import { parseSlugId, titleHref } from "@/lib/tmdb/models";
+import { parseSlugId, titleHref, type TitleDetails } from "@/lib/tmdb/models";
 import { getSeriesDetails, isTmdbConfigured } from "@/lib/tmdb/queries";
 
-/** Fiche Série (D16) — saisons/épisodes spoiler-safe détaillés au Lot 3 (H27 : pas de pages épisode). */
+/** Fiche Série (D16) — épisodes spoiler-safe dépliables par saison (H27 : pas de pages épisode). */
 
 export const revalidate = 21600;
 export async function generateStaticParams() {
@@ -17,13 +17,27 @@ async function load(slug: string) {
   return getSeriesDetails(id);
 }
 
+/** Meta description spec D16 : « {Titre} ({année}), série de {créateur} avec {acteurs}. … » (fiches-1). */
+function metaDescription(details: TitleDetails): string | undefined {
+  const creator = details.creators[0]?.name;
+  const actors = details.cast.slice(0, 2).map((c) => c.name);
+  const intro =
+    `${details.title}${details.year ? ` (${details.year})` : ""}, série` +
+    `${creator ? ` de ${creator}` : ""}` +
+    `${actors.length > 0 ? ` avec ${actors.join(", ")}` : ""}. `;
+  const note = details.voteCount > 0 ? `Note ${details.voteAverage.toFixed(1).replace(".", ",")}/10. ` : "";
+  const text = `${intro}${note}${details.overview}`.trim();
+  return text ? text.slice(0, 160) : undefined;
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const details = await load(slug);
   if (!details) return { title: "Série introuvable" };
   return {
-    title: `${details.title}${details.year ? ` (${details.year})` : ""}`,
-    description: details.overview.slice(0, 160) || undefined,
+    // Title ciblant l'intention de recherche (spec D15 §1 appliquée aux séries, fiches-8).
+    title: `${details.title}${details.year ? ` (${details.year})` : ""} — où regarder, casting, saisons`,
+    description: metaDescription(details),
     alternates: { canonical: details.href },
     openGraph: {
       title: details.title,

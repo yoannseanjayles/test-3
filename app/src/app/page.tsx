@@ -7,19 +7,24 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { ConversionBanner } from "@/components/home/ConversionBanner";
 import { isAuthConfigured } from "@/lib/auth/config";
 import {
+  getMoviesByGenre,
   getNowPlayingMovies,
   getPopularSeries,
+  getTopRatedMovies,
   getTrending,
   isTmdbConfigured,
 } from "@/lib/tmdb/queries";
-import type { Title } from "@/lib/tmdb/models";
+import { GENRES, type Title } from "@/lib/tmdb/models";
 import { FREE_CATALOG, watchHref } from "@/lib/free-catalog";
 
 /**
  * Accueil — structure D14 (hero → rails → étagère Gratuit → pub → éditorial).
  * Lot 2 : données réelles TMDB (tendances, nouveautés, séries) avec revalidation.
- * Sans TMDB configuré (ou API en panne), la page bascule sur les contenus de
- * démonstration du Lot 1 — jamais d'écran d'erreur (D14 §états).
+ * Ce lot : rails « Les mieux notés » et « À l'honneur » (rotation hebdomadaire
+ * déterministe), dédoublonnage descendant des rails (D14 §2 — hero exclu) et
+ * métadonnées courtes du hero. Sans TMDB configuré (ou API en panne), la page
+ * bascule sur les contenus de démonstration du Lot 1 — jamais d'écran d'erreur
+ * (D14 §états).
  */
 
 export const revalidate = 1800;
@@ -55,18 +60,80 @@ const INTENT_CHIPS = [
 ];
 
 function toCard(t: Title): TitleCardData {
-  return { href: t.href, title: t.title, year: t.year ?? undefined, posterUrl: t.posterUrl };
+  return {
+    href: t.href,
+    title: t.title,
+    year: t.year ?? undefined,
+    posterUrl: t.posterUrl,
+    // Note ★ sur les cartes (D14) — TitleCard la masque quand elle vaut 0.
+    rating: t.voteAverage,
+  };
+}
+
+/** Numéro de semaine ISO 8601 — fonction pure et déterministe, stable dans la fenêtre ISR. */
+function isoWeekNumber(date: Date): number {
+  const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const day = d.getUTCDay() || 7; // lundi = 1 … dimanche = 7
+  d.setUTCDate(d.getUTCDate() + 4 - day); // jeudi de la même semaine ISO
+  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
+  return Math.ceil(((d.getTime() - yearStart) / 86_400_000 + 1) / 7);
+}
+
+/**
+ * Dédoublonnage descendant (D14 §2) : le conteneur le plus haut garde le titre.
+ * Chaque rail écarte les titres déjà affichés au-dessus, puis limite à `count` cartes.
+ */
+function takeUnseen(titles: Title[] | undefined, seen: Set<string>, count = 12): Title[] {
+  const kept: Title[] = [];
+  for (const t of titles ?? []) {
+    const key = `${t.kind}-${t.id}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    kept.push(t);
+    if (kept.length >= count) break;
+  }
+  return kept;
 }
 
 export default async function HomePage() {
   const configured = isTmdbConfigured();
-  const [trending, nowPlaying, series] = configured
-    ? await Promise.all([getTrending(), getNowPlayingMovies(), getPopularSeries()])
-    : [null, null, null];
+  // Rail « À l'honneur » (D14) : genre en rotation hebdomadaire déterministe — 18 genres, ~18 semaines de variété.
+  const spotlightGenre = GENRES[isoWeekNumber(new Date()) % GENRES.length];
+  const [trending, nowPlaying, series, topRated, spotlight] = configured
+    ? await Promise.all([
+        getTrending(),
+        getNowPlayingMovies(),
+        getPopularSeries(),
+        getTopRatedMovies(),
+        getMoviesByGenre(spotlightGenre.id),
+      ])
+    : [null, null, null, null, null];
 
   // Hero = premier titre tendance avec backdrop (curation admin en 7.1, fallback tendances — D14 §2).
   const hero = trending?.titles.find((t) => t.backdropUrl && t.overview) ?? null;
   const live = Boolean(hero && trending && trending.titles.length > 0);
+
+  // Dédoublonnage descendant (D14 §2) : hero exclu des rails, puis chaque rail dans l'ordre visuel.
+  const seen = new Set<string>();
+  if (hero) seen.add(`${hero.kind}-${hero.id}`);
+  const trendingRail = takeUnseen(trending?.titles, seen);
+  const nowPlayingRail = takeUnseen(nowPlaying?.titles, seen);
+  const seriesRail = takeUnseen(series?.titles, seen);
+  const topRatedRail = takeUnseen(topRated?.titles, seen);
+  const spotlightRail = takeUnseen(spotlight?.titles, seen);
+
+  // Métadonnées courtes du hero (D14 §2) : type · année · ★ note — chaque segment omis si absent.
+  const heroMeta = hero
+    ? [
+        hero.kind === "film" ? "Film" : "Série",
+        hero.year,
+        hero.voteAverage > 0
+          ? `★ ${hero.voteAverage.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : null;
 
   return (
     <>
@@ -88,6 +155,7 @@ export default async function HomePage() {
           <h1 className="mt-1 max-w-xl text-3xl font-bold md:text-5xl">
             {hero ? hero.title : "Découvrez. Choisissez. Regardez."}
           </h1>
+          {heroMeta && <p className="mt-2 text-sm text-secondary">{heroMeta}</p>}
           <p className="mt-2 max-w-lg text-sm text-secondary md:text-base">
             {hero
               ? hero.overview.length > 180
@@ -101,7 +169,7 @@ export default async function HomePage() {
                 <ButtonLink size="lg" href={hero.href}>
                   Voir la fiche
                 </ButtonLink>
-                <ButtonLink size="lg" variant="secondary" href="/decouvrir">
+                <ButtonLink size="lg" variant="secondary" href="/tendances">
                   Explorer les tendances
                 </ButtonLink>
               </>
@@ -132,23 +200,49 @@ export default async function HomePage() {
           </ul>
         </section>
 
-        <Rail title="Tendances cette semaine" seeAllHref="/decouvrir">
-          {(live ? trending!.titles.slice(0, 12).map(toCard) : DEMO_TRENDING).map((t) => (
+        <Rail title="Tendances cette semaine" seeAllHref="/tendances">
+          {(live ? trendingRail.map(toCard) : DEMO_TRENDING).map((t) => (
             <TitleCard key={t.href === "#" ? t.title : t.href} {...t} />
           ))}
         </Rail>
 
-        {live && nowPlaying && nowPlaying.titles.length > 0 && (
+        {live && nowPlayingRail.length > 0 && (
           <Rail title="Nouveautés au cinéma" seeAllHref="/nouveautes" explanation="Les sorties du moment en France.">
-            {nowPlaying.titles.slice(0, 12).map((t) => (
+            {nowPlayingRail.map((t) => (
               <TitleCard key={t.href} {...toCard(t)} isNew />
             ))}
           </Rail>
         )}
 
-        {live && series && series.titles.length > 0 && (
+        {live && seriesRail.length > 0 && (
           <Rail title="Séries populaires" seeAllHref="/series">
-            {series.titles.slice(0, 12).map((t) => (
+            {seriesRail.map((t) => (
+              <TitleCard key={t.href} {...toCard(t)} />
+            ))}
+          </Rail>
+        )}
+
+        {/* Rail « Les mieux notés » (D14 §2 rangée 6) : fonds de catalogue intemporel, tri réel sur /films. */}
+        {live && topRatedRail.length > 0 && (
+          <Rail
+            title="Les mieux notés de tous les temps"
+            seeAllHref="/films?tri=note"
+            explanation="Les films les mieux notés par la communauté TMDB."
+          >
+            {topRatedRail.map((t) => (
+              <TitleCard key={t.href} {...toCard(t)} />
+            ))}
+          </Rail>
+        )}
+
+        {/* Rail « À l'honneur » (D14) : genre différent chaque semaine, lien croisé vers /genre/*. */}
+        {live && spotlightRail.length > 0 && (
+          <Rail
+            title={`À l'honneur : ${spotlightGenre.label}`}
+            seeAllHref={`/genre/${spotlightGenre.slug}`}
+            explanation="Une sélection renouvelée chaque semaine."
+          >
+            {spotlightRail.map((t) => (
               <TitleCard key={t.href} {...toCard(t)} />
             ))}
           </Rail>
