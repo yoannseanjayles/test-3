@@ -5,6 +5,7 @@ import { Rail } from "@/components/ui/Rail";
 import { TitleCard, type TitleCardData } from "@/components/ui/TitleCard";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { ConversionBanner } from "@/components/home/ConversionBanner";
+import { HeroCarousel, type HeroSlide } from "@/components/home/HeroCarousel";
 import { isAuthConfigured } from "@/lib/auth/config";
 import {
   getMoviesByGenre,
@@ -109,79 +110,67 @@ export default async function HomePage() {
       ])
     : [null, null, null, null, null];
 
-  // Hero = premier titre tendance avec backdrop (curation admin en 7.1, fallback tendances — D14 §2).
-  const hero = trending?.titles.find((t) => t.backdropUrl && t.overview) ?? null;
-  const live = Boolean(hero && trending && trending.titles.length > 0);
+  // Hero dynamique (D14 §2, amendé) : jusqu'à 5 titres tendance avec backdrop en rotation,
+  // plutôt qu'un seul titre figé pour toute la fenêtre ISR (curation admin en 7.1).
+  const heroCandidates = (trending?.titles ?? []).filter((t) => t.backdropUrl && t.overview).slice(0, 5);
+  const live = Boolean(trending && trending.titles.length > 0 && heroCandidates.length > 0);
 
-  // Dédoublonnage descendant (D14 §2) : hero exclu des rails, puis chaque rail dans l'ordre visuel.
+  const heroSlides: HeroSlide[] = heroCandidates.map((t) => ({
+    href: t.href,
+    title: t.title,
+    backdropUrl: t.backdropUrl as string,
+    overview: t.overview,
+    meta: [
+      t.kind === "film" ? "Film" : "Série",
+      t.year,
+      t.voteAverage > 0
+        ? `★ ${t.voteAverage.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`
+        : null,
+    ]
+      .filter(Boolean)
+      .join(" · "),
+  }));
+
+  // Dédoublonnage descendant (D14 §2) : toutes les vedettes du hero exclues des rails.
   const seen = new Set<string>();
-  if (hero) seen.add(`${hero.kind}-${hero.id}`);
+  for (const t of heroCandidates) seen.add(`${t.kind}-${t.id}`);
   const trendingRail = takeUnseen(trending?.titles, seen);
   const nowPlayingRail = takeUnseen(nowPlaying?.titles, seen);
   const seriesRail = takeUnseen(series?.titles, seen);
   const topRatedRail = takeUnseen(topRated?.titles, seen);
   const spotlightRail = takeUnseen(spotlight?.titles, seen);
 
-  // Métadonnées courtes du hero (D14 §2) : type · année · ★ note — chaque segment omis si absent.
-  const heroMeta = hero
-    ? [
-        hero.kind === "film" ? "Film" : "Série",
-        hero.year,
-        hero.voteAverage > 0
-          ? `★ ${hero.voteAverage.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}`
-          : null,
-      ]
-        .filter(Boolean)
-        .join(" · ")
-    : null;
-
   return (
     <>
-      {/* Hero — 1 titre unique, double CTA (D14 §2) */}
-      <section aria-label="À la une" className="relative">
-        <div className="relative aspect-[21/9] min-h-[320px] w-full overflow-hidden md:max-h-[560px]">
-          <Image
-            src={hero?.backdropUrl ?? "/media/interface/genre-science-fiction.jpg"}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div aria-hidden className="absolute inset-0" style={{ background: "var(--scrim-hero)" }} />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-8 md:px-6 md:pb-12">
-          <p className="text-sm font-medium text-brand">À la une cette semaine</p>
-          <h1 className="mt-1 max-w-xl text-3xl font-bold md:text-5xl">
-            {hero ? hero.title : "Découvrez. Choisissez. Regardez."}
-          </h1>
-          {heroMeta && <p className="mt-2 text-sm text-secondary">{heroMeta}</p>}
-          <p className="mt-2 max-w-lg text-sm text-secondary md:text-base">
-            {hero
-              ? hero.overview.length > 180
-                ? `${hero.overview.slice(0, 180).trimEnd()}…`
-                : hero.overview
-              : "Trouvez le bon film ou la bonne série en moins de deux minutes — et des classiques à regarder gratuitement."}
-          </p>
-          <div className="mt-5 flex gap-3">
-            {hero ? (
-              <>
-                <ButtonLink size="lg" href={hero.href}>
-                  Voir la fiche
-                </ButtonLink>
-                <ButtonLink size="lg" variant="secondary" href="/tendances">
-                  Explorer les tendances
-                </ButtonLink>
-              </>
-            ) : (
-              <>
-                <ButtonLink size="lg" href="/gratuit">▶ Regarder</ButtonLink>
-                <ButtonLink size="lg" variant="secondary" href="/decouvrir">Découvrir</ButtonLink>
-              </>
-            )}
+      {/* Hero (D14 §2, amendé « dynamique ») : rotation de titres si TMDB fournit des candidats, repli éditorial fixe sinon */}
+      {live ? (
+        <HeroCarousel slides={heroSlides} />
+      ) : (
+        <section aria-label="À la une" className="relative">
+          <div className="relative aspect-[21/9] min-h-[320px] w-full overflow-hidden md:max-h-[560px]">
+            <Image
+              src="/media/interface/genre-science-fiction.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div aria-hidden className="absolute inset-0" style={{ background: "var(--scrim-hero)" }} />
           </div>
-        </div>
-      </section>
+          <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-4 pb-8 md:px-6 md:pb-12">
+            <p className="text-sm font-medium text-brand">À la une cette semaine</p>
+            <h1 className="mt-1 max-w-xl text-3xl font-bold md:text-5xl">Découvrez. Choisissez. Regardez.</h1>
+            <p className="mt-2 max-w-lg text-sm text-secondary md:text-base">
+              Trouvez le bon film ou la bonne série en moins de deux minutes — et des classiques à regarder gratuitement.
+            </p>
+            <div className="mt-5 flex gap-3">
+              <ButtonLink size="lg" href="/gratuit">▶ Regarder</ButtonLink>
+              <ButtonLink size="lg" variant="secondary" href="/decouvrir">Découvrir</ButtonLink>
+            </div>
+          </div>
+        </section>
+      )}
 
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         {/* Chips d'intention (D14, assets B6 — audit A8) : « j'ai envie de… » */}
