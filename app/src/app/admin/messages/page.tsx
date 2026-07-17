@@ -1,25 +1,40 @@
 import type { Metadata } from "next";
-import { desc } from "drizzle-orm";
+import { desc, sql } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { setContactStatusAction } from "@/lib/admin/actions";
 import { Badge } from "@/components/ui/Badge";
+import { FilterChips } from "@/components/ui/FilterChips";
 
 export const metadata: Metadata = { title: "Messages" };
 export const dynamic = "force-dynamic";
 
 const TAKEDOWN = "Ayants droit / demande de retrait";
 const STATUS_LABELS: Record<string, string> = { new: "Nouveau", in_progress: "En cours", closed: "Traité" };
+const STATUSES = Object.keys(STATUS_LABELS);
 
-/** Messages de contact (D36) — takedown en tête de file (priorité D11). */
-export default async function AdminMessagesPage() {
-  const rows = await db()
-    .select()
-    .from(schema.contactMessages)
-    .orderBy(desc(schema.contactMessages.createdAt))
-    .limit(200);
+function first(raw: string | string[] | undefined): string {
+  return (Array.isArray(raw) ? raw[0] : raw) ?? "";
+}
+
+/** Messages de contact (D36) — onglets par statut (audit admin-5), takedown en tête de file (priorité D11). */
+export default async function AdminMessagesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ statut?: string | string[] }>;
+}) {
+  const statut = STATUSES.includes(first((await searchParams).statut)) ? first((await searchParams).statut) : "";
+
+  const client = db();
+  const [rows, counts] = await Promise.all([
+    client.select().from(schema.contactMessages).orderBy(desc(schema.contactMessages.createdAt)).limit(200),
+    client.select({ status: schema.contactMessages.status, n: sql<number>`count(*)::int` }).from(schema.contactMessages).groupBy(schema.contactMessages.status),
+  ]);
+  const countByStatus = new Map(counts.map((c) => [c.status, c.n]));
+  const total = counts.reduce((sum, c) => sum + c.n, 0);
+  const filtered = statut ? rows.filter((r) => r.status === statut) : rows;
 
   // Priorité takedown (D11), puis les nouveaux, puis le reste par date.
-  const sorted = [...rows].sort((a, b) => {
+  const sorted = [...filtered].sort((a, b) => {
     const at = a.motif === TAKEDOWN && a.status !== "closed" ? 0 : 1;
     const bt = b.motif === TAKEDOWN && b.status !== "closed" ? 0 : 1;
     if (at !== bt) return at - bt;
@@ -28,8 +43,22 @@ export default async function AdminMessagesPage() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold md:text-3xl">Messages ({rows.length})</h1>
+      <h1 className="text-2xl font-bold md:text-3xl">Messages ({sorted.length}{statut ? ` / ${total}` : ""})</h1>
       <p className="mt-1 text-sm text-secondary">Les demandes d&apos;ayants droit non traitées sont en tête (D11).</p>
+
+      <div className="mt-4">
+        <FilterChips
+          label="Statut"
+          options={[
+            { label: `Tous (${total})`, href: "/admin/messages", active: statut === "" },
+            ...STATUSES.map((s) => ({
+              label: `${STATUS_LABELS[s]} (${countByStatus.get(s) ?? 0})`,
+              href: `/admin/messages?statut=${s}`,
+              active: statut === s,
+            })),
+          ]}
+        />
+      </div>
 
       <ul className="mt-6 space-y-4">
         {sorted.map((message) => {
@@ -53,7 +82,13 @@ export default async function AdminMessagesPage() {
                   {takedown.url || "non précisé"} · qualité : {takedown.role || "non précisée"}
                 </p>
               )}
-              <div className="mt-3 flex gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
+                <a
+                  href={`mailto:${message.email}?subject=${encodeURIComponent(`Re: ${message.motif} — Ciné+`)}`}
+                  className="inline-flex h-9 items-center rounded-full bg-surface-overlay px-4 text-xs text-primary transition-colors duration-(--duration-fast) hover:bg-surface-interactive"
+                >
+                  ✉ Répondre par e-mail
+                </a>
                 {(["in_progress", "closed"] as const).map((next) => (
                   <form key={next} action={setContactStatusAction}>
                     <input type="hidden" name="messageId" value={message.id} />
@@ -70,9 +105,9 @@ export default async function AdminMessagesPage() {
             </li>
           );
         })}
-        {rows.length === 0 && (
+        {sorted.length === 0 && (
           <li className="rounded-(--radius-l) bg-surface-raised px-5 py-8 text-sm text-secondary">
-            Aucun message pour l&apos;instant.
+            {statut ? "Aucun message avec ce statut." : "Aucun message pour l'instant."}
           </li>
         )}
       </ul>
