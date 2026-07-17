@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { LibrarySync } from "@/components/library/LibrarySync";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { isAuthConfigured } from "@/lib/auth/config";
+import { siteBaseUrl } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -26,17 +27,35 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "http://localhost:3000",
-  ),
+  metadataBase: new URL(siteBaseUrl()),
   title: {
     default: "Ciné+ — Films et séries : découvrez, choisissez, regardez",
     template: "%s | Ciné+",
   },
   description:
     "Trouvez le bon film ou la bonne série en moins de deux minutes : catalogue complet, où regarder, bandes-annonces — et des classiques à regarder gratuitement.",
+};
+
+/** JSON-LD WebSite + Organization (audit transversal) — SearchAction vers /recherche. */
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "Ciné+",
+      url: siteBaseUrl(),
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${siteBaseUrl()}/recherche?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "Ciné+",
+      url: siteBaseUrl(),
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -52,6 +71,7 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
         <a
           href="#contenu"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand focus:px-4 focus:py-2 focus:text-on-brand"

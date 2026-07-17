@@ -3,8 +3,13 @@
  * metadataBase et tous les JSON-LD doivent passer par ici pour rester cohérents.
  */
 
+/** URL de base : APP_BASE_URL (explicite) > URL de production Vercel (déploiements/previews) > repli codé en dur. */
 export function siteBaseUrl(): string {
-  return (process.env.APP_BASE_URL ?? "https://cineplus-eight.vercel.app").replace(/\/$/, "");
+  const base =
+    process.env.APP_BASE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined) ??
+    "https://cineplus-eight.vercel.app";
+  return base.replace(/\/$/, "");
 }
 
 /** Transforme un chemin relatif (`/film/x-1`) en URL absolue pour JSON-LD/OG. */
