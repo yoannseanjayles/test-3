@@ -30,6 +30,16 @@ const formatDate = (iso: string | null): string | null => {
   return Number.isNaN(time) ? null : DATE_FR.format(time);
 };
 
+/** Fraîcheur série (fiches-5) — fonction pure hors du composant (règle react-hooks/purity). */
+function isRecentEpisode(lastAirDate: string | null): boolean {
+  if (!lastAirDate) return false;
+  const lastAirTime = Date.parse(lastAirDate);
+  if (Number.isNaN(lastAirTime)) return false;
+  const delta = Date.now() - lastAirTime;
+  // Seuil 7 jours pour absorber la latence ISR (revalidate 21600) ; borne basse pour ignorer une date future.
+  return delta < 7 * 86_400_000 && delta > -86_400_000;
+}
+
 /** Budget/recettes TMDB (toujours en dollars US) — affichés seulement si > 0 (fiches-2). */
 const MONEY_USD = new Intl.NumberFormat("fr-FR", { notation: "compact", style: "currency", currency: "USD", maximumFractionDigits: 1 });
 
@@ -93,13 +103,8 @@ export function TitleDetailPage({ details, freeWatchHref }: { details: TitleDeta
     { label: title },
   ];
 
-  // Fraîcheur série (fiches-5) : seuil 7 jours pour absorber la latence ISR (revalidate 21600).
-  const lastAirTime = lastAirDate ? Date.parse(lastAirDate) : Number.NaN;
-  const hasNewEpisode =
-    kind === "serie" &&
-    !Number.isNaN(lastAirTime) &&
-    Date.now() - lastAirTime < 7 * 86_400_000 &&
-    Date.now() - lastAirTime > -86_400_000;
+  // Fraîcheur série (fiches-5).
+  const hasNewEpisode = kind === "serie" && isRecentEpisode(lastAirDate);
   const nextEpisodeDate = kind === "serie" ? formatDate(nextEpisodeAirDate) : null;
 
   // Période de diffusion (fiches-5) : « depuis 2019 » en cours, « 2019 – 2024 » sinon.

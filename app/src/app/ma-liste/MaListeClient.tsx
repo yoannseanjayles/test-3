@@ -223,7 +223,7 @@ function HistoryTab({ entries }: { entries: LibraryEntry[] }) {
           onClick={clearAll}
           className="rounded-full bg-surface-raised px-4 py-1.5 text-sm text-secondary transition-colors hover:bg-surface-interactive hover:text-primary"
         >
-          Effacer tout l'historique
+          Effacer tout l&apos;historique
         </button>
       </div>
       {groups.map(([day, dayEntries]) => (

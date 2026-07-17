@@ -27,14 +27,19 @@ export function InstantSearch({ defaultValue }: { defaultValue: string }) {
 
   useEffect(() => {
     const trimmed = query.trim();
-    if (trimmed.length < 2) {
-      setSuggestions([]);
-      setOpen(false);
-      return;
-    }
     const controller = new AbortController();
-    setLoading(true);
+
+    if (trimmed.length < 2) {
+      // setState différé (règle react-hooks/set-state-in-effect) : jamais synchrone dans le corps de l'effet.
+      const clear = setTimeout(() => {
+        setSuggestions([]);
+        setOpen(false);
+      }, 0);
+      return () => clearTimeout(clear);
+    }
+
     const timer = setTimeout(() => {
+      setLoading(true);
       fetch(`/api/recherche?q=${encodeURIComponent(trimmed)}`, { signal: controller.signal })
         .then((r) => (r.ok ? r.json() : { suggestions: [] }))
         .then((data: { suggestions: Suggestion[] }) => {

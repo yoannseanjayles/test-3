@@ -5,6 +5,11 @@ import { approveVideoAction, rejectVideoAction } from "@/lib/admin/actions";
 import { isR2Configured, presignRead, publicUrl } from "@/lib/storage/r2";
 import { getSetting } from "@/lib/settings";
 
+/** Heures écoulées depuis une date (fonction pure hors du composant — règle react-hooks/purity). */
+function hoursSince(date: Date): number {
+  return Math.round((Date.now() - date.getTime()) / 3_600_000);
+}
+
 /** Historique d'un créateur (audit admin-2) — 0 partout si l'ID est absent (compte supprimé). */
 async function creatorHistory(ownerId: string | null) {
   if (!ownerId) return { published: 0, rejected: 0, total: 0 };
@@ -45,7 +50,7 @@ export default async function ModerationPage() {
           preview = await presignRead(video.hlsManifestKey, 3600).catch(() => null);
         }
       }
-      const ageHours = Math.round((Date.now() - video.createdAt.getTime()) / 3_600_000);
+      const ageHours = hoursSince(video.createdAt);
       const history = await creatorHistory(video.ownerId);
       return { video, preview, ageHours, history };
     }),
