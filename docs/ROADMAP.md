@@ -56,14 +56,22 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 | 6.1 Développement (4 lots) | [Socle données](phase-6/6.1-backend/lot-1-socle-donnees.md) · [Comptes & synchro](phase-6/6.1-backend/lot-2-comptes-synchro.md) · [Ingestion vidéo](phase-6/6.1-backend/lot-3-ingestion-video.md) · [**Back-office complet** (D36)](phase-6/6.1-backend/lot-4-back-office.md) — prêt-à-activer (variables Vercel) | D34, D35, D37, D38 |
 | 6.2 Architecture publicitaire | [Advertising Technical Specification](phase-6/6.2-advertising-technical-specification.md) — v1 régie directe, v2 VAST/TCF | D39 |
 
+### ✅ Phase 7 — Administration (terminée le 2026-07-16)
+
+| Étape | Livrable | Décisions |
+|---|---|---|
+| 7.0 Recherche | [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) | D40 |
+| 7.1 Développement (3 lots) | Lot 1 [Paramètres & anti-abus](phase-7/7.1-administration/lot-1-parametres-anti-abus.md) · Lot 2 [Mesure & revenus](phase-7/7.1-administration/lot-2-mesure-revenus.md) · Lot 3 [Notifications & opérations](phase-7/7.1-administration/lot-3-notifications-operations.md) | D41, D42, D44 |
+
+Complément transverse : [Audit de complétude](AUDIT-COMPLETUDE.md) adopté et en partie corrigé (D43).
+
 ## Phase en cours
 
-**Phase 7 — Administration** (recentrée D36 : compléments du back-office)
+**Amélioration continue du contenu et des fonctionnalités des pages** (hors numérotation de phase — complète le produit livré en Phases 5-7)
 
-| Étape | Livrable | Statut |
+| Lot | Contenu | Statut |
 |---|---|---|
-| 7.0 Recherche | [Best Practices Summary — Administration](phase-7/7.0-best-practices-administration.md) | ✅ Validé HITL (D40) |
-| 7.1 Développement | Lot 1 [Paramètres & anti-abus](phase-7/7.1-administration/lot-1-parametres-anti-abus.md) ✅ (D41) · Lot 2 [Mesure & revenus](phase-7/7.1-administration/lot-2-mesure-revenus.md) ✅ (D42) · Lot 3 [Notifications & opérations](phase-7/7.1-administration/lot-3-notifications-operations.md) ⏳ **en attente de validation (P42)** | En cours |
+| P44 | Découverte (rails, hub /decouvrir, /nouveautes, /tendances), fiches (crew, détails, épisodes, page Personne), grilles & recherche instantanée, lecture (raccourcis, /gratuit enrichi), compte (tri/stats, données locales, ?next=), support & SEO transverse, back-office (badges, filtres, CSV) | ⏳ **en attente de validation** |
 
 ## Phases à venir
 
@@ -77,6 +85,7 @@ Exigences transverses actées : **pub ON/OFF + pré-roll** (D6), **ingestion vid
 
 ## Prochaines étapes
 
-1. **Validation HITL du 7.1 Lot 3 (Notifications & opérations, P42)** ← nous sommes ici — clôture de la 7.1
-2. Activation des services (variables Vercel) : `DATABASE_URL` + `AUTH_SECRET` + `ADMIN_EMAILS` → comptes/synchro/back-office · clés R2 + GitHub → ingestion vidéo · `TMDB_ACCESS_TOKEN` → catalogue réel
-3. Phases 7 à 9 (7 recentrée : compléments du back-office) · médias restants (B7/B8/C2/logo) · risque R6 (marque) et H46 (juridique) à lever
+1. **Validation HITL du lot P44 (amélioration contenu & fonctionnalités)** ← nous sommes ici
+2. Activation des services (variables Vercel) : `DATABASE_URL` + `AUTH_SECRET` + `ADMIN_EMAILS` → comptes/synchro/back-office · clés R2 + GitHub → ingestion vidéo · `TMDB_ACCESS_TOKEN` → catalogue réel · vérification live (Lot C1 de l'audit)
+3. Reste de l'audit : lecteur avancé (sous-titres — B5), logo définitif (B6/R6), arbitrage juridique CMP (D2/H98), tests back-office (C5/E1), Lighthouse CI (E2)
+4. Phases 8-9 (Business Model Canvas, monétisation, analytics) · risque R6 (marque) et H46 (juridique) à lever
