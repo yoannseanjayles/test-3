@@ -1,0 +1,23 @@
+# Applique les migrations Drizzle en attente contre le DATABASE_URL réel du
+# runtime Vercel (via /api/diag/run-migrations). Utilise directement le
+# secret AUTH_SECRET du dépôt : aucune valeur sensible saisie à la main.
+name: Appliquer les migrations en direct
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL du site"
+        required: false
+        default: "https://cineplus-eight.vercel.app"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appel POST /api/diag/run-migrations
+        run: |
+          curl -sS -X POST "${{ inputs.url }}/api/diag/run-migrations" \
+            -H "Authorization: Bearer ${{ secrets.AUTH_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -w "\n\nHTTP %{http_code}\n"
