@@ -1,0 +1,29 @@
+# Appelle un endpoint de diagnostic protégé sur le site déployé (curl direct,
+# accès réseau complet contrairement à l'environnement de développement).
+name: Appeler un diagnostic en direct
+
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: "Chemin de l'endpoint à appeler (POST)"
+        required: true
+        default: "/api/diag/register-test"
+      auth_secret:
+        description: "Valeur du secret d'autorisation (header Bearer)"
+        required: true
+      url:
+        description: "URL du site"
+        required: false
+        default: "https://cineplus-eight.vercel.app"
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appel POST
+        run: |
+          curl -sS -X POST "${{ inputs.url }}${{ inputs.path }}" \
+            -H "Authorization: Bearer ${{ inputs.auth_secret }}" \
+            -H "Content-Type: application/json" \
+            -w "\n\nHTTP %{http_code}\n"
