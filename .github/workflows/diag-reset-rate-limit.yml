@@ -1,0 +1,22 @@
+# Ponctuel (bootstrap) : remet à zéro les compteurs anti-abus auth.register/
+# auth.login sur le site déployé. À retirer après usage.
+name: Réinitialiser les limites anti-abus
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL du site"
+        required: false
+        default: "https://cineplus-eight.vercel.app"
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Appel POST /api/diag/reset-rate-limit
+        run: |
+          curl -sS -X POST "${{ inputs.url }}/api/diag/reset-rate-limit" \
+            -H "Authorization: Bearer ${{ secrets.AUTH_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -w "\n\nHTTP %{http_code}\n"
