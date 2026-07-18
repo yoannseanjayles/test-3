@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
     // Affiches/backdrops/portraits TMDB (D5) — seul hôte d'images distant autorisé.
     remotePatterns: [{ protocol: "https", hostname: "image.tmdb.org", pathname: "/t/p/**" }],
   },
+  // Le migrateur Drizzle lit les fichiers SQL au runtime : non détectés par le
+  // traçage automatique (aucun `import` statique vers ./drizzle).
+  outputFileTracingIncludes: {
+    "/api/diag/run-migrations": ["./drizzle/**/*"],
+  },
   async headers() {
     return [
       {
