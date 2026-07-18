@@ -83,14 +83,33 @@ Sans elle, rien de tout ça n'est possible.
 
 **Ce bloc est le plus important.** Beaucoup d'autres blocs en dépendent.
 
+### Méthode recommandée : brancher Neon directement depuis Vercel
+
+Vercel sait créer la base de données Neon **pour vous**, sans quitter son propre site.
+C'est la façon la plus simple : pas de compte à créer à part, pas de code à copier-coller à la main.
+
+1. Dans Vercel, ouvrez le projet **cineplus**.
+2. Cliquez sur l'onglet **Storage** (Stockage), en haut.
+3. Cliquez sur **Create Database** (ou « Browse Marketplace » puis choisissez **Neon**).
+4. Suivez les instructions à l'écran : donnez un nom à la base, choisissez une région proche (Europe), validez.
+5. Vercel vous demande de confirmer le branchement au projet **cineplus** : acceptez.
+
+Vercel remplit alors la clé automatiquement. Il faut juste vérifier qu'elle porte le bon nom :
+
+1. Allez dans **Settings** → **Environment Variables**.
+2. Cherchez une ligne nommée exactement `DATABASE_URL`.
+3. Elle est là ? Parfait, passez à l'étape suivante (les migrations, plus bas).
+4. Vous ne voyez que `POSTGRES_URL` (sans `DATABASE_URL`) ? Dites-le-moi dans la conversation, je m'en occupe.
+
+### Méthode manuelle (si vous préférez, ou si l'intégration n'est pas disponible)
+
 1. Allez sur **neon.tech**.
 2. Créez un compte gratuit.
 3. Créez un nouveau projet (« New Project »). Donnez-lui un nom, par exemple « cineplus ».
 4. Sur la page du projet, cherchez le bouton **Connection string** (Chaîne de connexion).
 5. Copiez la chaîne de connexion. Elle ressemble à une longue adresse qui commence par `postgresql://`.
 6. Vérifiez qu'elle se termine bien par `?sslmode=require`. Si non, ajoutez-le à la fin.
-
-Collez-la dans Vercel :
+7. Collez-la vous-même dans Vercel :
 
 | Nom de la variable | Ce qu'on colle |
 |---|---|
