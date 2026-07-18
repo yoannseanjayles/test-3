@@ -1,11 +1,10 @@
 "use client";
 
-import { toggleFavorite, useLibrary, isInList } from "@/lib/library/store";
-import type { TitleKind } from "@/lib/tmdb/models";
+import { toggleFavorite, useLibrary, isInList, type LibraryKind } from "@/lib/library/store";
 
 export interface WatchlistTitle {
   id: number;
-  kind: TitleKind;
+  kind: LibraryKind;
   title: string;
   year: number | null;
   posterUrl: string | null;

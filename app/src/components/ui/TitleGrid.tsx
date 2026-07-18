@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TitleCard } from "./TitleCard";
 import type { Title } from "@/lib/tmdb/models";
+import { getFreeVideoByTmdbId } from "@/lib/free-catalog";
 
 /** Grille responsive d'affiches (pages catalogue/recherche — D19 grilles). */
 export function TitleGrid({ titles }: { titles: Title[] }) {
@@ -8,7 +9,14 @@ export function TitleGrid({ titles }: { titles: Title[] }) {
     <ul className="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {titles.map((t) => (
         <li key={`${t.kind}-${t.id}`} className="[&>a]:w-full">
-          <TitleCard href={t.href} title={t.title} year={t.year ?? undefined} posterUrl={t.posterUrl} />
+          <TitleCard
+            href={t.href}
+            title={t.title}
+            year={t.year ?? undefined}
+            posterUrl={t.posterUrl}
+            rating={t.voteAverage}
+            isFree={t.kind === "film" && Boolean(getFreeVideoByTmdbId(t.id))}
+          />
         </li>
       ))}
     </ul>

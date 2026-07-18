@@ -30,6 +30,8 @@ export const users = pgTable("users", {
   passwordHash: text("password_hash"),
   displayName: text("display_name"),
   role: userRoleEnum("role").notNull().default("user"),
+  /** Opt-out des échos e-mail de notifications (H108) — l'in-app reste toujours actif. */
+  emailOptOut: boolean("email_opt_out").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -143,6 +145,23 @@ export const events = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [index("events_name_idx").on(t.name, t.createdAt)],
+);
+
+// ── Notifications in-app (7.0 §5, lève H94) ───────────────────────────────────
+
+export const notifications = pgTable(
+  "notifications",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    type: text("type").notNull(), // video.published | video.rejected | video.ready_for_review | takedown.received | ops.quota_alert
+    payload: jsonb("payload").notNull().default({}),
+    readAt: timestamp("read_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("notifications_user_idx").on(t.userId, t.readAt, t.createdAt)],
 );
 
 // ── Anti-abus : fenêtres de rate limiting (7.0 §2, H88) ───────────────────────

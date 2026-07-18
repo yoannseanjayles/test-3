@@ -4,8 +4,12 @@ import { isTmdbConfigured, tmdbFetch } from "./client";
 import {
   movieToDetails,
   movieToTitle,
+  personToDetails,
+  seasonToEpisodes,
   tvToDetails,
   tvToTitle,
+  type EpisodeInfo,
+  type PersonDetails,
   type Title,
   type TitleDetails,
 } from "./models";
@@ -13,6 +17,8 @@ import {
   paginatedSchema,
   tmdbMovieDetailsSchema,
   tmdbMovieListItemSchema,
+  tmdbPersonSchema,
+  tmdbSeasonEpisodesSchema,
   tmdbTvDetailsSchema,
   tmdbTvListItemSchema,
 } from "./schemas";
@@ -67,11 +73,16 @@ async function fetchTvPage(path: string, params: Record<string, string | number 
   }
 }
 
-/** Tendances mixtes films+séries de la semaine (accueil, Découvrir). */
-export async function getTrending(page = 1): Promise<TitlePage> {
+/** Tendances films/séries — fenêtre jour ou semaine, tout ou par type (page /tendances D19 §2). */
+export async function getTrending(
+  page = 1,
+  window: "day" | "week" = "week",
+  media: "all" | "movie" | "tv" = "all",
+): Promise<TitlePage> {
+  const path = `/trending/${media}/${window}`;
   try {
     const data = paginatedSchema(tmdbMovieListItemSchema.or(tmdbTvListItemSchema)).parse(
-      await tmdbFetch("/trending/all/week", { page }, 1800),
+      await tmdbFetch(path, { page }, window === "day" ? 3600 : 1800),
     );
     return {
       titles: data.results.map((item) => ("title" in item ? movieToTitle(item) : tvToTitle(item))),
@@ -80,7 +91,7 @@ export async function getTrending(page = 1): Promise<TitlePage> {
       totalResults: data.total_results,
     };
   } catch (error) {
-    console.error("[tmdb] /trending/all/week indisponible :", error);
+    console.error(`[tmdb] ${path} indisponible :`, error);
     return EMPTY_PAGE;
   }
 }
@@ -88,13 +99,19 @@ export async function getTrending(page = 1): Promise<TitlePage> {
 export const getPopularMovies = (page = 1) => fetchMoviePage("/movie/popular", { page });
 export const getTopRatedMovies = (page = 1) => fetchMoviePage("/movie/top_rated", { page });
 export const getNowPlayingMovies = (page = 1) => fetchMoviePage("/movie/now_playing", { page, region: "FR" }, 1800);
+/** Sorties à venir en France (page /nouveautes, onglet Prochainement). */
+export const getUpcomingMovies = (page = 1) => fetchMoviePage("/movie/upcoming", { page, region: "FR" }, 21600);
 export const getPopularSeries = (page = 1) => fetchTvPage("/tv/popular", { page });
 export const getTopRatedSeries = (page = 1) => fetchTvPage("/tv/top_rated", { page });
 
 export async function getMovieDetails(id: number): Promise<TitleDetails | null> {
   try {
     const data = tmdbMovieDetailsSchema.parse(
-      await tmdbFetch(`/movie/${id}`, { append_to_response: "credits,videos,similar" }, 21600),
+      await tmdbFetch(
+        `/movie/${id}`,
+        { append_to_response: "credits,videos,similar,recommendations,watch/providers,release_dates" },
+        21600,
+      ),
     );
     return movieToDetails(data);
   } catch (error) {
@@ -106,7 +123,11 @@ export async function getMovieDetails(id: number): Promise<TitleDetails | null> 
 export async function getSeriesDetails(id: number): Promise<TitleDetails | null> {
   try {
     const data = tmdbTvDetailsSchema.parse(
-      await tmdbFetch(`/tv/${id}`, { append_to_response: "credits,videos,similar" }, 21600),
+      await tmdbFetch(
+        `/tv/${id}`,
+        { append_to_response: "credits,videos,similar,recommendations,watch/providers,content_ratings" },
+        21600,
+      ),
     );
     return tvToDetails(data);
   } catch (error) {
@@ -115,7 +136,78 @@ export async function getSeriesDetails(id: number): Promise<TitleDetails | null>
   }
 }
 
-/** Recherche multi (films + séries uniquement — les personnes arrivent avec la page Personne). */
+/** Épisodes d'une saison, spoiler-safe (D16) — liste vide en cas d'indisponibilité. */
+export async function getSeasonEpisodes(seriesId: number, seasonNumber: number): Promise<EpisodeInfo[]> {
+  try {
+    const data = tmdbSeasonEpisodesSchema.parse(
+      await tmdbFetch(`/tv/${seriesId}/season/${seasonNumber}`, {}, 21600),
+    );
+    return seasonToEpisodes(data);
+  } catch (error) {
+    console.error(`[tmdb] /tv/${seriesId}/season/${seasonNumber} indisponible :`, error);
+    return [];
+  }
+}
+
+/** Fiche Personne + filmographie combinée (page /personne, audit A5). */
+export async function getPersonDetails(id: number): Promise<PersonDetails | null> {
+  try {
+    const data = tmdbPersonSchema.parse(
+      await tmdbFetch(`/person/${id}`, { append_to_response: "combined_credits" }, 21600),
+    );
+    return personToDetails(data);
+  } catch (error) {
+    console.error(`[tmdb] /person/${id} indisponible :`, error);
+    return null;
+  }
+}
+
+/** Tri des grilles catalogue (D19 facettes) — libellés stables utilisés dans les URLs `?tri=`. */
+export type CatalogSort = "popularite" | "note" | "recent";
+
+export interface DiscoverOptions {
+  genreId?: number;
+  /** Décennie de sortie (ex. 1990 → 1990-1999). */
+  decade?: number;
+  /** Note moyenne minimale (0-10). */
+  minRating?: number;
+  sort?: CatalogSort;
+  page?: number;
+}
+
+function discoverParams(
+  { genreId, decade, minRating, sort = "popularite", page = 1 }: DiscoverOptions,
+  dateField: "primary_release_date" | "first_air_date",
+): Record<string, string | number | undefined> {
+  const sortBy = { popularite: "popularity.desc", note: "vote_average.desc", recent: `${dateField}.desc` }[sort];
+  // Garde-fous qualité : une note moyenne n'a de sens qu'avec assez de votes,
+  // et « récent » sans borne haute remonterait des sorties non advenues.
+  const today = new Date().toISOString().slice(0, 10);
+  return {
+    page,
+    sort_by: sortBy,
+    with_genres: genreId,
+    "vote_count.gte": sort === "note" ? 300 : sort === "recent" ? 50 : undefined,
+    "vote_average.gte": minRating,
+    [`${dateField}.gte`]: decade ? `${decade}-01-01` : undefined,
+    [`${dateField}.lte`]: decade ? `${decade + 9}-12-31` : sort === "recent" ? today : undefined,
+  };
+}
+
+/** Grille films paramétrable (genre, décennie, note min, tri) — D19 facettes. */
+export const discoverMovies = (options: DiscoverOptions = {}) =>
+  fetchMoviePage("/discover/movie", discoverParams(options, "primary_release_date"));
+
+/** Grille séries paramétrable — mêmes facettes que les films. */
+export const discoverSeries = (options: DiscoverOptions = {}) =>
+  fetchTvPage("/discover/tv", discoverParams(options, "first_air_date"));
+
+/** Grille par genre (D19 facettes) — discover trié par popularité. */
+export const getMoviesByGenre = (genreId: number, page = 1) => discoverMovies({ genreId, page });
+export const getSeriesByGenre = (genreId: number, page = 1) => discoverSeries({ genreId, page });
+
+/** Recherche multi (films + séries uniquement — les personnes ont leur propre page). */
+
 export async function searchTitles(query: string, page = 1): Promise<TitlePage> {
   const q = query.trim();
   if (!q) return EMPTY_PAGE;

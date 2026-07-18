@@ -6,6 +6,7 @@ import { z } from "zod";
 import { db, schema } from "@/lib/db";
 import { invalidateConfigCache } from "@/lib/ads/flags";
 import { invalidateSettingsCache, SETTINGS_REGISTRY, type SettingKey } from "@/lib/settings";
+import { notify } from "@/lib/notifications";
 import { requireAdmin } from "./guard";
 
 /**
@@ -30,11 +31,13 @@ function refreshCatalog() {
 export async function approveVideoAction(formData: FormData): Promise<void> {
   const admin = await requireAdmin();
   const videoId = uuid.parse(formData.get("videoId"));
-  await db()
+  const [video] = await db()
     .update(schema.videos)
     .set({ status: "published", publishedAt: new Date() })
-    .where(eq(schema.videos.id, videoId));
+    .where(eq(schema.videos.id, videoId))
+    .returning();
   await logModeration(videoId, admin.id, "approve");
+  if (video?.ownerId) await notify(video.ownerId, "video.published", { title: video.title });
   refreshCatalog();
 }
 
@@ -43,8 +46,13 @@ export async function rejectVideoAction(formData: FormData): Promise<void> {
   const admin = await requireAdmin();
   const videoId = uuid.parse(formData.get("videoId"));
   const reason = z.string().trim().min(3, "Motif obligatoire").max(1000).parse(formData.get("reason"));
-  await db().update(schema.videos).set({ status: "rejected" }).where(eq(schema.videos.id, videoId));
+  const [video] = await db()
+    .update(schema.videos)
+    .set({ status: "rejected" })
+    .where(eq(schema.videos.id, videoId))
+    .returning();
   await logModeration(videoId, admin.id, "reject", reason);
+  if (video?.ownerId) await notify(video.ownerId, "video.rejected", { title: video.title, reason });
   refreshCatalog();
 }
 
@@ -138,6 +146,20 @@ export async function setContactStatusAction(formData: FormData): Promise<void> 
   const status = z.enum(["new", "in_progress", "closed"]).parse(formData.get("status"));
   await db().update(schema.contactMessages).set({ status }).where(eq(schema.contactMessages.id, id));
   revalidatePath("/admin/messages");
+}
+
+/**
+ * Suppression de compte RGPD (7.0 §6) : cascade sur listes/notifications (FK),
+ * les vidéos publiées restent (licence de diffusion acquise) mais sont
+ * anonymisées (`owner_id` → null via FK set null). Jamais soi-même.
+ */
+export async function deleteUserAction(formData: FormData): Promise<void> {
+  const admin = await requireAdmin();
+  const userId = uuid.parse(formData.get("userId"));
+  if (userId === admin.id) return;
+  if (formData.get("confirm") !== "SUPPRIMER") return; // confirmation explicite (audit D3)
+  await db().delete(schema.users).where(eq(schema.users.id, userId));
+  revalidatePath("/admin/utilisateurs");
 }
 
 /** Promotion/rétrogradation d'un utilisateur (jamais soi-même — garde-fou verrouillage). */

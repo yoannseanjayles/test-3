@@ -10,12 +10,23 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
+function safeNext(raw: string | undefined): string | undefined {
+  if (raw && raw.startsWith("/") && !raw.startsWith("//") && !raw.startsWith("/api")) return raw;
+  return undefined;
+}
+
 /**
  * Connexion (D19 Auth) — formulaire réel dès que base + AUTH_SECRET sont
  * configurés (6.1 Lot 2) ; état d'annonce honnête sinon (H77).
  */
-export default function ConnexionPage() {
+export default async function ConnexionPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string | string[] }>;
+}) {
   const active = isAuthConfigured();
+  const nextParam = (await searchParams).next;
+  const next = safeNext(Array.isArray(nextParam) ? nextParam[0] : nextParam);
 
   return (
     <div className="mx-auto flex max-w-md flex-col px-4 py-16 md:px-6">
@@ -26,10 +37,10 @@ export default function ConnexionPage() {
           <p className="mt-3 leading-relaxed text-secondary">
             Retrouvez votre liste et votre progression sur tous vos écrans.
           </p>
-          <AuthForm mode="login" />
+          <AuthForm mode="login" next={next} />
           <p className="mt-8 text-sm text-secondary">
             Pas encore de compte ?{" "}
-            <Link href="/inscription" className="text-link underline hover:text-brand">
+            <Link href={next ? `/inscription?next=${encodeURIComponent(next)}` : "/inscription"} className="text-link underline hover:text-brand">
               Créer un compte gratuit
             </Link>
           </p>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { HeaderAuth } from "@/components/auth/HeaderAuth";
+import { SearchShortcut } from "./SearchShortcut";
 
 /** Navigation globale desktop — 6 entrées (D10 §1). En mobile, la BottomNav prend le relais. */
 const NAV = [
@@ -15,6 +16,7 @@ const NAV = [
 export function Header({ authEnabled }: { authEnabled: boolean }) {
   return (
     <header className="sticky top-0 z-100 border-b border-subtle bg-surface-base/85 backdrop-blur-md">
+      <SearchShortcut />
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-6 px-4 md:h-16 md:px-6">
         <Link href="/" aria-label="Ciné+ — Accueil" className="shrink-0">
           <Logo />
@@ -46,9 +48,7 @@ export function Header({ authEnabled }: { authEnabled: boolean }) {
               <path d="m20 20-3.5-3.5" />
             </svg>
           </Link>
-          <span className="hidden md:block">
-            <HeaderAuth enabled={authEnabled} />
-          </span>
+          <HeaderAuth enabled={authEnabled} />
         </div>
       </div>
     </header>

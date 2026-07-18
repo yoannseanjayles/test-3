@@ -4,6 +4,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { isUgcUploadEnabled } from "@/lib/ads/flags";
 import { isAuthConfigured } from "@/lib/auth/config";
 import { UploadForm } from "@/components/studio/UploadForm";
+import { getSetting } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Studio",
@@ -40,6 +41,11 @@ const RULES = [
 export default async function StudioPage() {
   const open = await isUgcUploadEnabled();
   const authEnabled = isAuthConfigured();
+  const [quota, maxMb, slaHours] = await Promise.all([
+    getSetting("ugc.quota.videos_per_user"),
+    getSetting("ugc.upload.max_mb"),
+    getSetting("moderation.sla_hours"),
+  ]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 md:px-6">
@@ -47,6 +53,19 @@ export default async function StudioPage() {
       <p className="mt-1 max-w-2xl text-sm text-secondary">
         L&apos;espace des créateurs : publiez vos vidéos, suivez leur modération et leur audience.
       </p>
+
+      {/* Aide contextuelle chiffrée (audit compte-5) — valeurs par défaut, modifiables en back-office */}
+      <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 rounded-(--radius-m) bg-surface-raised px-5 py-3 text-sm text-secondary">
+        <span>
+          Quota : <strong className="text-primary">{quota}</strong> vidéo{quota > 1 ? "s" : ""} / créateur
+        </span>
+        <span>
+          Taille max : <strong className="text-primary">{(maxMb / 1024).toFixed(maxMb % 1024 === 0 ? 0 : 1)} Go</strong>
+        </span>
+        <span>
+          Délai de modération visé : <strong className="text-primary">{slaHours} h</strong>
+        </span>
+      </div>
 
       {open ? (
         <section aria-label="Déposer une vidéo" className="mt-8 rounded-(--radius-l) bg-surface-raised p-6">

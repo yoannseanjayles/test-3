@@ -1,0 +1,30 @@
+# Vérification en direct de l'état des services (aucun secret nécessaire) —
+# utile quand l'environnement de développement ne peut pas atteindre le site
+# lui-même (proxy réseau restreint) ; complète le runbook OPERATIONS.md.
+name: Vérifier l'état des services
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "URL du site à vérifier"
+        required: false
+        default: "https://cineplus-eight.vercel.app"
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: /api/health
+        run: |
+          echo "── /api/health ──"
+          curl -sS "${{ inputs.url }}/api/health" | tee /tmp/health.json
+          echo
+      - name: /connexion — comptes actifs ?
+        run: |
+          echo "── /connexion ──"
+          if curl -sS "${{ inputs.url }}/connexion" | grep -q "arrivent très bientôt"; then
+            echo "AUTH : pas encore actif (AUTH_SECRET manquant ou redéploiement pas encore fait)"
+          else
+            echo "AUTH : actif (formulaire de connexion réel détecté)"
+          fi

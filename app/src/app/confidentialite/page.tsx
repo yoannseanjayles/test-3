@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalPage } from "@/components/legal/LegalPage";
+import { isAuthConfigured } from "@/lib/auth/config";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
@@ -7,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function ConfidentialitePage() {
+  const authEnabled = isAuthConfigured();
   return (
     <LegalPage
       title="Politique de confidentialité"
@@ -66,14 +69,26 @@ export default function ConfidentialitePage() {
         {
           id: "droits",
           title: "Vos droits (RGPD)",
-          plain: "Accès, rectification, effacement, portabilité, opposition — un message suffit.",
+          plain: "Accès, rectification, effacement, portabilité, opposition — en libre-service dans Paramètres.",
           body: (
             <p>
               Vous disposez des droits d&apos;accès, de rectification, d&apos;effacement, de portabilité,
-              de limitation et d&apos;opposition. Exercez-les via la page Contact (motif « Données
-              personnelles » / « Autre ») ; réponse sous 30 jours. Avec les comptes, des boutons
-              d&apos;export et de suppression directs seront disponibles dans les paramètres. Vous pouvez
-              saisir la CNIL en cas de désaccord persistant.
+              de limitation et d&apos;opposition.{" "}
+              {authEnabled ? (
+                <>
+                  Exportez toutes vos données ou supprimez votre compte directement depuis{" "}
+                  <Link href="/parametres" className="underline hover:text-brand">Paramètres</Link> — sans
+                  attendre de réponse. Pour tout autre exercice de vos droits (rectification, opposition),
+                  passez par la page Contact ; réponse sous 30 jours.
+                </>
+              ) : (
+                <>
+                  Exercez-les via la page Contact (motif « Données personnelles » / « Autre ») ; réponse
+                  sous 30 jours. Sans compte, vos données sont locales : la page Paramètres permet déjà
+                  d&apos;exporter ou d&apos;effacer les données de cet appareil.
+                </>
+              )}{" "}
+              Vous pouvez saisir la CNIL en cas de désaccord persistant.
             </p>
           ),
         },

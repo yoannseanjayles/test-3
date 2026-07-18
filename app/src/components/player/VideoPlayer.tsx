@@ -31,17 +31,18 @@ type Phase = "intro" | "preroll" | "playing" | "ended" | "error";
 const PREROLL_SECONDS = 15;
 const PREROLL_SKIP_AFTER = 5;
 
-function prerollAlreadyServed(slugKey: string): boolean {
+/** Capping D17 : nombre de pré-rolls servis pour ce titre dans la session (plafond paramétrable — audit A4). */
+function prerollServedCount(slugKey: string): number {
   try {
-    return window.sessionStorage.getItem(`cineplus.preroll.${slugKey}`) === "1";
+    return Number(window.sessionStorage.getItem(`cineplus.preroll.${slugKey}`) ?? "0") || 0;
   } catch {
-    return true; // stockage bloqué → on ne sert pas de pub plutôt que d'en servir trop
+    return Number.MAX_SAFE_INTEGER; // stockage bloqué → on ne sert pas de pub plutôt que d'en servir trop
   }
 }
 
 function rememberPreroll(slugKey: string) {
   try {
-    window.sessionStorage.setItem(`cineplus.preroll.${slugKey}`, "1");
+    window.sessionStorage.setItem(`cineplus.preroll.${slugKey}`, String(prerollServedCount(slugKey) + 1));
   } catch {
     /* sans stockage, tant pis pour le capping de cette session */
   }
@@ -50,20 +51,62 @@ function rememberPreroll(slugKey: string) {
 const formatTime = (seconds: number) =>
   `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
 
+/** Vitesses proposées (lecture-1) — 1× reste la valeur par défaut. */
+const SPEED_OPTIONS = [0.75, 1, 1.25, 1.5] as const;
+const SEEK_SECONDS = 10;
+const PLAYER_PREFS_KEY = "cineplus.player.v1";
+
+interface PlayerPrefs {
+  volume: number;
+  rate: number;
+}
+
+/** Préférences lecteur (volume, vitesse) mémorisées entre les lectures (lecture-1). */
+function readPlayerPrefs(): PlayerPrefs {
+  try {
+    const raw = window.localStorage.getItem(PLAYER_PREFS_KEY);
+    const parsed = raw ? (JSON.parse(raw) as Partial<PlayerPrefs>) : null;
+    const volume = typeof parsed?.volume === "number" && parsed.volume >= 0 && parsed.volume <= 1 ? parsed.volume : 1;
+    const rate = typeof parsed?.rate === "number" && parsed.rate > 0 ? parsed.rate : 1;
+    return { volume, rate };
+  } catch {
+    return { volume: 1, rate: 1 };
+  }
+}
+
+function writePlayerPrefs(prefs: PlayerPrefs) {
+  try {
+    window.localStorage.setItem(PLAYER_PREFS_KEY, JSON.stringify(prefs));
+  } catch {
+    /* stockage bloqué : les préférences ne valent que pour cette lecture */
+  }
+}
+
+/** Un champ de saisie a le focus : les raccourcis clavier du lecteur ne doivent pas les capturer. */
+function isTypingTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT" || target.isContentEditable;
+}
+
 export function VideoPlayer({
   video,
   prerollEnabled,
+  prerollCap = 1,
   suggestions,
 }: {
   video: PlayableVideo;
   prerollEnabled: boolean;
+  /** Plafond de pré-rolls par titre et par session (paramètre back-office, 0 = aucun). */
+  prerollCap?: number;
   suggestions: { href: string; title: string }[];
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<{ destroy: () => void } | null>(null);
   const lastBeatRef = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<Phase>("intro");
   const [prerollLeft, setPrerollLeft] = useState(PREROLL_SECONDS);
+  const [playbackRate, setPlaybackRate] = useState(1);
 
   const slugKey = `${video.entry.kind}-${video.entry.id}`;
 
@@ -136,6 +179,11 @@ export function VideoPlayer({
       if (fromSeconds) {
         el.currentTime = fromSeconds;
       }
+      // Préférences mémorisées (volume, vitesse) — réappliquées à chaque lancement (lecture-1).
+      const prefs = readPlayerPrefs();
+      el.volume = prefs.volume;
+      el.playbackRate = prefs.rate;
+      setPlaybackRate(prefs.rate);
       el.play().catch(() => {
         /* lecture bloquée par le navigateur : l'utilisateur relancera via les contrôles */
       });
@@ -145,7 +193,7 @@ export function VideoPlayer({
 
   const launch = useCallback(
     (fromSeconds: number | null) => {
-      const wantPreroll = prerollEnabled && fromSeconds === null && !prerollAlreadyServed(slugKey);
+      const wantPreroll = prerollEnabled && prerollCap > 0 && fromSeconds === null && prerollServedCount(slugKey) < prerollCap;
       if (wantPreroll) {
         rememberPreroll(slugKey);
         setPrerollLeft(PREROLL_SECONDS);
@@ -154,7 +202,7 @@ export function VideoPlayer({
         void startContent(fromSeconds);
       }
     },
-    [prerollEnabled, slugKey, startContent],
+    [prerollEnabled, prerollCap, slugKey, startContent],
   );
 
   // Compte à rebours du pré-roll (placeholder maison — VAST réel en 6.2).
@@ -182,8 +230,86 @@ export function VideoPlayer({
     setPhase("ended");
   };
 
+  // ± 10 s (bouton et raccourcis ← →, lecture-1).
+  const seek = useCallback((delta: number) => {
+    const el = videoRef.current;
+    if (!el) return;
+    const max = el.duration || el.currentTime + Math.abs(delta);
+    el.currentTime = Math.min(Math.max(0, el.currentTime + delta), max);
+  }, []);
+
+  const onRateChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const rate = Number(event.target.value) || 1;
+    const el = videoRef.current;
+    if (el) el.playbackRate = rate;
+    setPlaybackRate(rate);
+    writePlayerPrefs({ volume: el?.volume ?? 1, rate });
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    if (document.fullscreenElement) {
+      void document.exitFullscreen();
+    } else {
+      void containerRef.current?.requestFullscreen();
+    }
+  }, []);
+
+  // Raccourcis clavier — actifs uniquement en lecture, jamais dans un champ (lecture-1).
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (phase !== "playing" || isTypingTarget(event.target)) return;
+      const el = videoRef.current;
+      if (!el) return;
+      switch (event.key) {
+        case " ":
+        case "k":
+        case "K":
+          event.preventDefault();
+          if (el.paused) el.play().catch(() => {});
+          else el.pause();
+          break;
+        case "ArrowLeft":
+          event.preventDefault();
+          seek(-SEEK_SECONDS);
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          seek(SEEK_SECONDS);
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          el.volume = Math.min(1, el.volume + 0.1);
+          writePlayerPrefs({ volume: el.volume, rate: el.playbackRate });
+          break;
+        case "ArrowDown":
+          event.preventDefault();
+          el.volume = Math.max(0, el.volume - 0.1);
+          writePlayerPrefs({ volume: el.volume, rate: el.playbackRate });
+          break;
+        case "m":
+        case "M":
+          event.preventDefault();
+          el.muted = !el.muted;
+          break;
+        case "f":
+        case "F":
+          event.preventDefault();
+          toggleFullscreen();
+          break;
+        default:
+          break;
+      }
+    },
+    [phase, seek, toggleFullscreen],
+  );
+
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-(--radius-l) bg-black">
+    <div
+      ref={containerRef}
+      className="relative aspect-video w-full overflow-hidden rounded-(--radius-l) bg-black"
+      onKeyDown={onKeyDown}
+      tabIndex={-1}
+    >
       <video
         ref={videoRef}
         className="h-full w-full"
@@ -195,6 +321,42 @@ export function VideoPlayer({
         onError={() => phase === "playing" && setPhase("error")}
         aria-label={video.entry.title}
       />
+
+      {/* Barre de contrôles supplémentaire (lecture-1) : le natif reste, ceci s'ajoute au-dessus */}
+      {phase === "playing" && (
+        <div className="absolute inset-x-0 bottom-14 flex items-center justify-center gap-2 px-3 md:bottom-16">
+          <button
+            type="button"
+            onClick={() => seek(-SEEK_SECONDS)}
+            aria-label="Reculer de 10 secondes"
+            className="rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+          >
+            « 10 s
+          </button>
+          <button
+            type="button"
+            onClick={() => seek(SEEK_SECONDS)}
+            aria-label="Avancer de 10 secondes"
+            className="rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+          >
+            10 s »
+          </button>
+          <label className="flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
+            <span className="sr-only">Vitesse de lecture</span>
+            <select
+              value={playbackRate}
+              onChange={onRateChange}
+              className="bg-transparent text-xs font-medium text-white focus:outline-none"
+            >
+              {SPEED_OPTIONS.map((rate) => (
+                <option key={rate} value={rate} className="text-black">
+                  {rate}×
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      )}
 
       {/* Écran d'intro : lancer / reprendre (D17) */}
       {phase === "intro" && (

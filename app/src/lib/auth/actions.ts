@@ -17,6 +17,13 @@ export interface AuthFormState {
   error?: string;
 }
 
+/** Redirection post-connexion validée (compte-7) : chemin interne uniquement, jamais externe. */
+function safeNext(raw: FormDataEntryValue | null): string {
+  const value = typeof raw === "string" ? raw : "";
+  if (value.startsWith("/") && !value.startsWith("//") && !value.startsWith("/api")) return value;
+  return "/ma-liste";
+}
+
 const registerSchema = z.object({
   email: z.string().trim().toLowerCase().pipe(z.email("Adresse e-mail invalide.")),
   password: z.string().min(8, "8 caractères minimum.").max(128, "128 caractères maximum."),
@@ -54,7 +61,7 @@ export async function registerAction(_prev: AuthFormState, formData: FormData): 
     return { error: "Impossible de créer un compte avec cette adresse." };
   }
 
-  await signIn("credentials", { email, password, redirectTo: "/ma-liste" });
+  await signIn("credentials", { email, password, redirectTo: safeNext(formData.get("next")) });
   return {};
 }
 
@@ -67,7 +74,7 @@ export async function loginAction(_prev: AuthFormState, formData: FormData): Pro
     await signIn("credentials", {
       email: String(formData.get("email") ?? "").trim().toLowerCase(),
       password: String(formData.get("password") ?? ""),
-      redirectTo: "/ma-liste",
+      redirectTo: safeNext(formData.get("next")),
     });
     return {};
   } catch (error) {

@@ -212,7 +212,20 @@ export function UploadForm({ authEnabled }: { authEnabled: boolean }) {
           <ul className="mt-3 divide-y divide-white/5 rounded-(--radius-l) bg-surface-overlay">
             {mine.map((v) => (
               <li key={v.id} className="flex items-center justify-between gap-4 px-4 py-3">
-                <span className="truncate text-sm">{v.title}</span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm">
+                    {v.status === "published" ? (
+                      <Link href={`/regarder/${v.slug}`} className="underline hover:text-brand">
+                        {v.title}
+                      </Link>
+                    ) : (
+                      v.title
+                    )}
+                  </p>
+                  <p className="text-xs text-secondary">
+                    Déposée le {new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(v.createdAt))}
+                  </p>
+                </div>
                 <span className="shrink-0 rounded-full bg-surface-raised px-3 py-1 text-xs text-secondary">
                   {STATUS_LABELS[v.status] ?? v.status}
                 </span>

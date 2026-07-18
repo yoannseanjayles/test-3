@@ -1,9 +1,29 @@
 import type { Metadata } from "next";
-import { asc, eq } from "drizzle-orm";
+import { asc, count, eq } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { approveVideoAction, rejectVideoAction } from "@/lib/admin/actions";
 import { isR2Configured, presignRead, publicUrl } from "@/lib/storage/r2";
 import { getSetting } from "@/lib/settings";
+
+/** Heures écoulées depuis une date (fonction pure hors du composant — règle react-hooks/purity). */
+function hoursSince(date: Date): number {
+  return Math.round((Date.now() - date.getTime()) / 3_600_000);
+}
+
+/** Historique d'un créateur (audit admin-2) — 0 partout si l'ID est absent (compte supprimé). */
+async function creatorHistory(ownerId: string | null) {
+  if (!ownerId) return { published: 0, rejected: 0, total: 0 };
+  const client = db();
+  const rows = await client
+    .select({ status: schema.videos.status, n: count() })
+    .from(schema.videos)
+    .where(eq(schema.videos.ownerId, ownerId))
+    .groupBy(schema.videos.status);
+  const published = rows.find((r) => r.status === "published")?.n ?? 0;
+  const rejected = rows.find((r) => r.status === "rejected")?.n ?? 0;
+  const total = rows.reduce((sum, r) => sum + r.n, 0);
+  return { published, rejected, total };
+}
 
 export const metadata: Metadata = { title: "Modération" };
 export const dynamic = "force-dynamic";
@@ -30,7 +50,9 @@ export default async function ModerationPage() {
           preview = await presignRead(video.hlsManifestKey, 3600).catch(() => null);
         }
       }
-      return { video, preview };
+      const ageHours = hoursSince(video.createdAt);
+      const history = await creatorHistory(video.ownerId);
+      return { video, preview, ageHours, history };
     }),
   );
 
@@ -44,7 +66,9 @@ export default async function ModerationPage() {
       </p>
 
       <ul className="mt-6 space-y-5">
-        {withPreview.map(({ video, preview }) => (
+        {withPreview.map(({ video, preview, ageHours, history }) => {
+          const overdue = ageHours > slaHours;
+          return (
           <li key={video.id} className="rounded-(--radius-l) bg-surface-raised p-5">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h2 className="text-lg font-bold">{video.title}</h2>
@@ -54,6 +78,14 @@ export default async function ModerationPage() {
                 {video.licence}
               </p>
             </div>
+            <p className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
+              <span className={`rounded-full px-2 py-0.5 font-medium ${overdue ? "bg-red-500/20 text-red-300" : "bg-surface-overlay text-secondary"}`}>
+                {overdue ? `SLA dépassé — en attente depuis ${ageHours} h (cible ${slaHours} h)` : `En attente depuis ${ageHours} h`}
+              </span>
+              <span className="text-secondary">
+                Créateur : {history.total > 0 ? `${history.published} publiée${history.published > 1 ? "s" : ""}, ${history.rejected} refusée${history.rejected > 1 ? "s" : ""} précédemment` : "premier dépôt"}
+              </span>
+            </p>
             {video.overview && <p className="mt-2 text-sm text-secondary">{video.overview}</p>}
             <p className="mt-3 rounded-(--radius-m) bg-surface-overlay px-3 py-2 text-xs leading-relaxed text-secondary">
               <strong className="text-primary">Déclaration de droits :</strong> {video.rightsDeclaration}
@@ -99,7 +131,8 @@ export default async function ModerationPage() {
               </form>
             </div>
           </li>
-        ))}
+          );
+        })}
       </ul>
     </>
   );

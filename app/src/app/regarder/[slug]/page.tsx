@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VideoPlayer } from "@/components/player/VideoPlayer";
+import { ShareButton } from "@/components/player/ShareButton";
 import { Badge } from "@/components/ui/Badge";
+import { WatchlistButton } from "@/components/library/WatchlistButton";
 import { FREE_CATALOG, getFreeVideoBySlug, watchHref } from "@/lib/free-catalog";
 import { isAdPlacementEnabled } from "@/lib/ads/flags";
+import { getSetting } from "@/lib/settings";
 import { getPublishedVideoBySlug } from "@/lib/videos/published";
+import { titleHref } from "@/lib/tmdb/models";
+import { absoluteUrl } from "@/lib/site";
 
 /**
  * Watch (D17) — `/regarder/{slug}` : lecteur + fiche allégée, pré-roll = seule
@@ -33,6 +38,8 @@ interface Watchable {
   genre: string | null;
   hls?: string;
   mp4?: string;
+  /** Pont vers la fiche TMDB complète (audit A1/lecture-6) — absent pour les vidéos communauté. */
+  tmdbId?: number;
 }
 
 async function resolveWatchable(slug: string): Promise<Watchable | null> {
@@ -51,6 +58,7 @@ async function resolveWatchable(slug: string): Promise<Watchable | null> {
       genre: editorial.genre,
       hls: editorial.sources.hls,
       mp4: editorial.sources.mp4,
+      tmdbId: editorial.tmdbId,
     };
   }
   const published = await getPublishedVideoBySlug(slug);
@@ -89,6 +97,7 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
   if (!video) notFound();
 
   const prerollEnabled = await isAdPlacementEnabled("video.preroll");
+  const prerollCap = await getSetting("ads.preroll.session_cap");
   const suggestions = FREE_CATALOG.filter((v) => v.slug !== slug)
     .slice(0, 3)
     .map((v) => ({ href: watchHref(v), title: v.title }));
@@ -98,10 +107,10 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
     "@type": "VideoObject",
     name: video.title,
     description: video.overview,
-    thumbnailUrl: video.artwork,
+    thumbnailUrl: absoluteUrl(video.artwork),
     duration: video.durationMinutes ? `PT${video.durationMinutes}M` : undefined,
     uploadDate: video.year ? `${video.year}-01-01` : undefined,
-    potentialAction: { "@type": "WatchAction", target: `/regarder/${slug}` },
+    potentialAction: { "@type": "WatchAction", target: absoluteUrl(`/regarder/${slug}`) },
   };
 
   return (
@@ -123,6 +132,7 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
           attribution: video.attribution,
         }}
         prerollEnabled={prerollEnabled}
+        prerollCap={prerollCap}
         suggestions={suggestions}
       />
 
@@ -150,6 +160,29 @@ export default async function RegarderPage({ params }: { params: Promise<{ slug:
             </>
           )}
         </p>
+
+        {/* Barre d'actions (lecture-6/7) : fiche complète, ma liste, partage */}
+        <div className="mt-5 flex flex-wrap gap-3">
+          {video.tmdbId && (
+            <Link
+              href={titleHref("film", video.tmdbId, video.title)}
+              className="inline-flex h-10 items-center rounded-full bg-surface-raised px-5 text-sm text-primary transition-colors duration-(--duration-fast) hover:bg-surface-interactive"
+            >
+              Voir la fiche complète
+            </Link>
+          )}
+          <WatchlistButton
+            title={{
+              id: video.libId,
+              kind: "video",
+              title: video.title,
+              year: video.year,
+              posterUrl: video.artwork,
+              href: `/regarder/${slug}`,
+            }}
+          />
+          <ShareButton title={video.title} url={absoluteUrl(`/regarder/${slug}`)} />
+        </div>
       </div>
 
       {/* Suggestions (échelle réduite — la découverte reste sur /gratuit) */}

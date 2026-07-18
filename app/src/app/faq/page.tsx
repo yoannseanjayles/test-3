@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { isUgcUploadEnabled } from "@/lib/ads/flags";
+import { isAuthConfigured } from "@/lib/auth/config";
+import { FaqList } from "@/components/support/FaqList";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -19,13 +21,16 @@ interface QA {
   a: string;
 }
 
-const GROUPS: { title: string; items: QA[] }[] = [
+function buildGroups(authEnabled: boolean): { title: string; items: QA[] }[] {
+  return [
   {
     title: "Visionnage",
     items: [
       {
         q: "Comment reprendre un film là où je m'étais arrêté ?",
-        a: "Rouvrez simplement la page de lecture : un bouton « Reprendre à » vous ramène à la seconde près. Votre progression est enregistrée automatiquement pendant la lecture et se retrouve dans Ma liste, onglet « En cours ».",
+        a: authEnabled
+          ? "Rouvrez simplement la page de lecture : un bouton « Reprendre à » vous ramène à la seconde près. Connecté, la reprise fonctionne sur tous vos écrans ; sans compte, elle reste propre à cet appareil. Votre progression se retrouve dans Ma liste, onglet « En cours »."
+          : "Rouvrez simplement la page de lecture : un bouton « Reprendre à » vous ramène à la seconde près. Votre progression est enregistrée automatiquement pendant la lecture et se retrouve dans Ma liste, onglet « En cours ».",
       },
       {
         q: "La vidéo ne se lance pas, que faire ?",
@@ -52,16 +57,31 @@ const GROUPS: { title: string; items: QA[] }[] = [
   },
   {
     title: "Compte",
-    items: [
-      {
-        q: "Comment créer un compte ?",
-        a: "L'ouverture des comptes est imminente : elle arrive avec notre back-end. En attendant, Ma liste fonctionne déjà sur votre appareil et sera rattachée à votre profil à l'ouverture.",
-      },
-      {
-        q: "Ma liste est-elle synchronisée entre mes appareils ?",
-        a: "Pas encore : elle est conservée sur l'appareil en cours. La synchronisation multi-écrans fait partie des comptes, qui arrivent prochainement.",
-      },
-    ],
+    items: authEnabled
+      ? [
+          {
+            q: "Comment créer un compte ?",
+            a: "Rendez-vous sur la page Inscription : e-mail et mot de passe suffisent. Votre liste locale actuelle est automatiquement rattachée à votre nouveau compte.",
+          },
+          {
+            q: "Ma liste est-elle synchronisée entre mes appareils ?",
+            a: "Oui, dès que vous êtes connecté : favoris, historique et reprise de lecture sont synchronisés sur tous vos écrans.",
+          },
+          {
+            q: "Comment changer mon mot de passe ou désactiver les e-mails ?",
+            a: "Tout se passe dans Paramètres (accessible depuis le menu compte) : changement de mot de passe, notifications par e-mail, export et suppression de vos données.",
+          },
+        ]
+      : [
+          {
+            q: "Comment créer un compte ?",
+            a: "L'ouverture des comptes est imminente : elle arrive avec notre back-end. En attendant, Ma liste fonctionne déjà sur votre appareil et sera rattachée à votre profil à l'ouverture.",
+          },
+          {
+            q: "Ma liste est-elle synchronisée entre mes appareils ?",
+            a: "Pas encore : elle est conservée sur l'appareil en cours. La synchronisation multi-écrans fait partie des comptes, qui arrivent prochainement.",
+          },
+        ],
   },
   {
     title: "Publicité",
@@ -85,11 +105,14 @@ const GROUPS: { title: string; items: QA[] }[] = [
       },
       {
         q: "Comment exporter ou supprimer mes données ?",
-        a: "Aujourd'hui, videz simplement les données de site de votre navigateur (tout est local). Avec les comptes, des boutons d'export et de suppression seront disponibles dans les paramètres.",
+        a: authEnabled
+          ? "Depuis Paramètres : un bouton exporte toutes vos données en JSON, un autre supprime définitivement votre compte. Sans compte, vos données restent locales — Paramètres propose aussi leur export et leur effacement sur cet appareil."
+          : "Aujourd'hui, tout est local : Paramètres permet d'exporter ou d'effacer les données de cet appareil. Avec les comptes, l'export et la suppression du compte seront disponibles de la même manière.",
       },
     ],
   },
-];
+  ];
+}
 
 const UGC_GROUP: { title: string; items: QA[] } = {
   title: "Publier une vidéo",
@@ -107,7 +130,9 @@ const UGC_GROUP: { title: string; items: QA[] } = {
 
 export default async function FaqPage() {
   const ugcOpen = await isUgcUploadEnabled();
-  const groups = ugcOpen ? [...GROUPS, UGC_GROUP] : GROUPS;
+  const authEnabled = isAuthConfigured();
+  const baseGroups = buildGroups(authEnabled);
+  const groups = ugcOpen ? [...baseGroups, UGC_GROUP] : baseGroups;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -129,27 +154,7 @@ export default async function FaqPage() {
         La réponse à votre question se trouve probablement ici — sinon, le contact est en bas de page.
       </p>
 
-      {groups.map((group) => (
-        <section key={group.title} aria-label={group.title} className="mt-8">
-          <h2 className="text-lg font-bold text-brand">{group.title}</h2>
-          <div className="mt-3 space-y-2">
-            {group.items.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-(--radius-m) bg-surface-raised px-5 py-4 open:pb-5"
-              >
-                <summary className="cursor-pointer list-none font-medium marker:content-none [&::-webkit-details-marker]:hidden">
-                  <span className="mr-2 inline-block text-brand transition-transform duration-(--duration-fast) group-open:rotate-90">
-                    ›
-                  </span>
-                  {item.q}
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-secondary">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </section>
-      ))}
+      <FaqList groups={groups} />
 
       <div className="mt-12 rounded-(--radius-l) bg-surface-raised p-6 text-center">
         <p className="font-bold">Vous n&apos;avez pas trouvé ?</p>

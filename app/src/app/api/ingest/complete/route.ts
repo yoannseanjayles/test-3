@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { db, isDbConfigured, schema } from "@/lib/db";
+import { notify } from "@/lib/notifications";
 
 /**
  * Webhook de fin d'encodage (6.1 Lot 3) — appelé par le job GitHub Actions.
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
       .update(schema.videos)
       .set({ status: "pending_review", hlsManifestKey: hls_manifest_key, durationSeconds: duration_seconds ?? null })
       .where(eq(schema.videos.id, video_id));
+    if (video.ownerId) await notify(video.ownerId, "video.ready_for_review", { title: video.title });
   } else {
     console.error(`[ingest] encodage échoué pour ${video_id} :`, error);
     await client.update(schema.videos).set({ status: "uploading" }).where(eq(schema.videos.id, video_id));
