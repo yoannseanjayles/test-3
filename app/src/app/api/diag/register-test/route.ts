@@ -46,13 +46,24 @@ export async function POST(request: Request) {
       .delete(schema.users)
       .where(sql`${schema.users.email} = ${TEST_EMAIL}`)
       .catch(() => {});
-    return NextResponse.json(
-      {
-        ok: false,
-        steps,
-        error: error instanceof Error ? { name: error.name, message: error.message, stack: error.stack } : String(error),
-      },
-      { status: 500 },
-    );
+    return NextResponse.json({ ok: false, steps, error: serializeError(error) }, { status: 500 });
   }
+}
+
+/** Sérialise récursivement une erreur ET sa chaîne de `cause` (souvent où se cache la vraie raison Postgres/HTTP). */
+function serializeError(error: unknown, depth = 0): unknown {
+  if (depth > 5) return "…";
+  if (error instanceof Error) {
+    const out: Record<string, unknown> = { name: error.name, message: error.message };
+    for (const key of Object.getOwnPropertyNames(error)) {
+      if (key === "name" || key === "message" || key === "stack") continue;
+      out[key] = (error as unknown as Record<string, unknown>)[key];
+    }
+    if ((error as { cause?: unknown }).cause !== undefined) {
+      out.cause = serializeError((error as { cause?: unknown }).cause, depth + 1);
+    }
+    out.stack = error.stack;
+    return out;
+  }
+  return error;
 }
